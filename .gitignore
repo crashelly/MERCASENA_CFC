@@ -7,8 +7,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-mercasena-react/node_modules/
-MERCASENA_server/vendor/
+FRONTEND/node_modules/
+BACKEND/vendor/
 *dist
 *dist-ssr
 *.local
