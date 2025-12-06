@@ -1,0 +1,38 @@
+services:
+  DB:
+    image: mariadb:10.6
+    container_name: mercasena_db_released
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mercasena
+      MYSQL_USER: u836772000_chucho
+      MYSQL_PASSWORD: mercasena_test
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -proot || exit 1"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    ports:
+      - 3306:3306
+    volumes:
+      - data:/var/lib/mysql
+      # - ./DB/test/01-test.sql:/docker-entrypoint-initdb.d/01-test.sql
+      - ./MERCASENA_db/DB/script/01-mainMercasena.sql:/docker-entrypoint-initdb.d/01-mainMercasena.sql
+    networks:
+      - backend_net
+  backend:
+      build: ./MERCASENA_backend
+      container_name: MERCASENA_server_released
+      ports:
+      - "80:80"
+      volumes:
+      - ./MERCASENA_backend/:/var/www/html/mercasena
+      restart: always
+      networks:
+        - backend_net
+volumes:
+  data:
+networks:
+  backend_net:
+
