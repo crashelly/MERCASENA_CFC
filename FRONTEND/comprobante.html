@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="comprobante.css">
+    <!-- <link rel="stylesheet" href="assets/css/comprobante.css"> -->
+</head>
+
+
+<body id="body">
+
+    <script>
+        let bill = window.localStorage.getItem('bill');
+
+
+        bill = JSON.parse(bill);
+        console.log(bill);
+        // const billJson = `
+        // {
+        //     "customer": "Jesus David Buitrago Agudelo",
+        //     "customersPhone": -1068350462,
+        //     "customerNit": 0,
+        //     "customerEmail": 0,
+        //     "customerAddress": 0,
+        //     "orderID": "",
+        //     "total": 200680,
+        //     "products": [
+        //         {
+        //             "id": "139",
+        //             "cantidad": "20",
+        //             "name": "Kilos -  Cerdo  Pulpa",
+        //             "precioUnitario": "10000",
+        //             "precio": "200000"
+        //         }
+        //     ]
+        // }
+        // `;
+
+        // const bill = JSON.parse(billJson);
+
+        // console.log(bill);
+        function extractDateComponents(dateString) {
+            // Dividir la cadena de fecha en componentes
+            const [year, month, day] = dateString.split('-');
+
+            // Convertir los componentes a números (opcional)
+            const yearNumber = parseInt(year, 10);
+            const monthNumber = parseInt(month, 10);
+            const dayNumber = parseInt(day, 10);
+
+            // Retornar los componentes
+            return {
+                year: yearNumber,
+                month: monthNumber,
+                day: dayNumber
+            };
+        }
+        /**
+          * pone los puntos de miles
+          */
+        function addPuntuaction(number) {
+            return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        }
+        // Ejemplo de uso
+
+        const date = extractDateComponents(bill.fecha);
+
+        // console.log(components); // { year: 2025, month: 6, day: 18 }
+        // limpieza de variables para una correcta visualizacion 
+        bill.Usuario = bill.Usuario ?? '';
+        bill.nit = bill.nit ?? '';
+        bill.direccion = bill.direccion ?? '';
+        bill.telefono = bill.telefono ?? '';
+        bill.precioTotal = bill.precioTotal ?? '';
+        bill.id = bill.id ?? '';
+        bill.fecha = bill.fecha ?? '0000-00-00';
+        bill.productos = bill.productos ?? [];
+        bill.encargadoPuntoVenta = bill.encargadoPuntoVenta ?? 'Encargado Punto de Venta No Definido';
+        // ============
+        let body = document.getElementById('body');
+        let html = '';
+
+        html = `
+    <div id="page_pdf">
+        <table id="factura_head">
+            <tr>
+                <td class="logo_factura" height="70">
+                    <div>
+                        <img width="100" height="100" src="src/Assets/logos/logoSena_2.png" alt="Sena Logo">
+                    </div>
+                </td>
+                <td class="info_empresa">
+
+                    <div>
+                        <strong class="h2">COMERCIALIZADORA DIDÁCTICA </strong>
+                        <hr>
+                        <p class="h2-desc">SERVICIO NACIONAL DE APRENDIZAJE-SENA</p>
+                        <p class="h2-desc">REGIONAL CALDAS</p>
+                        <p class="h2-desc">COMPROBANTE MERCASENA</p>
+
+                    </div>
+
+                </td>
+                <!-- <td class="">
+                    <div class="">
+                        <span class="desaparecer">Factura</span>
+                        <p class="desaparecer">piensa bien siempre</strong></p>
+                        <p class="desaparecer">algun dia succedio</p>
+                        <p class="desaparecer">no se la verdad</p>
+                        <p class="desaparecer">NO nesecitas sabeer el contenido</p>
+                    </div>
+                </td> -->
+            </tr>
+        </table>
+        <!-- parte de la informacion del cliente -->
+        <div class="comprobante">
+            <div class="fila-superior">
+                <!-- Fecha -->
+
+
+                <!-- Número de factura -->
+
+            </div>
+            <table>
+                <tr>
+                    <span id="fechaTexto">FECHA</span>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <table class="fecha">
+
+                                <tr>
+
+                                    <td class="fecha_bold">DIA</td>
+                                    <td class="fecha_bold">MES</td>
+                                    <td class="fecha_bold">AÑO</td>
+                                </tr>
+                                <tr>
+                                    <td>${date.day}</td>
+                                    <td>${date.month}</td>
+                                    <td>${date.year}</td>
+                                </tr>
+                            </table>
+                            <!-- <label>FECHA</label>
+                        <div class="campos">
+                            <div>DÍA</div>
+                            <div>MES</div>
+                            <div>AÑO</div>
+                        </div> -->
+                        </div>
+                    </td>
+                    <td>
+                        <b
+                            class="espacioBlanco">......................................................................................</b>
+                    </td>
+                    <td>
+                        <b>COMPROBANTE DE VENTA</b>
+                    </td>
+                    <td>
+                        <div class="numero">
+
+                            <span>N°${bill.id}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- Datos del cliente -->
+            <table class="info">
+                <tr>
+                    <td class="label">CLIENTE:</td>
+                    <td> ${bill.Usuario}</td>
+                    <td class="label">C.C. / Nit.:</td>
+                    <td> ${bill.nit}</td>
+                </tr>
+                <tr>
+                    <td class="label">DIRECCIÓN:</td>
+                    <td>${bill.direccion}</td>
+                    <td class="label">TELEFONO/CELULAR:</td>
+                    
+                    <td>${bill.telefono}</td>
+                </tr>
+            </table> 
+
+            <table class="info">
+                <tr>
+                    <td class=" thead textcenter cant">CANT:</td>
+                    <td class=" thead textcenter descripcion">DESCRIPCION</td>
+                    <td class=" thead textcenter">Vr.UNIT</td>
+                    <td class=" thead textcenter ">vr.TOTAL</td>
+                </tr>`;
+        // bucle de los productos
+        bill.productos.forEach(producto => {
+
+            html += `
+                         <tr>
+                             <td class="textcenter">${producto.cantidad}</td>
+                             <td class="textcenter">${producto.name} </td>
+                             <td class="textcenter">${addPuntuaction(producto.precioUnitario)}</td>
+                             <td class="textcenter">${addPuntuaction(producto.precio)}</td>
+                         </tr>`;
+        })
+
+        html += `
+                <!-- <tfoot>
+                     <tr>
+                    <td class="textcenter" colspan="4">recibido</td>
+                    <td class="textcenter" colspan="4">total ${bill.precioTotal} </td>
+                </tr>
+                </tfoot> -->
+            </table>
+            <table id="info-foot" class="info">
+                <tr>
+                    <td class="textleft" colspan="4">Recibido ${bill.encargadoPuntoVenta} : Encargado del  punto de venta SENA</td>
+                    <td class="textleft" colspan="4">Total ${addPuntuaction(bill.precioTotal)} </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <!-- FIN  -->
+
+
+
+
+        <div>
+            <p class="nota">Si usted tiene preguntas sobre este comprobante de venta, <br>pongase en contacto con nombre, teléfono y
+                Email</p>
+            <h4 class="label_gracias">¡Gracias por su compra!</h4>
+
+            <img class="qr" width="100px" height="100px" src="src/Assets/logos/qr_mercasena_no_logo.png"
+        </div>
+
+    </div>
+      `;
+
+        body.innerHTML = '';
+        body.innerHTML = html;
+
+        //   window.print();
+        window.href = 'index.html';
+    </script>
+</body>

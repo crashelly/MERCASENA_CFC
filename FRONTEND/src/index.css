@@ -1,0 +1,12 @@
+/* @plugin "tailwindcss"; */
+/* @import "tailwindcss"; */
+/* @import "daisyui"; */
+/* @plugin "daisyui"; */
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+@import "tailwindcss";
+
+@plugin "daisyui";
+@import "tailwindcss-animated";
+/* @plugin "daisyui"; */

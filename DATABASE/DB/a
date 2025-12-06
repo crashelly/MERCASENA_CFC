@@ -1,0 +1,1463 @@
+{
+  "id": "0",
+  "name": "SQL Import (mysql)",
+  "createdAt": "2025-11-05T18:49:15.958Z",
+  "updatedAt": "2025-11-05T20:45:53.466Z",
+  "databaseType": "mysql",
+  "tables": [
+    {
+      "id": "1",
+      "name": "loan_state",
+      "x": 1163.2743122587526,
+      "y": 1021.3697617433281,
+      "fields": [
+        {
+          "id": "2",
+          "name": "loanState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": true,
+          "nullable": false,
+          "primaryKey": true,
+          "createdAt": 1762373110033
+        },
+        {
+          "id": "3",
+          "name": "loanState_name",
+          "type": {
+            "id": "tinytext",
+            "name": "tinytext"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762373167857
+        }
+      ],
+      "indexes": [
+        {
+          "id": "4",
+          "name": "pk_table_14_id",
+          "fieldIds": [
+            "2"
+          ],
+          "unique": true,
+          "isPrimaryKey": true,
+          "createdAt": 1762373110033
+        }
+      ],
+      "color": "#8eb7ff",
+      "createdAt": 1762373110033,
+      "isView": false,
+      "order": 13,
+      "parentAreaId": "3itpawj0bc4tr4weqc95bl7x7",
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "5",
+      "name": "loan",
+      "schema": "",
+      "order": 13,
+      "fields": [
+        {
+          "id": "6",
+          "name": "loan_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "7",
+          "name": "loan_datetime",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "8",
+          "name": "loan_date",
+          "type": {
+            "name": "date",
+            "id": "date",
+            "usageLevel": 1
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "9",
+          "name": "user_id",
+          "type": {
+            "id": "varchar",
+            "name": "varchar"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "createdAt": 1762368555958
+        },
+        {
+          "id": "10",
+          "name": "carnetConfirmation",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "11",
+          "name": "loanState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": false,
+          "primaryKey": false,
+          "createdAt": 1762372982001
+        },
+        {
+          "id": "12",
+          "name": "loan_programID",
+          "type": {
+            "id": "bigint",
+            "name": "bigint"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374320227
+        }
+      ],
+      "indexes": [],
+      "x": 1523.5357326233698,
+      "y": 617.0747577451856,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555958,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "3itpawj0bc4tr4weqc95bl7x7"
+    },
+    {
+      "id": "13",
+      "name": "user_has_roles",
+      "schema": "",
+      "order": 4,
+      "fields": [
+        {
+          "id": "14",
+          "name": "UserRoles_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "15",
+          "name": "role_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "createdAt": 1762368555957
+        },
+        {
+          "id": "16",
+          "name": "usr_id",
+          "type": {
+            "name": "varchar",
+            "id": "varchar",
+            "fieldAttributes": {
+              "hasCharMaxLength": true
+            },
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false,
+          "characterMaximumLength": "255"
+        }
+      ],
+      "indexes": [],
+      "x": 485.33425019261074,
+      "y": -70.16534151640275,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "wvkvi9vz3w4n78cs5qkhbiunm"
+    },
+    {
+      "id": "17",
+      "name": "user",
+      "schema": "",
+      "order": 8,
+      "fields": [
+        {
+          "id": "18",
+          "name": "usr_id",
+          "type": {
+            "name": "varchar",
+            "id": "varchar",
+            "fieldAttributes": {
+              "hasCharMaxLength": true
+            },
+            "usageLevel": 1
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false,
+          "characterMaximumLength": "255"
+        },
+        {
+          "id": "19",
+          "name": "usr_email",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "20",
+          "name": "usr_name",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "21",
+          "name": "usr_address",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "22",
+          "name": "usr_phoneNumber",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "23",
+          "name": "usr_logo",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "24",
+          "name": "usr_creationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "25",
+          "name": "NIT",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "26",
+          "name": "isActive",
+          "type": {
+            "id": "boolean",
+            "name": "boolean"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "createdAt": 1762368555957
+        },
+        {
+          "id": "27",
+          "name": "usr_password_hash",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "28",
+          "name": "usr_lastConnection",
+          "type": {
+            "id": "bigint",
+            "name": "bigint"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374693267
+        },
+        {
+          "id": "29",
+          "name": "usr_formationProgramID",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374715067
+        },
+        {
+          "id": "30",
+          "name": "usr_formationProgramName",
+          "type": {
+            "id": "bigint",
+            "name": "bigint"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374757266
+        },
+        {
+          "id": "31",
+          "name": "userCategory_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762375091765
+        },
+        {
+          "id": "32",
+          "name": "userState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762375102858
+        }
+      ],
+      "indexes": [],
+      "x": 157.60252516389176,
+      "y": -117.37093921044752,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "expanded": true,
+      "parentAreaId": "wvkvi9vz3w4n78cs5qkhbiunm"
+    },
+    {
+      "id": "33",
+      "name": "loans_has_products",
+      "x": 1135.5616378561867,
+      "y": 810.0708819836024,
+      "fields": [
+        {
+          "id": "34",
+          "name": "lp_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": true,
+          "nullable": false,
+          "primaryKey": true,
+          "createdAt": 1762372296754
+        },
+        {
+          "id": "35",
+          "name": "loan_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762372327186
+        },
+        {
+          "id": "36",
+          "name": "prod_id",
+          "type": {
+            "id": "bigint",
+            "name": "bigint"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762372357722
+        },
+        {
+          "id": "37",
+          "name": "prod_quantity",
+          "type": {
+            "id": "bigint",
+            "name": "bigint"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762372381346
+        }
+      ],
+      "indexes": [
+        {
+          "id": "38",
+          "name": "pk_table_16_id",
+          "fieldIds": [
+            "34"
+          ],
+          "unique": true,
+          "isPrimaryKey": true,
+          "createdAt": 1762372296754
+        }
+      ],
+      "color": "#8eb7ff",
+      "createdAt": 1762372296754,
+      "isView": false,
+      "order": 15,
+      "parentAreaId": "3itpawj0bc4tr4weqc95bl7x7",
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "39",
+      "name": "product",
+      "schema": "",
+      "order": 0,
+      "fields": [
+        {
+          "id": "40",
+          "name": "prod_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "41",
+          "name": "prod_name",
+          "type": {
+            "name": "varchar",
+            "id": "varchar",
+            "fieldAttributes": {
+              "hasCharMaxLength": true
+            },
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false,
+          "characterMaximumLength": "45"
+        },
+        {
+          "id": "42",
+          "name": "prod_creationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        }
+      ],
+      "indexes": [],
+      "x": -35.949949932008394,
+      "y": 673.9949424469949,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "sywyqfahqurwj8nttft5mcac6"
+    },
+    {
+      "id": "43",
+      "name": "product_images",
+      "schema": "",
+      "order": 5,
+      "fields": [
+        {
+          "id": "44",
+          "name": "prodImg_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "45",
+          "name": "prodImg_path",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "46",
+          "name": "prodVar_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "47",
+          "name": "prodImg_creationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "48",
+          "name": "prodImg_miniature",
+          "type": {
+            "id": "tinyint",
+            "name": "tinyint"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "0",
+          "createdAt": 1762368555957,
+          "increment": false
+        }
+      ],
+      "indexes": [],
+      "x": -41.369413216878684,
+      "y": 902.0422880305413,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "sywyqfahqurwj8nttft5mcac6"
+    },
+    {
+      "id": "49",
+      "name": "product_category",
+      "schema": "",
+      "order": 6,
+      "fields": [
+        {
+          "id": "50",
+          "name": "prodCat_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "51",
+          "name": "prodCat_creationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "52",
+          "name": "prodCat_name",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        }
+      ],
+      "indexes": [],
+      "x": 623.8859994162406,
+      "y": 846.2982618712407,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "sywyqfahqurwj8nttft5mcac6"
+    },
+    {
+      "id": "53",
+      "name": "product_variation",
+      "schema": "",
+      "order": 10,
+      "fields": [
+        {
+          "id": "54",
+          "name": "prodVar_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "55",
+          "name": "prod_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "56",
+          "name": "prodVar_name",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "57",
+          "name": "prodVar_creationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "58",
+          "name": "prodVar_actualizationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "59",
+          "name": "prodVar_stock",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "60",
+          "name": "prodMeasurement_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "61",
+          "name": "isConsumable",
+          "type": {
+            "id": "boolean",
+            "name": "boolean"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "createdAt": 1762368555958
+        },
+        {
+          "id": "62",
+          "name": "prodVar_description",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "63",
+          "name": "prodVar_expirationDate",
+          "type": {
+            "name": "date",
+            "id": "date",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "64",
+          "name": "prodWeight_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "65",
+          "name": "prodState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "66",
+          "name": "prodCategory_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "67",
+          "name": "prodVar_minStock",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "68",
+          "name": "isVisible",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "1",
+          "createdAt": 1762368555958,
+          "increment": false
+        },
+        {
+          "id": "69",
+          "name": "prodVar_loanStock",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374214643
+        }
+      ],
+      "indexes": [],
+      "x": 272.0944080500907,
+      "y": 697.9569622966181,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555958,
+      "diagramId": "51fzid0kvjhl",
+      "expanded": true,
+      "parentAreaId": "sywyqfahqurwj8nttft5mcac6"
+    },
+    {
+      "id": "70",
+      "name": "product_state",
+      "schema": "",
+      "order": 3,
+      "fields": [
+        {
+          "id": "71",
+          "name": "prodState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "72",
+          "name": "prodState_name",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "73",
+          "name": "prodState_CreationDate",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        }
+      ],
+      "indexes": [],
+      "x": 572.4733610886576,
+      "y": 657.3073015377253,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "sywyqfahqurwj8nttft5mcac6"
+    },
+    {
+      "id": "74",
+      "name": "productos_medidaventa",
+      "schema": "",
+      "order": 7,
+      "fields": [
+        {
+          "id": "75",
+          "name": "prodMed_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "76",
+          "name": "prodMed_medida",
+          "type": {
+            "name": "text",
+            "id": "text",
+            "usageLevel": 1
+          },
+          "nullable": true,
+          "primaryKey": false,
+          "unique": false,
+          "default": "NULL",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "77",
+          "name": "prodMed_factor",
+          "type": {
+            "name": "float",
+            "id": "float"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "1",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "78",
+          "name": "prodMed_fechaCreacion",
+          "type": {
+            "name": "datetime",
+            "id": "datetime",
+            "usageLevel": 2
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "'CURRENT_TIMESTAMP()'",
+          "createdAt": 1762368555957,
+          "increment": false
+        }
+      ],
+      "indexes": [],
+      "x": 2368,
+      "y": 300,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "79",
+      "name": "roles",
+      "schema": "",
+      "order": 1,
+      "fields": [
+        {
+          "id": "80",
+          "name": "role_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "default": "",
+          "createdAt": 1762368555957,
+          "increment": false
+        },
+        {
+          "id": "81",
+          "name": "role_name",
+          "type": {
+            "id": "tinytext",
+            "name": "tinytext"
+          },
+          "nullable": false,
+          "primaryKey": false,
+          "unique": false,
+          "createdAt": 1762368555957
+        }
+      ],
+      "indexes": [],
+      "x": 610.0661181241161,
+      "y": 183.60147091568322,
+      "color": "#8eb7ff",
+      "isView": false,
+      "createdAt": 1762368555957,
+      "diagramId": "51fzid0kvjhl",
+      "parentAreaId": "wvkvi9vz3w4n78cs5qkhbiunm"
+    },
+    {
+      "id": "82",
+      "name": "user_state",
+      "x": -244.8802505749395,
+      "y": 148.0060719044682,
+      "fields": [
+        {
+          "id": "83",
+          "name": "userState_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": true,
+          "nullable": false,
+          "primaryKey": true,
+          "createdAt": 1762374890115
+        },
+        {
+          "id": "84",
+          "name": "userState_name",
+          "type": {
+            "id": "text",
+            "name": "text"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762374923323
+        }
+      ],
+      "indexes": [
+        {
+          "id": "85",
+          "name": "pk_table_13_id",
+          "fieldIds": [
+            "83"
+          ],
+          "unique": true,
+          "isPrimaryKey": true,
+          "createdAt": 1762374890115
+        }
+      ],
+      "color": "#8eb7ff",
+      "createdAt": 1762374890115,
+      "isView": false,
+      "order": 12,
+      "parentAreaId": "wvkvi9vz3w4n78cs5qkhbiunm"
+    },
+    {
+      "id": "86",
+      "name": "user_category",
+      "x": -249.2597438682395,
+      "y": 297.73475614543554,
+      "fields": [
+        {
+          "id": "87",
+          "name": "userCat_id",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": true,
+          "nullable": false,
+          "primaryKey": true,
+          "createdAt": 1762374961075
+        },
+        {
+          "id": "88",
+          "name": "userCat_name",
+          "type": {
+            "id": "text",
+            "name": "text"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762375003658
+        },
+        {
+          "id": "89",
+          "name": "userCat_criticLevel",
+          "type": {
+            "id": "int",
+            "name": "int"
+          },
+          "unique": false,
+          "nullable": true,
+          "primaryKey": false,
+          "createdAt": 1762375020235
+        }
+      ],
+      "indexes": [
+        {
+          "id": "90",
+          "name": "pk_table_14_id",
+          "fieldIds": [
+            "87"
+          ],
+          "unique": true,
+          "isPrimaryKey": true,
+          "createdAt": 1762374961075
+        }
+      ],
+      "color": "#8eb7ff",
+      "createdAt": 1762374961075,
+      "isView": false,
+      "order": 13,
+      "parentAreaId": "wvkvi9vz3w4n78cs5qkhbiunm"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "91",
+      "name": "loan_loanState_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "5",
+      "targetTableId": "1",
+      "sourceFieldId": "11",
+      "targetFieldId": "2",
+      "sourceCardinality": "many",
+      "targetCardinality": "one",
+      "createdAt": 1762373250409,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "92",
+      "name": "loans_has_products_loan_id_fk",
+      "sourceTableId": "33",
+      "targetSchema": "",
+      "targetTableId": "5",
+      "sourceFieldId": "35",
+      "targetFieldId": "6",
+      "sourceCardinality": "many",
+      "targetCardinality": "one",
+      "createdAt": 1762372461129,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "93",
+      "name": "product_prod_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "39",
+      "targetSchema": "",
+      "targetTableId": "53",
+      "sourceFieldId": "40",
+      "targetFieldId": "55",
+      "sourceCardinality": "one",
+      "targetCardinality": "many",
+      "createdAt": 1762371606884,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "94",
+      "name": "productos_variacion_prodCat_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "53",
+      "targetSchema": "",
+      "targetTableId": "49",
+      "sourceFieldId": "66",
+      "targetFieldId": "50",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762368722243,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "95",
+      "name": "productos_variacion_prodE_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "53",
+      "targetSchema": "",
+      "targetTableId": "70",
+      "sourceFieldId": "65",
+      "targetFieldId": "71",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762368714788,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "96",
+      "name": "productos_variacion_subCat_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "53",
+      "targetSchema": "",
+      "targetTableId": "43",
+      "sourceFieldId": "54",
+      "targetFieldId": "46",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762368743268,
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "97",
+      "name": "usuarios_usr_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "17",
+      "targetSchema": "",
+      "targetTableId": "13",
+      "sourceFieldId": "18",
+      "targetFieldId": "16",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762374569019
+    },
+    {
+      "id": "98",
+      "name": "user_has_roles_role_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "13",
+      "targetSchema": "",
+      "targetTableId": "79",
+      "sourceFieldId": "15",
+      "targetFieldId": "80",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762374573427
+    },
+    {
+      "id": "99",
+      "name": "user_state_userState_id_fk",
+      "sourceTableId": "82",
+      "targetSchema": "",
+      "targetTableId": "17",
+      "sourceFieldId": "83",
+      "targetFieldId": "32",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762375154578
+    },
+    {
+      "id": "100",
+      "name": "user_category_userCat_id_fk",
+      "sourceTableId": "86",
+      "targetSchema": "",
+      "targetTableId": "17",
+      "sourceFieldId": "87",
+      "targetFieldId": "31",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762375181610
+    },
+    {
+      "id": "101",
+      "name": "loan_user_id_fk",
+      "sourceSchema": "",
+      "sourceTableId": "5",
+      "targetSchema": "",
+      "targetTableId": "17",
+      "sourceFieldId": "9",
+      "targetFieldId": "18",
+      "sourceCardinality": "one",
+      "targetCardinality": "one",
+      "createdAt": 1762375486858
+    }
+  ],
+  "dependencies": [],
+  "areas": [
+    {
+      "id": "102",
+      "name": "PRESTAMOS",
+      "x": 1113.0620624736669,
+      "y": 605.544396529636,
+      "width": 702,
+      "height": 550,
+      "color": "#b067e9",
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "103",
+      "name": "PRODUCTOS",
+      "x": -71.3942414940928,
+      "y": 603.8013100978777,
+      "width": 977,
+      "height": 717,
+      "color": "#ff9f74",
+      "diagramId": "51fzid0kvjhl"
+    },
+    {
+      "id": "104",
+      "name": "USUARIOS",
+      "x": -249.5009501683038,
+      "y": -212.24181849874617,
+      "width": 1133,
+      "height": 746,
+      "color": "#42e0c0"
+    }
+  ],
+  "customTypes": [],
+  "notes": [
+    {
+      "id": "105",
+      "content": "Prestado ,Agotado,Perdido,Completado",
+      "x": 1544.3520236965874,
+      "y": 949.3948565448766,
+      "width": 200,
+      "height": 150,
+      "color": "#ffe374",
+      "diagramId": "51fzid0kvjhl"
+    }
+  ]
+}

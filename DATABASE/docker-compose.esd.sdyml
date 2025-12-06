@@ -1,0 +1,18 @@
+services:
+  mysql:
+    image: mariadb:10.6
+    container_name: mercasena_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mercasena
+      MYSQL_USER: cliente
+      MYSQL_PASSWORD: mercasena_test
+    ports:
+      - 3306:3306
+    volumes:
+      - data:/var/lib/mysql
+      # - ./DB/test/01-test.sql:/docker-entrypoint-initdb.d/01-test.sql
+      - ./DB/script/01-mainMercasena.sql:/docker-entrypoint-initdb.d/01-mainMercasena.sql
+volumes:
+   data:
