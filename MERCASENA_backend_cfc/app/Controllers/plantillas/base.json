@@ -1,0 +1,20 @@
+[
+    {
+        "pedidoId": "ped_2025-06-17_685196e08ab546.63099396",
+        "precioTotal": 100000,
+        "Usuario": "Jesus David Buitrago",
+        "fecha": "2025-06-17",
+        "telefono": -1068350462,
+        "direccion": "Calle31 # 14 a 61 barrio galan",
+        "nit": "",
+        "productos": [
+            {
+                "id": "79",
+                "cantidad": "1",
+                "name": "Kilogramos -  Cafe Arabigo",
+                "precioUnitario": "100000",
+                "precio": "100000"
+            }
+        ]
+    }
+]

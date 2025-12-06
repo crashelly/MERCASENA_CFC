@@ -1,0 +1,33 @@
+tablas con rutinas 
+
+
+usuarios (aunque está incompleta y sin el IF NOT EXISTS)
+
+productos_MedidaVenta -- model funcionando
+productos_PesoVenta -- verifica si tiene foranea con productos_MedidaVenta
+productos_Estado  --model funcionando
+productos_categoria --model funcionando
+productos_imagenes -- model funcionado
+productos_subcategorias  -- model funcionando
+productos
+inventario_base
+Carrito 
+tipo_usuario
+clientes
+pedidos
+facturas
+ventas
+comunidadSena
+pedidos_tiene_productos
+animales_estado
+Animales
+fecha_ventas
+
+
+
+
+el identifiacdor del usuario deja de ser el correo para volverse el UUID
+
+
+
+cada factura lleva un maximo de N (254 productos en una sola factura) productos donde 15 dan en promedio 3850 caracteres

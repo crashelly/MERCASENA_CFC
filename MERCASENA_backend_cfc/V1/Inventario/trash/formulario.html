@@ -1,0 +1,237 @@
+<dialog id="formularioProducto" class="modal ">
+    <div class="modal-box ">
+        <h3 class="text-lg text-center font-bold">
+            Crea tu producto</h3>
+        <!-- formulario -->
+        <form class="px-7 h-screen grid  w-full " id="modalFormCreateProduct">
+            <div class="grid grid-cols-2 md:grid-cols-1 gap-6" id="form">
+                <div class="w-full  mx-auto items-center justify-between  gap-3">
+
+                    <!-- elemento del form -->
+                    <div class="w-full flex gap-3">
+                        <!-- categorias select -->
+                        <label class="floating_label ">
+                            <input type="file" id="image" name="image" accept="image/*">
+                        </label>
+                        <div class="bg-white p-8 rounded-xl shadow-xl flex  w-full">
+                            
+                            <!-- File upload box -->
+                            <div class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-xl hover:border-blue-500 transition-all duration-300">
+                                <!-- Icon for drag & drop -->
+                                <svg class="w-16 h-16 text-blue-500 mb-4 transition-all duration-300" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+                                </svg>
+                            
+                                <!-- Hidden file input -->
+                                <input id="file-upload" type="file" class="hidden" />
+                                
+                                <!-- Custom label for file upload -->
+                                <label for="file-upload" class="text-gray-600 cursor-pointer text-center hover:text-blue-600 transition-all duration-300">
+                                    <span class="block text-xl font-medium">Drag & Drop your file here</span>
+                                    <span class="block text-sm text-gray-400">Or click to browse</span>
+                                </label>
+                            
+                                <!-- File name display -->
+                                <div id="file-name" class="mt-3 text-gray-700 text-sm font-medium hidden">No file selected</div>
+                            </div>
+                            
+                            <!-- Upload Button -->
+                            <button id="upload-btn" class="w-full mt-6 py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-600 transition-all duration-300" disabled>Upload</button>
+                            </div>
+                            
+
+                    </div>
+                    <!-- elemento del form -->
+
+
+                    <div class="w-full flex gap-3">
+                        <!-- categorias select -->
+                        <label class="floating_label ">
+                            <div class="container inline-flex container">
+                                <label class="floating_label w-full">
+                                    <span class="text-2xl text-green-400  ">Categorias</span>
+                                    <br>
+                                    <br>
+                                    <select id="categoriasSelect"
+                                        class=" p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                        name="categoria">
+                                        <option selected disabled> Categoria base</option>
+                                    </select>
+                                </label>
+                                <button
+                                    class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                    title="Add New" type="button"
+                                    onclick="selectTypeOfCreationModal('categoria');">
+                                    <svg class="stroke-teal-500 fill-none group-hover:fill-green-200 group-active:stroke-teal-200 group-active:fill-teal-600 group-active:duration-0 duration-300"
+                                        viewBox="0 0 24 24" height="50px" width="50px"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-width="1.5"
+                                            d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                        </path>
+                                        <path stroke-width="1.5" d="M8 12H16"></path>
+                                        <path stroke-width="1.5" d="M12 16V8"></path>
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </label>
+                        <label class="floating_label">
+                            <span class="text-2xl text-green-400  ">Precio</span>
+                            <br>
+                            <br>
+                            <input
+                                class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                type="number" placeholder="$20000" id="precio" name="precio">
+                            <span class="badge badge-neutral badge-xs">requerido</span>
+                        </label>
+
+                    </div>
+
+
+                    <!-- elemento del form -->
+                    <div class="w-full flex gap-3">
+                        <!-- demas informacion -->
+                        <!-- productos select -->
+                        <label class="floating_label mr-5 justify-start ">
+                            <div class="container inline-flex container">
+                                <label class="floating_label w-full">
+                                    <span class="text-2xl text-green-400  ">Productos</span>
+                                    <br>
+                                    <br>
+                                    <select id="productoSelect"
+                                        class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                        name="producto">
+                                        <option selected disabled> productos </option>
+                                    </select>
+                                </label>
+                                <button
+                                    class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                    title="Add New" type="button"
+                                    onclick="selectTypeOfCreationModal('producto');">
+                                    <svg class="stroke-teal-500 fill-none group-hover:fill-green-200 group-active:stroke-teal-200 group-active:fill-teal-600 group-active:duration-0 duration-300"
+                                        viewBox="0 0 24 24" height="50px" width="50px"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-width="1.5"
+                                            d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                        </path>
+                                        <path stroke-width="1.5" d="M8 12H16"></path>
+                                        <path stroke-width="1.5" d="M12 16V8"></path>
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </label>
+                        <label class="floating_label justify-end ">
+                            <span class="text-2xl text-green-400  ">Existencias</span>
+                            <br>
+                            <br>
+                            <input
+                                class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                type="number" placeholder="100" id="existencias" name="existencias">
+                            <span class="badge badge-neutral badge-xs">requerido</span>
+                        </label>
+                    </div>
+
+                    <!-- elemento del form -->
+                    <div class="w-full flex gap-3">
+                        <!-- medidaVenta -->
+                        <label class="floating_label ">
+                            <div class="container inline-flex container">
+                                <label class="floating_label w-full">
+                                    <span class="text-2xl  text-green-400  ">Medida del
+                                        Producto</span>
+                                    <br>
+
+                                    <select id="medSelect"
+                                        class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                        name="medidaVenta">
+                                        <option selected disabled> toneladas
+                                        </option>
+                                    </select>
+                                </label>
+                                <button
+                                    class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-9"
+                                    title="Add New" type="button"
+                                    onclick="selectTypeOfCreationModal('medidaVenta');">
+                                    <!-- esta funcion viene de js/ModalScripts.js -->
+                                    <svg class="stroke-teal-500 fill-none group-hover:fill-green-200 group-active:stroke-teal-200 group-active:fill-teal-600 group-active:duration-0 duration-300"
+                                        viewBox="0 0 24 24" height="50px" width="50px"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path stroke-width="1.5"
+                                            d="M12 22C17.5 22 22 17.5 22 12C22 6.5 17.5 2 12 2C6.5 2 2 6.5 2 12C2 17.5 6.5 22 12 22Z">
+                                        </path>
+                                        <path stroke-width="1.5" d="M8 12H16"></path>
+                                        <path stroke-width="1.5" d="M12 16V8"></path>
+                                    </svg>
+                                </button>
+
+                            </div>
+                        </label>
+                        <!-- <label class="floating_label">
+                            <span class="text-2xl text-green-400  ">Existencias</span>
+                            <br>
+                            <br>
+                            <input
+                                class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                type="number" placeholder="existencias" id="existencias"
+                                name="existencias">
+                        </label> -->
+                    </div>
+
+                    <!-- elemento del form -->
+                    <div class="w-full flex gap-3">
+
+                        <label class="floating_label">
+                            <span class="text-2xl text-green-400  ">¿Tiene el producto alguna
+                                variacion
+                                o subcategoria ?</span>
+                            <br>
+                            <br>
+                            <label class="floating_label"> SI
+                                <input id="VariantCheckboxYes" type="checkbox"
+                                    class="checkbox border-indigo-600 bg-indigo-500 checked:bg-orange-400 checked:text-orange-800 checked:border-orange-500 " />
+                            </label>
+                            <label class="floating_label"> NO
+                                <input id="VariantCheckboxNo" type="checkbox"
+                                    class="checkbox border-indigo-600 bg-indigo-500 checked:bg-orange-400 checked:text-orange-800 checked:border-orange-500 " />
+                            </label>
+
+                        </label>
+
+
+
+
+                    </div>
+
+                    <div id="variantInputContainer" class="w-full flex gap-3">
+
+                    </div>
+                    <!-- elemento del form -->
+                    <!-- <div class="w-full  flex gap-3">
+                        <label class="floating_label">
+                            <span class="text-2xl text-green-400  ">Precio</span>
+                            <br>
+                            <br>
+
+                            <input
+                                class="p-3 shadow-2xl   glass w-full text-black outline-none focus:border-solid focus:border-[1px]border-[#035ec5]"
+                                type="number" placeholder="precio" required="">
+                        </label>
+                    </div> -->
+
+
+                </div>
+
+            </div>
+            <div
+                class="w-full text-center flex mt-20 mb-6 items-center rounded-full flex-row md:flex-row ">
+                <button
+                    class="outline-none btn btn-circle md:inline-flex text-center glass shadow-2xl  w-full p-3  bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px]  hover:text-[#035ec5] font-bold"
+                    type="submit"><span class="text-2xl text-center mx-auto">Guardar</span></button>
+            </div>
+        </form>
+        <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+</dialog>

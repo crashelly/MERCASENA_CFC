@@ -1,0 +1,20 @@
+[
+    {
+        "subCat_id": 1,
+        "precioParcial": 100,
+        "cantidad": 2,
+        "pedi_id": "ped_2023-10-12_1.0"
+    },
+    {
+        "subCat_id": 2,
+        "precioParcial": 150,
+        "cantidad": 1,
+        "pedi_id": "ped_2023-10-12_1.0"
+    },
+    {
+        "subCat_id": 3,
+        "precioParcial": 200,
+        "cantidad": 3,
+        "pedi_id": "ped_2023-10-12_1.0"
+    }
+]

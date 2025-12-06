@@ -1,0 +1,7 @@
+futuroProducto = productos_subcategorias
+productos = futuroprodCat
+
+
+llaves 
+subcatId = subcatId
+prod_id = subCat_Id

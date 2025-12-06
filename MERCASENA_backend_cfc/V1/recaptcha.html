@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="verificar.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        <br>
+        <div class="g-recaptcha" data-sitekey="6LesK3MrAAAAAANkrfvmLuHcVJOTQZmXokqOmlmq"></div>
+        <br>
+        <input type="submit" value="Enviar">
+    </form>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+    <style>
+        form{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50%;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        label{
+            margin-bottom: 10px;
+        }
+        input[type="text"]{
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+        }
+        .g-recaptcha{
+            margin-bottom: 20px;
+        }
+        input[type="submit"]{
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</html>

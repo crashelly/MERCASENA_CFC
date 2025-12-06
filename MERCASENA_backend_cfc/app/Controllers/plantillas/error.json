@@ -1,0 +1,18 @@
+{
+    "customer": "Nose",
+    "customersPhone": 0,
+    "customerNit": 2457744,
+    "customerEmail": 0,
+    "customerAddress": 0,
+    "orderID": "",
+    "total": 10232,
+    "products": [
+        {
+            "id": "130",
+            "cantidad": "1",
+            "name": "Kilos -  Cerdo  Chuletero",
+            "precioUnitario": "10000",
+            "precio": "10000"
+        }
+    ]
+}

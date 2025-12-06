@@ -1,0 +1,22 @@
+[
+  { "singular": "Kilo", "plural": "Kilos", "abreviatura": "kg" },
+  { "singular": "Libra", "plural": "Libras", "abreviatura": "lb" },
+  { "singular": "Gramo", "plural": "Gramos", "abreviatura": "g" },
+  { "singular": "Onza", "plural": "Onzas", "abreviatura": "oz" },
+  { "singular": "Litro", "plural": "Litros", "abreviatura": "L" },
+  { "singular": "Mililitro", "plural": "Mililitros", "abreviatura": "mL" },
+  { "singular": "Unidad", "plural": "Unidades", "abreviatura": "u" },
+  { "singular": "Docena", "plural": "Docenas", "abreviatura": "dz" },
+  { "singular": "cubeta", "plural": "cubetas", "abreviatura": "sub" },
+  { "singular": "par", "plural": "pares", "abreviatura": "par" },
+  { "singular": "Galón", "plural": "Galones", "abreviatura": "gal" },
+  { "singular": "Cuarto", "plural": "Cuartos", "abreviatura": "qt" },
+  { "singular": "Pie", "plural": "Pies", "abreviatura": "ft" },
+  { "singular": "Centímetro", "plural": "Centímetros", "abreviatura": "cm" },
+  { "singular": "Pulgada cuadrada", "plural": "Pulgadas cuadradas", "abreviatura": "sq in" },
+  { "singular": "Yarda cuadrada", "plural": "Yardas cuadradas", "abreviatura": "sq yd" },
+  { "singular": "Litro por metro", "plural": "Litros por metro", "abreviatura": "L/m" },
+  { "singular": "Gramo por metro", "plural": "Gramos por metro", "abreviatura": "g/m" },
+  { "singular": "Unidad por caja", "plural": "Unidades por caja", "abreviatura": "u/c" },
+  { "singular": "Kilovatio-hora", "plural": "Kilovatios-hora", "abreviatura": "kWh" }
+]

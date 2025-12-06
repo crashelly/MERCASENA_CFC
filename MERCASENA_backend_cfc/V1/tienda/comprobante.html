@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- <link rel="stylesheet" href="assets/css/comprobante.css"> -->
+</head>
+<style>
+    /* @import url('fonts/BrixSansRegular.css');
+    @import url('fonts/BrixSansBlack.css'); */
+    /*  */
+
+
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    p,
+    label,
+    span,
+    table {
+        font-family: 'BrixSansRegular';
+        font-size: 9pt;
+    }
+
+    .h2 {
+        font-family: 'BrixSansBlack';
+        font-size: 16pt;
+    }
+
+    .h2-desc {
+        font-family: 'BrixSansBlack';
+        font-size: 12pt;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .h3 {
+        font-family: 'BrixSansBlack';
+        font-size: 12pt;
+        display: block;
+        background: #0a4661;
+        color: #FFF;
+        text-align: center;
+        padding: 3px;
+        margin-bottom: 5px;
+    }
+
+    #page_pdf {
+        width: 95%;
+        margin: 15px auto 10px auto;
+    }
+
+    #factura_head,
+    #factura_cliente,
+    #factura_detalle {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .logo_factura {
+        width: 20%;
+    }
+
+    .info_empresa {
+        width: 70%;
+        text-align: center;
+    }
+
+    .info_factura {
+        width: 25%;
+    }
+
+    .info_cliente {
+        width: 100%;
+    }
+
+    .datos_cliente {
+        width: 100%;
+    }
+
+    .datos_cliente tr td {
+        width: 50%;
+    }
+
+    .datos_cliente {
+        padding: 10px 10px 0 10px;
+    }
+
+    .datos_cliente label {
+        width: 75px;
+        display: inline-block;
+    }
+
+    .datos_cliente p {
+        display: inline-block;
+    }
+
+    .textright {
+        text-align: right;
+    }
+
+    .textleft {
+        text-align: left;
+    }
+
+    .textcenter {
+        text-align: center;
+    }
+
+    .round {
+        border-radius: 10px;
+        border: 1px solid #0a4661;
+        overflow: hidden;
+        padding-bottom: 15px;
+    }
+
+    .round p {
+        padding: 0 15px;
+    }
+
+    #factura_detalle {
+        border-collapse: collapse;
+    }
+
+    #factura_detalle thead th {
+        background: #058167;
+        color: #FFF;
+        padding: 5px;
+    }
+
+    #detalle_productos tr:nth-child(even) {
+        background: #ededed;
+    }
+
+    #detalle_totales span {
+        font-family: 'BrixSansBlack';
+    }
+
+    .nota {
+        font-size: 8pt;
+    }
+
+    .label_gracias {
+        font-family: verdana;
+        font-weight: bold;
+        font-style: italic;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .anulada {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    hr {
+        border: none;
+        /* Elimina el borde predeterminado */
+        height: 5px;
+        /* Ajusta el grosor de la línea */
+        background-color: #000;
+        /* Cambia el color de la línea */
+    }
+
+
+    body {
+        font-family: Arial, sans-serif;
+        background-color: rgb(255, 255, 255);
+        margin: 20px;
+    }
+
+    .comprobante {
+        background-color: rgb(255, 255, 255);
+        padding: 20px;
+        /* border-radius: 8px; */
+        width: 650px;
+        /* border: 1px solid #999; */
+    }
+
+    .fila-superior {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .fecha {
+        text-align: center;
+        /* border: 2px solid black; */
+        width: 140px;
+    }
+
+    .fecha label {
+        display: block;
+        font-weight: bold;
+        background: white;
+        padding: 2px 0;
+    }
+
+    .fecha .campos {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid black;
+    }
+
+    .fecha .campos div {
+        width: 33.33%;
+        /* border-left: 1px solid black; */
+        padding: 5px 0;
+    }
+
+    .fecha .campos div:first-child {
+        /* border-left: none; */
+    }
+
+    .numero {
+        text-align: center;
+    }
+
+    .numero b {
+        font-size: 14px;
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .numero span {
+        display: inline-block;
+        padding: 5px 15px;
+        border: 1px solid #444;
+        border-radius: 8px;
+        color: #b00000;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    table.info {
+        width: 100%;
+        border-collapse: collapse;
+        border-radius: 20px;
+        margin-top: 10px;
+    }
+
+    table.info td {
+        border: 1px solid black;
+        padding: 6px;
+        font-size: 14px;
+    }
+
+    table.info td.theadl {
+        font-weight: bold;
+        width: 0%;
+        background: rgb(124, 115, 105);
+    }
+
+    table.info td.label {
+        font-weight: bold;
+        width: 0%;
+        background: rgb(255, 255, 255);
+    }
+
+    table.fecha {
+        width: 100%;
+        margin-top: 10px;
+        /* border-radius: 20px; */
+        border-collapse: collapse;
+        border: 2px solid black;
+        border-radius: 12px;
+    }
+
+    table.fecha td {
+        /* border-collapse: collapse; */
+        border: 1px solid black;
+        padding: 5px;
+        font-size: 12px;
+    }
+
+    table.fecha td.label {
+        font-weight: bold;
+        width: 0%;
+        background: rgb(255, 255, 255);
+    }
+
+    .espacioBlanco {
+        color: #FFF;
+        cursor: text;
+    }
+
+    .desaparecer {
+        color: #FFF;
+        cursor: text;
+    }
+
+    #fechaTexto {
+        margin-left: 30px;
+        margin-bottom: -20px;
+        margin-top: 20px;
+        font-weight: bold;
+        font-size: 12pt;
+
+    }
+
+    .cant {
+        width: 20px;
+    }
+
+    .thead {
+        background-color: rgb(219, 207, 207);
+    }
+
+    .fecha_bold {
+        font-weight: bold;
+    }
+
+    #info-foot {
+        margin-top: -2px;
+    }
+</style>
+
+<body id="body">
+
+    <script>
+        let bill = window.localStorage.getItem('bill');
+
+
+        bill = JSON.parse(bill);
+        console.log(bill);
+        // const billJson = `
+        // {
+        //     "customer": "Jesus David Buitrago Agudelo",
+        //     "customersPhone": -1068350462,
+        //     "customerNit": 0,
+        //     "customerEmail": 0,
+        //     "customerAddress": 0,
+        //     "orderID": "",
+        //     "total": 200680,
+        //     "products": [
+        //         {
+        //             "id": "139",
+        //             "cantidad": "20",
+        //             "name": "Kilos -  Cerdo  Pulpa",
+        //             "precioUnitario": "10000",
+        //             "precio": "200000"
+        //         }
+        //     ]
+        // }
+        // `;
+
+        // const bill = JSON.parse(billJson);
+
+        // console.log(bill);
+        function extractDateComponents(dateString) {
+            // Dividir la cadena de fecha en componentes
+            const [year, month, day] = dateString.split('-');
+
+            // Convertir los componentes a números (opcional)
+            const yearNumber = parseInt(year, 10);
+            const monthNumber = parseInt(month, 10);
+            const dayNumber = parseInt(day, 10);
+
+            // Retornar los componentes
+            return {
+                year: yearNumber,
+                month: monthNumber,
+                day: dayNumber
+            };
+        }
+  /**
+    * pone los puntos de miles
+    */
+    function addPuntuaction(number) {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+        // Ejemplo de uso
+
+        const date = extractDateComponents(bill.fecha);
+
+        // console.log(components); // { year: 2025, month: 6, day: 18 }
+        // limpieza de variables para una correcta visualizacion 
+        bill.Usuario = bill.Usuario ?? '';
+        bill.nit = bill.nit ?? '';
+        bill.direccion = bill.direccion ?? '';
+        bill.telefono = bill.telefono ?? '';
+        bill.precioTotal = bill.precioTotal ?? '';
+        bill.id = bill.id ?? '';
+        bill.fecha = bill.fecha ?? '0000-00-00';
+        bill.productos = bill.productos ?? [];
+        bill.encargadoPuntoVenta = bill.encargadoPuntoVenta ?? 'Encargado Punto de Venta No Definido';
+        // ============
+        let body = document.getElementById('body');
+        let html = '';
+
+        html = `
+    <div id="page_pdf">
+        <table id="factura_head">
+            <tr>
+                <td class="logo_factura" height="70">
+                    <div>
+                        <img width="150" height="150" src="assets/logos/sena_logo.png" alt="Sena Logo">
+                    </div>
+                </td>
+                <td class="info_empresa">
+
+                    <div>
+                        <strong class="h2">COMERCIALIZADORA DIDÁCTICA </strong>
+                        <hr>
+                        <p class="h2-desc">SERVICIO NACIONAL DE APRENDIZAJE-SENA</p>
+                        <p class="h2-desc">REGIONAL CALDAS</p>
+                        <p class="h2-desc">COMPROBANTE MERCASENA</p>
+
+                    </div>
+
+                </td>
+                <!-- <td class="">
+                    <div class="">
+                        <span class="desaparecer">Factura</span>
+                        <p class="desaparecer">piensa bien siempre</strong></p>
+                        <p class="desaparecer">algun dia succedio</p>
+                        <p class="desaparecer">no se la verdad</p>
+                        <p class="desaparecer">NO nesecitas sabeer el contenido</p>
+                    </div>
+                </td> -->
+            </tr>
+        </table>
+        <!-- parte de la informacion del cliente -->
+        <div class="comprobante">
+            <div class="fila-superior">
+                <!-- Fecha -->
+
+
+                <!-- Número de factura -->
+
+            </div>
+            <table>
+                <tr>
+                    <span id="fechaTexto">FECHA</span>
+                </tr>
+                <tr>
+                    <td>
+                        <div>
+                            <table class="fecha">
+
+                                <tr>
+
+                                    <td class="fecha_bold">DIA</td>
+                                    <td class="fecha_bold">MES</td>
+                                    <td class="fecha_bold">AÑO</td>
+                                </tr>
+                                <tr>
+                                    <td>${date.day}</td>
+                                    <td>${date.month}</td>
+                                    <td>${date.year}</td>
+                                </tr>
+                            </table>
+                            <!-- <label>FECHA</label>
+                        <div class="campos">
+                            <div>DÍA</div>
+                            <div>MES</div>
+                            <div>AÑO</div>
+                        </div> -->
+                        </div>
+                    </td>
+                    <td>
+                        <b
+                            class="espacioBlanco">......................................................................................</b>
+                    </td>
+                    <td>
+                        <b>COMPROBANTE DE VENTA</b>
+                    </td>
+                    <td>
+                        <div class="numero">
+
+                            <span>N°${bill.id}</span>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <!-- Datos del cliente -->
+            <table class="info">
+                <tr>
+                    <td class="label">CLIENTE:</td>
+                    <td> ${bill.Usuario}</td>
+                    <td class="label">C.C. / Nit.:</td>
+                    <td> ${bill.nit}</td>
+                </tr>
+                <tr>
+                    <td class="label">DIRECCIÓN:</td>
+                    <td>${bill.direccion}</td>
+                    <td class="label">TELEFONO/CELULAR:</td>
+                    
+                    <td>${bill.telefono}</td>
+                </tr>
+            </table> 
+
+            <table class="info">
+                <tr>
+                    <td class=" thead textcenter cant">CANT:</td>
+                    <td class=" thead textcenter descripcion">DESCRIPCION</td>
+                    <td class=" thead textcenter">Vr.UNIT</td>
+                    <td class=" thead textcenter ">vr.TOTAL</td>
+                </tr>`;
+        // bucle de los productos
+        bill.productos.forEach(producto => {
+
+            html += `
+                         <tr>
+                             <td class="textcenter">${producto.cantidad}</td>
+                             <td class="textcenter">${producto.name} </td>
+                             <td class="textcenter">${addPuntuaction( producto.precioUnitario)}</td>
+                             <td class="textcenter">${addPuntuaction( producto.precio)}</td>
+                         </tr>`;
+        })
+
+        html += `
+                <!-- <tfoot>
+                     <tr>
+                    <td class="textcenter" colspan="4">recibido</td>
+                    <td class="textcenter" colspan="4">total ${bill.precioTotal} </td>
+                </tr>
+                </tfoot> -->
+            </table>
+            <table id="info-foot" class="info">
+                <tr>
+                    <td class="textleft" colspan="4">Recibido ${bill.encargadoPuntoVenta} : Encargado del  punto de venta SENA</td>
+                    <td class="textleft" colspan="4">Total ${addPuntuaction( bill.precioTotal)} </td>
+                </tr>
+            </table>
+
+        </div>
+
+        <!-- FIN  -->
+
+
+
+
+        <div>
+            <p class="nota">Si usted tiene preguntas sobre este comprobante de venta, <br>pongase en contacto con nombre, teléfono y
+                Email</p>
+            <h4 class="label_gracias">¡Gracias por su compra!</h4>
+        </div>
+
+    </div>
+      `;
+
+        body.innerHTML = '';
+        body.innerHTML = html;
+
+        //   window.print();
+        window.href = 'index.html';
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,18 @@
+{
+    "customer": "Jesus David Buitrago Agudelo",
+    "customersPhone": -1068350462,
+    "customerNit": 0,
+    "customerEmail": 0,
+    "customerAddress": 0,
+    "orderID": "",
+    "total": 200680,
+    "products": [
+        {
+            "id": "139",
+            "cantidad": "20",
+            "name": "Kilos -  Cerdo  Pulpa",
+            "precioUnitario": "10000",
+            "precio": "200000"
+        }
+    ]
+}

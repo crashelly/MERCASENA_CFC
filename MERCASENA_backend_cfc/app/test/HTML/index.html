@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="app">
+
+  </div>
+  <script>
+
+    function addPuntuaction(number) {
+      return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    }
+    let continaer = document.getElementById("app");
+    for (let i = 0; i < 10; i++) {
+      continaer.innerHTML += `<span>${addPuntuaction(1000000*i)}</span><br>`;
+      
+
+    }
+    // Examples:
+    console.log(addPuntuaction(1000));     // Output: 1.000
+    console.log(addPuntuaction(200000));  // Output: 200.000
+    console.log(addPuntuaction(1234567)); // Output: 1.234.567
+    console.log(addPuntuaction(500));    // Output: 500
+  </script>
+</body>
+
+</html>

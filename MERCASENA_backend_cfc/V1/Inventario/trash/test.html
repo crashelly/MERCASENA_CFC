@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="js/jquery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+</head>
+
+<body>
+    <!-- <div>
+        <div class="flex-col md:flex-row justify-between flex gap-2 items-start mx-4 py-6">
+            <div class="flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
+                <div class="relative w-full md:w-48 flex justify-center items-center">
+                    <img src="https://cdn.pixabay.com/photo/2013/07/13/14/07/apparel-162180_960_720.png"
+                        alt="shopping image"
+                        class="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none">
+                </div>
+                <div class="flex-auto p-6">
+                    <div class="flex flex-wrap">
+                        <h1 class="flex-auto text-xl font-semibold dark:text-gray-50">Cebolla Peluda</h1>
+                        <div class="text-xl flex flex-inline font-semibold text-gray-500 dark:text-gray-300">$ 20000</div>
+                      
+                        <div class="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+                           <span class="text-md" > por <strong class="hover:text-green-600">Kilogramos</strong></span>
+                        </div>
+                         <div class="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+                           <span class="text-md" > quedan <strong class="hover:text-blue-600">80</strong>  kilogramos</span>
+                        </div>
+                          <div class="flex-none w-full mt-4 text-sm font-medium text-gray-500 dark:text-gray-300">
+                            <div class="badge badge-error hover:text-white duration-300 trasform hover:scale-105  ">
+                                <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <rect x="1.972" y="11" width="20.056" height="2"
+                                            transform="translate(-4.971 12) rotate(-45)" fill="currentColor"
+                                            stroke-width="0"></rect>
+                                        <path
+                                            d="m12,23c-6.065,0-11-4.935-11-11S5.935,1,12,1s11,4.935,11,11-4.935,11-11,11Zm0-20C7.038,3,3,7.037,3,12s4.038,9,9,9,9-4.037,9-9S16.962,3,12,3Z"
+                                            stroke-width="0" fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                                Error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
+                    </div>
+                    <div class="flex mb-4 text-sm font-medium">
+                        <button type="button"
+                            class="py-2 px-4 bg-green-500 hover:bg-green-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-col md:flex-row justify-between flex gap-2 items-start mx-4 py-6">
+            <div class="flex bg-white rounded-lg shadow dark:bg-gray-800 flex-col md:flex-row">
+                <div class="relative w-full md:w-48 flex justify-center items-center">
+                    <img src="https://cdn.pixabay.com/photo/2013/07/13/14/07/apparel-162180_960_720.png"
+                        alt="shopping image"
+                        class="object-cover w-full h-48 md:h-full rounded-t-lg md:rounded-l-lg md:rounded-t-none">
+                </div>
+                <div class="flex-auto p-6">
+                    <div class="flex flex-wrap">
+                        <h1 class="flex-auto text-xl font-semibold dark:text-gray-50">Cebolla Peluda</h1>
+                        <div class="text-xl flex flex-inline font-semibold text-gray-500 dark:text-gray-300">$ 20000</div>
+                      
+                        <div class="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+                           <span class="text-md" > por <strong class="hover:text-green-600">Kilogramos</strong></span>
+                        </div>
+                         <div class="flex-none w-full mt-2 text-sm font-medium text-gray-500 dark:text-gray-300">
+                           <span class="text-md" > quedan <strong class="hover:text-blue-600">80</strong>  kilogramos</span>
+                        </div>
+                          <div class="flex-none w-full mt-4 text-sm font-medium text-gray-500 dark:text-gray-300">
+                            <div class="badge badge-error hover:text-white duration-300 trasform hover:scale-105  ">
+                                <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                    <g fill="currentColor">
+                                        <rect x="1.972" y="11" width="20.056" height="2"
+                                            transform="translate(-4.971 12) rotate(-45)" fill="currentColor"
+                                            stroke-width="0"></rect>
+                                        <path
+                                            d="m12,23c-6.065,0-11-4.935-11-11S5.935,1,12,1s11,4.935,11,11-4.935,11-11,11Zm0-20C7.038,3,3,7.037,3,12s4.038,9,9,9,9-4.037,9-9S16.962,3,12,3Z"
+                                            stroke-width="0" fill="currentColor"></path>
+                                    </g>
+                                </svg>
+                                Error
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex items-baseline mt-4 mb-6 text-gray-700 dark:text-gray-300">
+                    </div>
+                    <div class="flex mb-4 text-sm font-medium">
+                        <button type="button"
+                            class="py-2 px-4 bg-green-500 hover:bg-green-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">Añadir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div> -->
+<!-- From Uiverse.io by tubbymctubbzz --> 
+<!-- From Uiverse.io by devAaus --> 
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+[
+    {
+        "pedidoId": "ped_2025-05-24_683134511a4367.63837025",
+        "precioTotal": 1000,
+        "Usuario": true,
+        "fecha": true,
+        "productos": [
+            {
+                "id": "73",
+                "cantidad": "2",
+                "name": "Kilogramos -  papa parda",
+                "precioUnitario": "6000",
+                "precio": "12000"
+            },
+            {
+                "id": "74",
+                "cantidad": "3",
+                "name": "Kilogramos -  lulo ",
+                "precioUnitario": "3000",
+                "precio": "9000"
+            },
+            {
+                "id": "75",
+                "cantidad": "2",
+                "name": "Kilogramos -  Aguacate Hass",
+                "precioUnitario": "2000",
+                "precio": "4000"
+            }
+        ]
+    }
+]

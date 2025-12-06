@@ -1,0 +1,97 @@
+tipos_usuario ->  crear_tipo_usuario
+                -> actualizar_tipo_usuario
+                -> eliminar_tipo_usuario
+
+
+productos_Estado ->crear_producto_estado
+                -->eliminar_producto_estado
+                --> actualizar_producto_estado
+
+productos_categoria --> crear_producto_categoria
+                    --> actualizar_producto_categoria
+                    --> eliminar_producto_categoria
+
+productos_pesoVenta -->crear_producto_pesoVenta
+                    -->eliminar_producto_pesoVenta
+                    --> actualizar_producto_pesoVenta
+
+productos_medidaVenta   --> crear_producto_medidaVenta
+                        --> eliminar_producto_medidaVenta
+                        --> actualizar_producto_medidaVenta
+
+
+productos -> crear_producto
+          --> actualizar_producto
+          --> eliminar_producto
+          --> obtener_producto_por_id
+          --> listar_productos
+
+
+producto_subcategoria --> crear_producto_subcategoria
+                        --> actualizar_productos_subcategoria
+                        --> eliminar_productos_subcategoria
+
+productos_imagenes ->  --> crear_producto_imagen
+                        --> actualizar_productos_subcategoria
+                        --> eliminar_productos_subcategoria
+
+
+========== YO ================
+
+administrativo -> crear_administrativo
+                -->actualizar_administrativo
+                -->eliminar_administrativo
+
+proveedor -> crear_proveedor
+                ->actualizar_proveedor
+                -->eliminar_proveedor
+
+inventario_base
+
+Carrito -> crear_carrito
+        -> actualizar_carrito
+        ->eliminar_carrito
+
+========== YO ================
+
+===== Yeison =========
+
+=======
+detalles_usuarios -> crear_detalle_usuario
+                  -> actualizar_detalle_usuario
+                  -> eliminar_detalle_usuario
+
+                  
+usuarios (esto afecta a la tabla de detalles_usuarios) 
+        --> crear_usuario
+         -->actualizar_usuario
+         -->eliminar_usuario
+
+
+pedidos  --> crear_pedido
+         -->actualizar_pedido
+         -->eliminar_pedido
+
+
+facturas --> crear_factura
+         --> actualizar_factura
+         --> eliminar_factura
+
+
+ventas   --> crear_venta
+         --> actualizar_venta
+         --> eliminar_venta
+
+
+comunidadSena --> crear_comunidadSena
+              --> actualizar_comunidadSena
+              --> eliminar_comunidadSena
+>>>>>>> b7a183fd2934cb6f9fe2f0c49ca9b4f442ac1e0f
+
+=================   Yeison ====0
+
+pedidos_tiene_productos
+animales_estado
+Animales
+
+fecha_ventas

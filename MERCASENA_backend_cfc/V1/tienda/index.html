@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>MERCASENA TIENDA</title>
+  <link rel="icon" type="image/x-icon" href="../assets/logos/logoSena_2.png">
+  <meta name="description" content="Mercasena">
+  <meta name="keywords"
+    content="tailwind,tailwindcss,tailwind css,css,starter template,free template,store template, shop layout, minimal, monochrome, minimalistic, theme, nordic">
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
+  <!-- <script src="../assets/js/jquery-3.7.1.js"></script> -->
+  <!-- <script src="../assets/js/owl.carousel.min.js"></script> -->
+
+  <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Work+Sans:200,400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link href="css/loader.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+  <!-- los estilos de los comprobantes de venta -->
+  <!-- <link rel="stylesheet" href="assets/css/comprobante.css"> -->
+</head>
+
+<body class="bg-gray-300 text-gray-600 work-sans leading-normal text-base tracking-normal">
+
+  <!-- MODAL DE QUE SE EFECTUARON LOS CAMBIOS  -->
+  <dialog id="modalExito" class="modal">
+    <div class="modal-box ">
+      <div class="container inline-flex">
+        <img src="../assets/icons/check-icon.gif" class="object-cover mr-10 mt-9" alt="">
+        <p class="align-center mt-9 text-gray-600 text-2xl " id="mensajeModalExito">Press ESC key or
+          click the button below to close</p>
+
+      </div>
+
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- modal que muestra la informacion del pedido -->
+  <!-- MODAL QUE MUESTRA LOS ERRORES  -->
+  <dialog id="errorModal" class="modal">
+    <div class="modal-box ">
+      <div class="container inline-flex">
+        <img src="../assets/icons/error-icon.gif" class="object-cover overflow-visible  h-50 w-50 ml-7  mr-10 mt-9"
+          alt="">
+        <p class="align-center mt-9 text-gray-600 text-2xl " id="text-modalError">Press ESC key or
+          click the button below to close</p>
+
+      </div>
+
+      <div class="modal-action">
+        <form method="dialog">
+          <!-- if there is a button in form, it will close the modal -->
+          <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- MODAL DE PREVISUALIZACION DE LA FACTURA -->
+
+  <dialog id="billPreviewModal" class="modal">
+
+
+    <div class="modal-box  w-11/12 max-w-5xl ">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="w-full  mx-auto p-0  bg-white">
+        <div class="mb-6 min-w-full container   w-full">
+          <div class="border-b w-full  pb-2 mb-2 flex inline-flex  mx-auto">
+            <div class="flex w-7/10  text-left mr-10 px-6">
+              <img src="../assets/logos/logoSena_2.png" alt="logo sena"
+                class="h-20  w-20 avatar  align-center mx-auto  w-auto object-cover  mr-4">
+              <div class="w-full">
+
+              </div>
+            </div>
+            <div class="flex-1 w-7/11 text-center  justify-self-end justify-center text-left ml-2">
+
+              <p class="text-lg  text-slate-500  tracking-wide  mr-20 pr-10  font-bold mx-auto mb-1 ">
+                COMERCIALIZADORA DIDÁCTICA</p>
+              <div class="divider divider-neutral  "></div>
+              <p class="text-sm text-slate-500 font-bold mr-20 pr-10 ">SERVICIO NACIONAL
+                DE
+                APRENDIZAJE - SENA - </p>
+              <p class="text-sm text-slate-500 font-bold mr-20 pr-10 ">REGIONAL CALDAS</p>
+              <p class="text-sm text-slate-500  font-bold mr-20 pr-10 ">REGIONAL CALDAS
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- informacion de la factura -->
+        <div class="container">
+          <div class=" grid grid-cols-2   mb-5 mt-4 ">
+            <!-- Customer Information parte de la izquierda -->
+            <div class="mr-1 w-1/2">
+              <div class="items-center w-2/2  mb-1  flex text-center">
+                <span
+                  class="font-semibold relative  mx-auto flex items-center  text-xs ml-11 lg:ml-16 lg:mr-3  lg:text-lg ">FECHA
+                </span>
+              </div>
+              <div class="flex w-2/3 relative ml-5   flex-col">
+                <!-- dia,mes año-->
+                <div class="flex lg:w-auto text-xs lg:text-sm text-center bg-slate-100">
+                  <div class="flex-1 w-max   py-1 px-1 font-bold border border-gray-500 rounded-tl-lg">
+                    DIA</div>
+                  <div class="flex-1 w-auto   py-1 px-1 font-bold border border-gray-500">
+                    MES
+                  </div>
+                  <div class="flex-1 w-auto py-1 px-1  font-bold border border-gray-500 rounded-tr-lg">
+                    AÑO</div>
+                </div>
+                <!-- fecha :V -->
+                <div class="flex relative   tex-center text-xs lg:text-sm ">
+                  <div class="flex-1 w-auto  py-2  px-2  border border-gray-500 rounded-bl-lg">
+                    15</div>
+                  <div class="flex-1  w-auto  py-2  px-2  border border-gray-500">05
+                  </div>
+                  <div class="flex-1  w-auto  py-2  px-2  border border-gray-500 rounded-br-lg">
+                    2025</div>
+                </div>
+
+              </div>
+            </div>
+            <!-- Invoice Information parte de la derecha -->
+            <div class="mb-1 mt-10 justify-between  justify-self-center w-1/3 lg:ml-20  text-center flex-1">
+              <div class="flex mt-4  align-center justify-center flex-inline mr-40 lg:mr-20">
+                <span class="font-semibold p-0 text-xs mr-1 ">COMPROBANTE DE
+                  VENTA</span>
+
+                <div class="flex  w-2/3   flex-col">
+                  <div class="flex  border absolute rounded-lg border-gray-500 border-collapse ">
+                    <div
+                      class="flex-1 ml-2 flex-inline font-bold py-1 lg:py-2  px-1 lg:px-4  text-red-500 flex-shrink-0 over-flow-hidden ">
+                      <span class="text-red-500">N°</span> <span id="facID">No registrada</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- informacion del cliente -->
+        <div class="mb-6">
+
+
+          <div class="mr-1 w-2/2">
+
+            <div class="flex w-3/3 relative ml-5   flex-col">
+              <!-- dia,mes año-->
+              <div class="flex lg:w-auto text-xs lg:text-sm  bg-slate-100">
+
+                <div class="flex-1 w-max flex-inline   py-1 px-1 font-bold border border-gray-500">
+                  <label for="customerNit" class="w-1/3">CLIENTE :</label>
+                  <span id="customerName" class="text-center text-lg  text-gray-600"></span>
+                  <!-- <input type="text" class="text-center text-lg  text-gray-600  w-2/3 " id="customerName"> -->
+                </div>
+                <div class="flex-1 w-max flex-inline  py-1 px-1 font-bold border border-gray-500">
+                  <label for="customerNit" class="w-1/3">C.C /Nit :</label>
+                  <!-- <input type="text" class="text-center  text-lg  text-gray-600  w-2/3  ml-20 pl-1 "
+                          id="customerNit" value="1054832432"> -->
+
+                  <span id="customerNit" class="text-center text-lg  text-gray-600"></span>
+                </div>
+
+              </div>
+
+              <div class="flex relative   text-xs lg:text-sm ">
+                <div class="flex-1 w-max flex-inline  py-1 px-1 font-bold border border-gray-500">
+                  <label for="customerAdress" class="self-center w-1/3">DIRECCION :
+                  </label>
+                  <span id="customerAdressText">
+
+                  </span>
+                  <!-- <textarea class="text-center text-wrap  text-lg  text-gray-600  w-2/3 " id="customerAdress"
+                          value="calle 31 #14 A 61 ,bloque b1 puerta 202 ">
+                                                    </textarea> -->
+                </div>
+                <div class="flex-1 w-max flex-inline pt-10  py-1 px-1 font-bold border border-gray-500">
+                  <label for="customerPhone" class="w-1/3 self-end   ">TELEFONO/CELULAR
+                    :</label>
+                  <input type="text" class="text-center  text-lg  text-gray-600  w-2/3" id="customerPhone"
+                    value="3226616834">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+
+        <!-- tabla con la informacion de la factura -->
+        <!-- Invoice Table -->
+
+
+
+        <div class=" mb-6">
+          <table class="min-w-full w-5/10 table-auto mt-20 border-2 border-gray-500  mb-24">
+            <thead>
+              <tr class="bg-slate-100">
+                <th class="px-4  border-2 border-gray-500   py-2 text-left">CANT</th>
+                <th class="px-4  border-2 border-gray-500   py-2 text-left">DESCRIPCION</th>
+                <th class="px-4  border-2 border-gray-500   py-2 text-left">Vr.UNITARIO</th>
+                <th class="px-4  border-2 border-gray-500   py-2 text-left">Vr.TOTAL</th>
+              </tr>
+            </thead>
+            <tbody id="tbodyBillTable">
+              <tr>
+                <td class="border-2 border-gray-500   px-4 py-2">4</td>
+                <td class="border-2 border-gray-500   px-4 py-2">Huevos AAA x30 (CUBETA)</td>
+                <td class="border-2 border-gray-500   px-4 py-2"> $ 600</td>
+                <td class="border-2 border-gray-500   px-4 py-2">$ 16000</td>
+
+              </tr>
+
+            </tbody>
+            <tfoot>
+              <td class="font-bold ">TOTAL : <span id="totalBill"></span></td>
+            </tfoot>
+          </table>
+          <div>
+            <!-- <butto class="btn button-succes" onclick="window.location.href='reporteFactura.html';">CONFIRMAR -->
+            <!-- </butto> -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </dialog>
+  <!-- MODAL DE CARGA -->
+  <!-- modal de carga -->
+  <dialog id="modalCarga" class="modal">
+    <div class="modal-box opacity-100 ">
+      <form method="dialog">
+        <button class="btn hidden btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+
+
+      <div class="loader-container ">
+        <div class="loader">
+          <!-- <img src="../assets/logos/mercasena_logo.png" class="animate-pulse w-15 h-15" alt=""> -->
+        </div>
+        <img src="../assets/logos/mercasena_logo.png" width="120px" height="40px" class="animate-pulse " alt="">
+        <div class="loader-text lowercase" id="loader-text"></div>
+      </div>
+
+
+    </div>
+  </dialog>
+  <!--Nav-->
+  <nav id="header" class="w-full z-30 top-0 py-1 bg-white flex flex-inline   md:block ">
+    <div class="w-full container mx-auto flex flex-wrap items-center md:justify-between mt-0 px-2 md:px-6 py-2">
+
+      <!-- Mobile menu button -->
+
+      <input class="hidden" type="checkbox" id="menu-toggle" />
+
+
+      <!-- Logo -->
+      <div class="order-1 md:order-2">
+        <a onclick="location.reload();"   class="flex items-center tracking-wide no-underline hover:no-underline font-bold color-sena-texto text-xl"
+          href="#">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#56B847">
+            <path d="M120-240v-80h720v80H120Zm0-200v-80h720v80H120Zm0-200v-80h720v80H120Z" />
+          </svg> -->
+          <img class="hidden" width="50px" height="50px" src="../assets/logos/logoSena_2.png" alt="">
+          <span class="ml-1 md:mr-10 mr-5 md:ml-0  md:block">
+
+            MERCASENA
+          </span>
+
+        </a>
+      </div>
+
+      <!-- Menu -->
+
+      <!-- para desktop -->
+      <div class="order-2 md:order-3 hidden md:block w-full md:w-auto mt-4 md:mt-0">
+        <div class="w-full max-w-sm min-w-[200px]">
+          <div class="relative mt-7">
+            <input id="productSearchBar"
+              class="w-full color-sena  text-white placeholder:text-white text-white text-sm border border-slate-200 rounded-full pl-4 pr-28 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+              placeholder="Busca tus productos..." />
+
+            <button
+              class=" bg-green-800 absolute top-1 right-1 flex items-center rounded-full bg-slate-800 py-1 px-3 border border-transparent text-center text-sm text-white transition-all shadow-sm hover:shadow focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+              type="button">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#FFFFFFFF" class="w-4 h-4 mr-2">
+                <path fill-rule="evenodd"
+                  d="M10.5 3.75a6.75 6.75 0 1 0 0 13.5 6.75 6.75 0 0 0 0-13.5ZM2.25 10.5a8.25 8.25 0 1 1 14.59 5.28l4.69 4.69a.75.75 0 1 1-1.06 1.06l-4.69-4.69A8.25 8.25 0 0 1 2.25 10.5Z"
+                  clip-rule="evenodd" />
+              </svg>
+              Buscar
+            </button>
+            <button class="btn mt-2 h-1 w-1   " id="btnOpenPopover" popovertarget="productsResult"
+              style="anchor-name:--anchor-1">
+
+            </button>
+            <div class="dropdown  dropdown-start   w-full h-full rounded-box bg-base-100 shadow-sm" popover
+              id="productsResult" style="position-anchor:--anchor-1">
+              <div class=" px-1 grid grid-cols-4 gap-4  bg-slate-100 " id="resultsforProducxts">
+
+              </div>
+              <div class=" px-1  " id="errorBannerContainer">
+
+              </div>
+
+            </div>
+            <!-- <div class="dropdown menu w-7/10 rounded-box bg-base-100 shadow-sm" popover id="productsResult"
+              style="position-anchor:--anchor-1">
+            
+           </div> -->
+
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <!-- Iconos de navegación -->
+      <div class="order-1  md:order-4   flex items-center md:justify-center  md:justify-end md:space-x-4"
+        id="nav-content">
+
+
+        <a href="index.html" class="hidden md:inline-block no-underline hover:text-black " href="">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#39A900">
+            <path
+              d="M234-276q51-39 114-61.5T480-360q69 0 132 22.5T726-276q35-41 54.5-93T800-480q0-133-93.5-226.5T480-800q-133 0-226.5 93.5T160-480q0 59 19.5 111t54.5 93Zm246-164q-59 0-99.5-40.5T340-580q0-59 40.5-99.5T480-720q59 0 99.5 40.5T620-580q0 59-40.5 99.5T480-440Zm0 360q-83 0-156-31.5T197-197q-54-54-85.5-127T80-480q0-83 31.5-156T197-763q54-54 127-85.5T480-880q83 0 156 31.5T763-763q54 54 85.5 127T880-480q0 83-31.5 156T763-197q-54 54-127 85.5T480-80Zm0-80q53 0 100-15.5t86-44.5q-39-29-86-44.5T480-280q-53 0-100 15.5T294-220q39 29 86 44.5T480-160Zm0-360q26 0 43-17t17-43q0-26-17-43t-43-17q-26 0-43 17t-17 43q0 26 17 43t43 17Zm0-60Zm0 360Z" />
+          </svg>
+        </a>
+        <!-- cuenta -->
+        <div id="cuenta_space" class="  flex flex-col">
+          <div class="dropdown dropdown-end">
+            <div tabindex="0" role="button" id="loginTrigger"
+              class="btn bg-base-100 hover:bg-base-300  color-sena-texto  text-xs  md:text-md  m-1">Click ⬇️
+            </div>
+            <ul tabindex="0" class="dropdown-content menu bg-base-100 rounded-box z-1 w-70 p-2 shadow-sm">
+              <li>
+                <!-- tu cuenta  -->
+                <div class="flex flex-inline">
+                  <svg width="30px" height="30px" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" fill="#39A900">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M0 0h48v48H0z" fill="none"></path>
+                      <g id="Shopicon">
+                        <path
+                          d="M31.278,25.525C34.144,23.332,36,19.887,36,16c0-6.627-5.373-12-12-12c-6.627,0-12,5.373-12,12 c0,3.887,1.856,7.332,4.722,9.525C9.84,28.531,5,35.665,5,44h38C43,35.665,38.16,28.531,31.278,25.525z M16,16c0-4.411,3.589-8,8-8 s8,3.589,8,8c0,4.411-3.589,8-8,8S16,20.411,16,16z M24,28c6.977,0,12.856,5.107,14.525,12H9.475C11.144,33.107,17.023,28,24,28z">
+                        </path>
+                      </g>
+                    </g>
+                  </svg>
+                  <a onclick="user.createUserUpdateModal(); " class="text-md ml-2 font-bold color-sena-texto">Mi
+                    cuenta</a>
+                </div>
+
+              </li>
+              <li>
+                <!-- tus pedidos -->
+                <div class="flex flex-inline">
+                  <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                    stroke="#39A900">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M4.50938 10.4343C4.7433 8.79689 4.86026 7.97818 5.42419 7.48909C5.98812 7 6.81514 7 8.46918 7H9H15H15.5308C17.1849 7 18.0119 7 18.5758 7.48909C19.1397 7.97818 19.2567 8.79689 19.4906 10.4343L20.3478 16.4343C20.6512 18.5586 20.803 19.6208 20.2049 20.3104C19.6068 21 18.5339 21 16.388 21H16H8H7.61204C5.46614 21 4.3932 21 3.79511 20.3104C3.19703 19.6208 3.34877 18.5586 3.65224 16.4343L4.50938 10.4343Z"
+                        stroke="#39A900" stroke-width="2" stroke-linejoin="round"></path>
+                      <path d="M9 11V5C9 3.89543 9.89543 3 11 3H13C14.1046 3 15 3.89543 15 5V11" stroke="#39A900"
+                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                  </svg>
+                  <a onclick="user.fetchOrders()" class="text-md ml-2 font-bold color-sena-texto">Mis Pedidos</a>
+                </div>
+              </li>
+              <li>
+                <!-- tus comprobantes de venta #39A900 -->
+                <div class="flex flex-inline p-0 ml-2 ">
+                  <svg stroke="#39A900" width="60px" height="30px" class="mr-1" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path d="M10.5 11L17 11" stroke="#37c035" stroke-width="1.5" stroke-linecap="round"></path>
+                      <path d="M7 11H7.5" stroke="#37c035" stroke-width="1.5" stroke-linecap="round"></path>
+                      <path d="M7 7.5H7.5" stroke="#37c035" stroke-width="1.5" stroke-linecap="round"></path>
+                      <path d="M7 14.5H7.5" stroke="#37c035" stroke-width="1.5" stroke-linecap="round"></path>
+                      <path d="M17 14.5H16M10.5 14.5H13.5" stroke="#37c035" stroke-width="1.5" stroke-linecap="round">
+                      </path>
+                      <path d="M17 7.5H14M10.5 7.5H11.5" stroke="#37c035" stroke-width="1.5" stroke-linecap="round">
+                      </path>
+                      <path
+                        d="M21 7V6.37006C21 5.17705 21 4.58055 20.842 4.09946C20.5425 3.18719 19.8468 2.47096 18.9606 2.16261C18.4933 2 17.9139 2 16.755 2H7.24502C6.08614 2 5.50671 2 5.03939 2.16261C4.15322 2.47096 3.45748 3.18719 3.15795 4.09946C3 4.58055 3 5.17705 3 6.37006V15M21 11V20.3742C21 21.2324 20.015 21.6878 19.3919 21.1176C19.0258 20.7826 18.4742 20.7826 18.1081 21.1176L17.625 21.5597C16.9834 22.1468 16.0166 22.1468 15.375 21.5597C14.7334 20.9726 13.7666 20.9726 13.125 21.5597C12.4834 22.1468 11.5166 22.1468 10.875 21.5597C10.2334 20.9726 9.26659 20.9726 8.625 21.5597C7.98341 22.1468 7.01659 22.1468 6.375 21.5597L5.8919 21.1176C5.52583 20.7826 4.97417 20.7826 4.6081 21.1176C3.985 21.6878 3 21.2324 3 20.3742V19"
+                        stroke="#37c035" stroke-width="1.5" stroke-linecap="round"></path>
+                    </g>
+                  </svg>
+                  <a onclick="user.fetchBills()" class="text-md font-bold color-sena-texto">Mis Comprobantes de
+                    Venta</a>
+                </div>
+              </li>
+              <!-- boton de logout  -->
+              <li>
+                <!-- boton de logout  -->
+                <div class="flex flex-inline">
+                  <svg stroke="#39A900" width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path
+                        d="M15 16.5V19C15 20.1046 14.1046 21 13 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3H13C14.1046 3 15 3.89543 15 5V8.0625M11 12H21M21 12L18.5 9.5M21 12L18.5 14.5"
+                        stroke="#39A900" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </g>
+                  </svg>
+                  <a onclick="user.logout()" class="text-md ml-2 font-bold color-sena-texto">Salir</a>
+                </div>
+              </li>
+
+            </ul>
+          </div>
+          <!-- <button id="loginTrigger" popovertarget="popover-1"
+            class="hiddenbtn  md:inline-block no-underline hover:text-black text-green-600" href="#">
+          </button> -->
+
+        </div>
+
+
+
+        <!-- <button class="btn" style="anchor-name:--anchor-1">
+          Button
+        </button> -->
+
+        <div class="border-l-2 border-green-500 h-6"></div>
+        <div>
+          <a onclick="web.getProductsInfo();" class="block md:hidden">
+            <label class="input">
+              <svg class="h-4 w-4"  viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+                stroke="#39a900">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M15.7955 15.8111L21 21M18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5Z"
+                    stroke="#" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+              </svg>
+
+            </label>
+
+          </a>
+        </div>
+        <!-- boton del carrito -->
+        <div>
+          <button onclick="user.renderShoppingCart()"
+            class="py-4 px-1 relative border-2 border-transparent text-gray-800 rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out"
+            aria-label="Cart">
+            <svg class="md:h-6 md:w-6 w-4 h-4" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              viewBox="0 0 24 24" stroke="#39A900">
+              <path
+                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z">
+              </path>
+            </svg>
+            <span class="absolute inset-0 object-right-top -mr-6">
+              <div id="productCounterInShoppingCart"
+                class="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-red-500 text-white">
+                0
+              </div>
+            </span>
+          </button>
+        </div>
+
+
+
+
+
+      </div>
+    </div>
+  </nav>
+
+
+  <div>
+
+    <!-- modal del carrito de compras de mercasena papa! -->
+
+    <dialog id="modal_carrito" class="modal">
+      <div class="modal-box w-full max-w-6xl p-6 bg-white rounded-lg shadow-lg">
+        <h3 class="text-center text-2xl font-bold color-sena-texto">CARRITO DE COMPRAS</h3>
+
+        <!-- Contenedor principal sin divide-x global -->
+        <div class="mt-2 color-sena-borde">
+          <!-- Cabecera con línea horizontal debajo -->
+          <div
+            class="grid  grid-cols-2 md:grid-cols-3 text-center font-bold text-green-700 py-2 border-b-4 color-sena-borde">
+            <div class="color-sena-texto">PRODUCTOS</div>
+            <div class="border-l-4 border-r-4 color-sena-borde color-sena-texto">CANTIDAD</div>
+            <div class="hidden md:block color-sena-texto">TOTAL</div>
+          </div>
+
+          <!-- Fila de producto -->
+          <div id="shoppingCarContainer"
+            class="grid grid-cols-2 md:grid-cols-3   items-center text-center font-semibold py-4">
+
+            <!-- se renderiza el carrito en el metodo de la clase de user que es renderShoppingCart -->
+            <!-- Producto + botón eliminar -->
+            <!-- <div class="flex items-center justify-center gap-2">
+              <span class="bg-green-500 text-white px-3 py-1 rounded-lg">Mango: $14000</span>
+              <button class="bg-red-400 text-white px-2 py-1 rounded-md text-xs">Eliminar</button>
+            </div> -->
+
+            <!-- Cantidad que tambien contiene los botones de agregar o bajar -->
+            <!-- <div class="border-l-4 border-r-4 border-green-500 flex justify-center items-center">
+              <span class="bg-green-500 text-white px-3 py-1 rounded-lg">2</span>
+            </div> -->
+
+            <!-- Total -->
+            <!-- <div class="flex justify-center items-center">
+              <span class="bg-green-500 text-white px-3 py-1 rounded-lg">$28000</span>
+            </div> -->
+
+
+
+
+
+            <!-- ================== SEGUNDO PRODUCTO =================== -->
+
+
+          </div>
+
+
+
+
+
+          <!-- Botones de pago -->
+          <div class="flex justify-center gap-4 mt-6 border-t-4 color-sena-borde pt-4">
+            <button onclick="orderLimitInHours.showModal();" class="color-sena text-white px-6 py-2 rounded-lg">SOLICITAR
+              $<span id="TotalShoppinCart"></span></button>
+          </div>
+
+
+        </div>
+
+
+        <!-- Botón cerrar -->
+        <form method="dialog" class="absolute right-2 top-2">
+          <button class="btn btn-sm btn-circle btn-ghost">✕</button>
+        </form>
+      </div>
+    </dialog>
+
+
+
+    <!-- Modal  -->
+
+    <dialog id="infoModal" class="modal">
+      <div class="modal-box">
+        <h3 class="text-lg font-bold" id="type-text"></h3>
+        <p class="py-4" id="text-modal"></p>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- carousele de las categorias -->
+
+    <div id="bannerCarousele" class="owl-carousel owl-theme">
+
+    </div>
+
+    <!-- <style>
+      .sena-verde{
+        /* color:#39a900; */
+        background-color:#39a900;
+      }
+    </style> -->
+
+    <div id="carousele-categories"
+      class="color-sena   p-3 rounded-lg overflow-y-hidden    flex flex-nowrap justify-center mt-0 ml-0 mr-2  carousel h-12 carousel-horizontal  mx-o w-full rounded-box  p-0 border-box mt-3  rounded-lg  justify-center ">
+      <!-- <div   id="carousele-categories" class="carousel h-7  carousel-horizontal items-align-center   mx-auto w-full rounded-box"> -->
+
+    </div>
+
+  </div>
+
+  </div>
+  <!-- body -->
+  <!-- modal del carrito -->
+
+  <!-- Productos -->
+  <section class="bg-white/80 py-12">
+    <div class="container mx-auto px-4">
+      <!-- grid -->
+      <div id="products-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+
+
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- modal de los pedidos del usuario -->
+  <dialog id="ordersModal" class="modal">
+    <div class="modal-box  bg-base-300  w-11/12 max-w-5xl  ">
+      <form method="dialog">
+        <button
+          class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+          ✕</button>
+      </form>
+      <div>
+        <!-- menu de filtros -->
+        <div class="navbar  bg-base-100 shadow-sm">
+          <!-- primera parte -->
+          <div class="flex-none">
+            <button class="btn btn-square btn-ghost">
+
+            </button>
+          </div>
+          <!-- segunda parte -->
+          <div class="flex-1">
+            <!-- filtros -->
+
+            <a class="btn btn-ghost text-green-400 mb-5  text-xl">Mis pedidos</a>
+          </div> 
+
+        </div>
+        <div id="ordersCardContainers" class="grid ml-8 grid-cols-1 p-2 gap-2  md:gap-0 lg:grid-cols-2">
+          <!-- CARD de informacion del pedido -->
+          <div
+            class="rounded-xl overflow-hidden mt-2 md:mt-0  flex shadow hover:shadow-lg hover:scale-110 transform  max-w-sm bg-white cursor-pointer h-40">
+            <div class="w-7/12 h-200  pl-3 p- pb-5 text-text1 flex flex-col justify-center">
+              <p class="text-base mb-2 font-bold truncate">
+              </p>
+              <div class="badge badge-success mt-1 text-white">pendiente</div>
+              <div class="text-xs pt-1 pb-0  text-primary mb-2">
+                <a class="flex items-center">
+
+
+                </a>
+                <span class="font-bold tracking-wide mt-2 text-lg text-green-400">4 productos</span>
+              </div>
+              <div class="text-sm text-text2 tracking-wider">22/05/2025 08:34 </div>
+            </div>
+            <div class="lg:flex flex w-5/12 flex-col mt-3 pt-2 flex-1    p-2">
+              <span class="font-bold tracking-wide mt-7 text-x4l text-green-400">Total <span
+                  class="font-bold tracking-wide mt-2 text-x2l text-gray-600">$</span> <span
+                  class="font-bold tracking-wide mt-2 text-x2l text-gray-600"> 186044</span></span>
+              <div class="text-sm text-text2 self-center mt-5 justify-end tracking-wider">
+                <butto
+                  class="btn btn-md  md:btn-sm  mr-6 md:mr-0  bg-blue-300 p-4 md:p-4    hover:bg-blue-600 hover:text-white  transition duration-200 ease-in-out justify-end">
+
+                  Mas Informacion</butto>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- segunda  -->
+          <div
+            class="rounded-xl mt-2 md:mt-0  overflow-hidden flex shadow hover:shadow-lg hover:scale-110 transform  max-w-sm bg-white cursor-pointer h-40">
+            <div class="w-7/12 h-200  pl-3 p- pb-3 text-text1 flex flex-col justify-center">
+              <p class="text-base mb-2 font-bold truncate">
+              </p>
+              <div class="badge badge-warning mt-1 text-white">por confirmar</div>
+              <div class="text-xs pt-1 pb-0  text-primary mb-2">
+                <a class="flex items-center">
+
+
+                </a>
+                <span class="font-bold tracking-wide mt-2 text-lg text-green-400">3 productos</span>
+              </div>
+              <div class="text-sm text-text2 tracking-wider">23/05/2025 10:34 </div>
+            </div>
+            <div class="lg:flex flex w-5/12 flex-col mt-3 pt-2 flex-1    p-2">
+              <span class="font-bold tracking-wide mt-7 text-x4l text-green-400">Total <span
+                  class="font-bold tracking-wide mt-2 text-x2l text-gray-600">$</span> <span
+                  class="font-bold tracking-wide mt-2 text-x2l text-gray-600"> 12500</span></span>
+              <div class="text-sm text-text2 self-center mt-5 justify-end tracking-wider">
+                <butto
+                  class="btn btn-md  md:btn-sm  mr-6 md:mr-0  bg-blue-300 p-4 md:p-4    hover:bg-blue-600 hover:text-white  transition duration-200 ease-in-out justify-end">
+                  Mas Informacion</butto>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+<!-- 
+        <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="1" checked="checked" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+        </div> -->
+
+      </div>
+
+    </div>
+  </dialog>
+  <!-- modal que muestra informacion de uin pedido especifico -->
+  <!-- You can open the modal using ID.showModal() method -->
+
+  <dialog id="orderInfoModal" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div class="w-full" id="orderInfoModalContainer">
+
+      </div>
+    </div>
+  </dialog>
+
+  <!-- modal de las facturas  -->
+  <!-- modal que muestra informacion de uin pedido especifico -->
+  <!-- You can open the modal using ID.showModal() method -->
+
+  <!-- modal de los pedidos del usuario -->
+  <dialog id="BillModal" class="modal">
+    <div class="modal-box  bg-base-300  w-11/12 max-w-5xl  ">
+      <form method="dialog">
+        <button
+          class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+          ✕</button>
+      </form>
+      <div>
+        <!-- menu de filtros -->
+        <div class="navbar  bg-base-100 shadow-sm">
+          <!-- primera parte -->
+          <div class="flex-none">
+            <button class="btn btn-square btn-ghost">
+
+            </button>
+          </div>
+          <!-- segunda parte -->
+          <div class="flex-1">
+            <!-- filtros -->
+
+            <a class="btn btn-ghost text-green-400  text-sm md:text-xl">Mis Comprobantes de ventas</a>
+          </div>
+
+        </div>
+        <!-- <div id="BillCardContainers" class="grid ml-8 grid-cols-1 p-2 lg:grid-cols-2"> -->
+        <!-- CARD de informacion del comprobante de venta -->
+
+        <div id="BillCardContainers" class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 p-4">
+
+          <div class="p-2 sm:w-1/2 w-full">
+            <div class="bg-gray-100 rounded flex p-5 h-full items-center">
+              <svg fill="#000000" class="w-6 h-6  md:w-10 md:h-10" width="0px" height="0px" viewBox="0 0 24 24"
+                id="bill-dollar-left" data-name="Flat Line" xmlns="http://www.w3.org/2000/svg" class="icon flat-line">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path id="secondary"
+                    d="M18,3H10A8.48,8.48,0,0,1,5,18v3l2.33-1,2.33,1L12,20l2.34,1,2.33-1L19,21V4A1,1,0,0,0,18,3Z"
+                    style="fill: #2ca9bc; stroke-width: 2;"></path>
+                  <path id="primary"
+                    d="M5,13H7.5A1.5,1.5,0,0,0,9,11.5H9A1.5,1.5,0,0,0,7.5,10h-1A1.5,1.5,0,0,1,5,8.5H5A1.5,1.5,0,0,1,6.5,7H9"
+                    style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                  </path>
+                  <path id="primary-2" data-name="primary" d="M7,7V6m0,8V13m5,2h3m-2-4h2"
+                    style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                  </path>
+                  <path id="primary-3" data-name="primary"
+                    d="M5,18v3l2.33-1,2.33,1L12,20l2.34,1,2.33-1L19,21V4a1,1,0,0,0-1-1H10"
+                    style="fill: none; stroke: #000000; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;">
+                  </path>
+                </g>
+              </svg>
+              <div class=" ml-4 flex-row flex">
+                <div class="col">
+                  <span
+                    class="flex col transition   text-sm md:text-lg hover:text-gray-100 hover:bg-yellow-400 duration-300 rounded-lg transition-colors ease-in-out   bg-base-100 bg-opacity-25">12/05/2025</span>
+                  <span
+                    class="flex col mt-1  text-sm md:text-lg hover:text-green-400 font-bold duration-300 transition  uppercase">jesus
+                    david buitrago agudelo</span>
+                  <span class="flex col mt-6"><span
+                      class="font-bold rounded-lg hover:bg-green-400 duration-300 transition-colors ease-in-out mr-4 text-center  w-6">8</span>
+                    productos</span>
+                  <div class="divider divider-success"></div>
+                  <span class="flex col">Total:<span class="ml-12 self-end font-bold"> $2,000</span></span>
+                </div>
+                <div class="divider col  divider-success"></div>
+                <div
+                  class="flex overflow-visible  justify-center md:justify-end  md:justify-center  items-center  pr-0   divide-x rounded-lg flex-col md:flex-col-reverse dark:bg-gray-900 dark:border-gray-700 dark:divide-gray-700">
+
+                  <!-- drodown de opciones -->
+                  <div class="dropdown z-100 items-center overflow-visible justify-center  dropdown-top">
+                    <div tabindex="0" role="button" class="btn m-1">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 512 512">
+                        <path fill="currentColor"
+                          d="M256 144a64 64 0 1 0-64-64a64.072 64.072 0 0 0 64 64Zm0-96a32 32 0 1 1-32 32a32.036 32.036 0 0 1 32-32Zm0 320a64 64 0 1 0 64 64a64.072 64.072 0 0 0-64-64Zm0 96a32 32 0 1 1 32-32a32.036 32.036 0 0 1-32 32Zm0-272a64 64 0 1 0 64 64a64.072 64.072 0 0 0-64-64Zm0 96a32 32 0 1 1 32-32a32.036 32.036 0 0 1-32 32Z" />
+                      </svg>
+                    </div>
+
+                    <ul tabindex="0"
+                      class=" ml-2 dropdown-content h-100 overflow-visible menu bg-base-100 rounded-box z-1 w-30 justify-center   items-aling-center p-2 shadow-sm">
+                      <!-- el de ver factura  -->
+                      <li class="justify-center gap-2  w-full hover:bg-gray-200 ">
+                        <button
+                          class="transition delay-150 duration-300 ease-in-out hover:rotate-45  hover:-translate-y-1 flex-grow  hover:scale-110 hover:bg-indigo-500"
+                          onclick="inventary.showDeletionModal({preposition:'el producto-base ',name :',user.deleteBaseProduct)">
+                          <svg width="0px" height="0px" class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path
+                                d="M15.0007 12C15.0007 13.6569 13.6576 15 12.0007 15C10.3439 15 9.00073 13.6569 9.00073 12C9.00073 10.3431 10.3439 9 12.0007 9C13.6576 9 15.0007 10.3431 15.0007 12Z"
+                                stroke="#30c555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                              <path
+                                d="M12.0012 5C7.52354 5 3.73326 7.94288 2.45898 12C3.73324 16.0571 7.52354 19 12.0012 19C16.4788 19 20.2691 16.0571 21.5434 12C20.2691 7.94291 16.4788 5 12.0012 5Z"
+                                stroke="#30c555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                            </g>
+                          </svg>
+                        </button>
+                      </li>
+
+                      <!-- el de descargar -->
+                      <li class="py-4">
+                        <input type="hidden" value="" id="my-modal-3" class="modal-toggle" />
+                        <button onclick="user.editBaseProduct()">
+                          <svg width="0px" height="0px" class="w-5 h-5 sm:w-6 sm:h-6" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                            <g id="SVGRepo_iconCarrier">
+                              <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M8 10C8 7.79086 9.79086 6 12 6C14.2091 6 16 7.79086 16 10V11H17C18.933 11 20.5 12.567 20.5 14.5C20.5 16.433 18.933 18 17 18H16.9C16.3477 18 15.9 18.4477 15.9 19C15.9 19.5523 16.3477 20 16.9 20H17C20.0376 20 22.5 17.5376 22.5 14.5C22.5 11.7793 20.5245 9.51997 17.9296 9.07824C17.4862 6.20213 15.0003 4 12 4C8.99974 4 6.51381 6.20213 6.07036 9.07824C3.47551 9.51997 1.5 11.7793 1.5 14.5C1.5 17.5376 3.96243 20 7 20H7.1C7.65228 20 8.1 19.5523 8.1 19C8.1 18.4477 7.65228 18 7.1 18H7C5.067 18 3.5 16.433 3.5 14.5C3.5 12.567 5.067 11 7 11H8V10ZM13 11C13 10.4477 12.5523 10 12 10C11.4477 10 11 10.4477 11 11V16.5858L9.70711 15.2929C9.31658 14.9024 8.68342 14.9024 8.29289 15.2929C7.90237 15.6834 7.90237 16.3166 8.29289 16.7071L11.2929 19.7071C11.6834 20.0976 12.3166 20.0976 12.7071 19.7071L15.7071 16.7071C16.0976 16.3166 16.0976 15.6834 15.7071 15.2929C15.3166 14.9024 14.6834 14.9024 14.2929 15.2929L13 16.5858V11Z"
+                                fill="#000000"></path>
+                            </g>
+                          </svg>
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <div>
+                <!-- From Uiverse.io by Bodyhc -->
+
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- </div> -->
+
+        <!-- <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="1" checked="checked" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+        </div> -->
+
+      </div>
+
+    </div>
+  </dialog>
+  <dialog id="ProductsModalForMobile" class="modal">
+    <div class="modal-box  modal-bottom sm:modal-middle  ">
+      <form method="dialog">
+        <button
+          class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+          ✕</button>
+      </form>
+      <div>
+        <!-- menu de filtros -->
+        <div class="navbar rounded-lg  bg-base-100 shadow-sm">
+          <!-- primera parte -->
+          <div class="flex-none">
+
+          </div>
+          <!-- segunda parte -->
+          <div class="flex-1">
+            <!-- filtros -->
+
+            <a class="btn btn-ghost text-md mr-3  justify-start color-sena-texto">Busqueda de productos</a>
+            <!-- <a class="btn btn-ghost text-xl ml-6 text-gray-700 ml-7">filtros </a> -->
+
+
+          </div>
+
+
+          <div class="flex-2">
+            <form class="flex flex-inline" id="searchBillByUser_form">
+
+              <input id="productSearchBarForMobile" type="text" placeholder="quiero..."
+                class="input  input-bordered border-green-400 w-24 md:w-auto" />
+              <button class="btn btn-sm bg-white-400   btn-circle btn-ghost hover:bg-green-400">
+                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                  <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <path
+                      d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                      stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                  </g>
+                </svg>
+              </button>
+
+            </form>
+          </div>
+          <!-- tercera parte para ver  -->
+          <div class="flex-none">
+
+            <!-- boton de buscar pedidos -->
+
+
+            <!-- icono de la persona -->
+            <div class="dropdown dropdown-end ml-1  mr-1">
+              <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                <div class="w-10 rounded-full">
+                  <img alt="Tailwind CSS Navbar component" src="assets/logos/sena_logo_2.png" />
+                </div>
+              </div>
+            </div>
+            <!-- <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+                                                </path>
+                                            </svg>
+                                        </button> -->
+          </div>
+        </div>
+        <!-- <div id="BillCardContainers" class="grid ml-8 grid-cols-1 p-2 lg:grid-cols-2"> -->
+        <!-- CARD de informacion del comprobante de venta -->
+
+        <!-- <div id="mobile_searchedProducts" class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 p-4"> -->
+        <div id="mobile_searchedProducts"
+          class="grid mt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 justify-items-center">
+
+
+
+        </div>
+
+        <!-- </div> -->
+
+        <!-- <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="1" checked="checked" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+        </div> -->
+
+      </div>
+
+    </div>
+  </dialog>
+
+
+  <!-- modal para la busqwuerda de los pedidos en celular -->
+
+
+  <!-- modales -->
+  <!-- modal que dice que te queda una hora para pagar tu producto  -->
+  <dialog id="orderLimitNotification" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+
+      <div>
+        <div class="relative my-10 flex w-full flex-col items-center sm:mt-15">
+          <a rel="noreferrer" href="https://example.com"
+            class="mx-auto flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-yellow-200 hover:bg-yellow-400 hover:text-white hover:scale-150 ease-in-out  transform hover:delay-150  px-7 py-2 transition-all duration-300">
+            <svg fill="#000000" class="w-5 h-5 animate-bounce" viewBox="0 0 32 32" version="1.1"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <title>warning</title>
+                <path
+                  d="M30.555 25.219l-12.519-21.436c-1.044-1.044-2.738-1.044-3.782 0l-12.52 21.436c-1.044 1.043-1.044 2.736 0 3.781h28.82c1.046-1.045 1.046-2.738 0.001-3.781zM14.992 11.478c0-0.829 0.672-1.5 1.5-1.5s1.5 0.671 1.5 1.5v7c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5v-7zM16.501 24.986c-0.828 0-1.5-0.67-1.5-1.5 0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5c0 0.83-0.672 1.5-1.5 1.5z">
+                </path>
+              </g>
+            </svg>
+            <p class="text-sm font-semibold text-[#1d9bf0]">ATENCION</p>
+          </a>
+          <h1
+            class="  mt-8 max-w-sm bg-gradient-to-r from-green-300 to-green-600 via-teal-500 to-gray-500 bg-clip-text text-center text-4xl font-extrabold text-transparent sm:max-w-4xl sm:text-6xl">
+          <span id="alertUserName_alert"></span><span class="underline"> , recuerda pagar </span> en <span class="underline">el</span> punto de venta en efectivo
+          </h1>
+          <!-- <span class="mt-8 max-w-lg text-center text-xl leading-relaxed text-gray-800">
+            recuerda pagar en el punto de venta
+          </span> -->
+          <p
+            class="mt-3 hover:font-bold  hover:scale-125 ease-in-out  transform hover:delay-150  px-7 py-2 transition-all duration-300 rounded border px-3 py-1 shadow">
+            💳 <span class="text-accent font-semibold underline"></span>efectivo 
+          </p>
+
+        </div>
+      </div>
+      <!-- <p class="py-4">El pedido será cancelado en una hora si no se confirma el pago.  recuerda pagar en el punto de venta</p> -->
+    </div>
+  </dialog>
+  <!-- modal que muestra el aviso de una hora -->
+  <dialog id="orderLimitInHours" class="modal">
+    <div class="modal-box">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+      <div>
+        <div class="px-4 md:px-8 py-12 bg-gray-100 rounded-lg shadow-2xl max-w-xl">
+
+          <h1 class="text-lg mb-8">
+            Hey <span id="userNameForConfirmSh" class="hover:underline hover:text-blue-400"></span> <span class="mx-2"
+              id="demo"></span><span class="text-xl">😄</span>
+            <br>
+            <span class="text-4xl font-semibold">¿Quieres confirmar tu </span>
+            <span class="text-4xl font-semibold text-blue-700">pedido?</span>
+          </h1>
+
+          <div class="flex animate-bounce mx-auto text-center justify-center space-x-3  flex-inline">
+            <span class="flex mr-4"><svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <path
+                    d="M12 16.99V17M12 7V14M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                    stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path>
+                </g>
+              </svg>
+              <h3>
+            </span>
+            <div>
+
+            </div>
+            <span class="underline font-bold">No puedes editar tu pedido </span> despues de haber sido
+            confirmado ¡</h3>
+          </div>
+          <div class="flex flex-col justify-center w-full text-center mt-6 gap-6 sm:flex-row text-lg font-semibold">
+            <a onclick="orderLimitInHours.close();"
+              class="py-4 w-full sm:w-40 border border-blue-700 rounded-lg hover:shadow-2xl hover:text-blue-700 shadow-lg">
+              Cancelar
+            </a>
+            <a id="confirmShoppingCartBtn" onclick=" user.recolectDataFromShoppingCar();"
+              class="bg-green-500 w-full sm:w-40 py-4 rounded-lg text-white hover:bg-green-700 shadow-lg">
+              Confirmar
+            </a>
+          </div>
+
+        </div>
+      </div>
+      <div>
+
+      </div>
+    </div>
+  </dialog>
+  <!-- este es elmodala de registro  -->
+  <dialog id="myAccountModal" class="modal">
+    <div class="modal-box w-11/12 max-w-6xl">
+      <form method="dialog">
+        <button class="btn mt-10 md:mt-0 btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+
+      <div class="modal-action grid grid-cols-1  md:grid-cols-2">
+
+        <div class="w-full max-w-lg mx-auto border-gray-300  p-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl color-sena-texto font-bold  underline self-start  text-center font-medium mb-6">Mi cuenta
+            </h2>
+            <form id="set_formUpdateData">
+              <div class="grid grid-cols-2 gap-6">
+                <!-- nombre del usuario -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">Mi nombre</label>
+                    <div class="tooltip  tooltip-success "
+                      data-tip="este sera el nombre que aparecera en los pedidos y en las facturas">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <input type="text" name="username" id="set_username" placeholder="Juan Perez Torres"
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+                <!-- telefono delk usuario -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="" class="block text-sm font-medium text-gray-700 mb-2">Mi Numero de telefono</label>
+                    <div class="tooltip  tooltip-success "
+                      data-tip="este el numero de telefono de confirmacion o envio de factura">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <input type="text" name="set_phoneNumber" id="set_phoneNumber" placeholder="3147773423 "
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+                <!-- NIT -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">NIT</label>
+                    <div class="tooltip  tooltip-success " data-tip="Numero de cedula ,opcional">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <input type="number" name="set_nit" id="set_nit" placeholder="105467034" disabled
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+                <!-- direccion -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">Mi Direccion</label>
+                    <div class="tooltip  tooltip-success "
+                      data-tip="este sera la direccion de envio que aparecera en la factura">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <textarea type="" name="set_adress" id="set_adress" placeholder="calle 39b #14 b3 edificio 4"
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500"></textarea>
+
+                </div>
+              </div>
+              <div class="mt-8">
+                <button type="submit"
+                  class="w-full color-sena hover:bg-blue-600 text-white font-medium py-3 rounded-lg focus:outline-none">Guardar
+                  Cambios</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- seguridad -->
+        <div class="w-full max-w-lg mx-auto border-gray-300  p-8">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl color-sena-texto font-bold  underline self-start  text-center font-medium mb-6">Seguridad
+            </h2>
+            <form id="formPasswordChange_account">
+              <div class="grid grid-cols-2 gap-6">
+                <!-- contraseña -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">antigua
+                      Contraseña</label>
+                    <!-- <div class="tooltip  tooltip-success "
+                      data-tip="este sera el nombre que aparecera en los pedidos y en las facturas">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div> -->
+
+                  </div>
+                  <input type="password" name="" id="password_account" placeholder=""
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+                <!-- confirmacion de lla contraseña -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="" class="block text-sm font-medium text-gray-700 mb-2">repite tu contraseña</label>
+                    <div class="tooltip  tooltip-success "
+                      data-tip="porfavor repite la contraseña que acaba de digitar para poder cambiarla ">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <input type="password" name="pass_input_rep" id="pass_input_rep" placeholder=""
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+              </div>
+              <div class="mt-8">
+                <button type="submit"
+                  class="w-full color-sena hover:bg-blue-600 text-white font-medium py-3 rounded-lg focus:outline-none">Guardar
+                  contraseña</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="divirder"></div>
+        <div class="w-full hidden  max-w-lg mx-auto border-gray-300  p-1">
+          <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-xl color-sena-texto font-bold  underline self-start  text-center font-medium mb-6">
+              privacidad
+            </h2>
+            <form>
+              <div class="grid grid-cols-2 gap-6">
+                <!-- contraseña -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="card-number" class="block text-sm font-medium text-gray-700 mb-2">antigua
+                      Contraseña</label>
+                    <!-- <div class="tooltip  tooltip-success "
+                      data-tip="este sera el nombre que aparecera en los pedidos y en las facturas">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div> -->
+
+                  </div>
+                  <input type="text" name="username" id="set_username" placeholder="Juan Perez Torres"
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+                <!-- confirmacion de lla contraseña -->
+                <div class="col-span-2 sm:col-span-1">
+
+                  <div class="flex flex-inline justify-between">
+                    <label for="" class="block text-sm font-medium text-gray-700 mb-2">repite tu contraseña</label>
+                    <div class="tooltip  tooltip-success "
+                      data-tip="este el numero de telefono de confirmacion o envio de factura">
+
+                      <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                          <path
+                            d="M12 11V16M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                            stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+                          <circle cx="12" cy="7.5" r="1" fill="#000000"></circle>
+                        </g>
+                      </svg>
+                    </div>
+
+                  </div>
+                  <input type="text" name="set_phoneNumber" id="set_phoneNumber" placeholder="3147773423 "
+                    class="w-full py-3 px-4 border border-gray-400 rounded-lg focus:outline-none focus:border-blue-500">
+
+                </div>
+
+              </div>
+              <div class="mt-8">
+                <button type="submit"
+                  class="w-full bg-green-500 hover:bg-blue-600 text-white font-medium py-3 rounded-lg focus:outline-none">Guardar
+                  contraseña</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+
+
+  <!-- Footer -->
+  <footer class="bg-white text-black py-8">
+    <div class="container mx-auto px-6">
+      <!-- Contenedor principal con flex-row para alinear horizontalmente -->
+      <div class="flex flex-col md:flex-row justify-between items-center">
+        <!-- Logo SENA y MERCASENA alineados a la izquierda -->
+        <div class="flex items-center space-x-3 mb-4 md:mb-0">
+          <img src="../assets/logos/logoSena_2.png" alt="SENA" class="h-10">
+          <h2 class="text-xl font-bold color-sena-texto">MERCASENA</h2>
+        </div>
+
+        <!-- Iconos de redes sociales centrados en móvil, alineados a la derecha en desktop -->
+        <div class="flex justify-center md:justify-end w-full md:w-auto">
+         <div class="flex space-x-6">
+            <a href="https://www.facebook.com/share/16mxFyYVuP/" target="_blank" class="hover:opacity-80 transition-opacity">
+              <img src="../assets/logos/facebook-logo.png" alt="Facebook" class="h-8 w-8">
+            </a>
+            <a href="https://github.com/crashelly" target="_blank" class="hover:opacity-80 transition-opacity">
+              <img src="../assets/logos/github-logo.png" alt="GitHub" class="h-8 w-8">
+            </a>
+            <div id="whatsapp_contact">
+
+           
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <!-- Script mejorado para manejar el modal -->
+  <script src="../assets/js/ModalScripts.js"></script>
+  <script defer src="js/class/web.js"></script>
+  <script defer src="js/class/user.js"></script>
+  <script defer src="js/events.js"></script>
+  <script defer src="js/start.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
+
+</html>

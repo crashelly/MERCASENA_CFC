@@ -1,0 +1,74 @@
+[
+    {
+        "pedido_id":"loque sea",
+        "precioTotal":"3000000",
+        "nombreUsuario":"carlos andres Loaiza",
+        "fechaHora":"2022-01-01 00:00:00",
+
+        "productos":[
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            }
+        ]
+    },
+    {
+        "pedido_id":"loque sea",
+        "precioTotal":"3000000",
+        "nombreUsuario":"carlos andres Loaiza",
+        "fechaHora":"2022-01-01 00:00:00",
+
+        "productos":[
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            }
+        ]
+    },
+    {
+        "pedido_id":"loque sea",
+        "precioTotal":"3000000",
+        "nombreUsuario":"carlos andres Loaiza",
+        "fechaHora":"2022-01-01 00:00:00",
+
+        "productos":[
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            },
+            {
+                "producto_id":"loque sea",
+                "cantidad":"2",
+                "precioParcial":"1500000"
+            }
+        ]
+    }
+]

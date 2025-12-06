@@ -1,0 +1,4 @@
+#RewriteEngine On
+#RewriteRule mercasena/admin mercasena/inventary/index.html
+
+ErrorDocument 404 /prueba.html

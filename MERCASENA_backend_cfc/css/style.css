@@ -1,0 +1,124 @@
+*{
+  margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Estilos globales */
+body {
+    font-family: Arial, sans-serif;
+    /*background-color: #4CAF50;*/
+    background-image: url(../img/sena.png);
+    background-attachment: fixed;
+    background-size: contain;
+  }
+  
+  
+  .carro {
+    width: 300px;
+    background-color: #fff; 
+    padding: 20px;
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin: 20px auto; 
+  }
+  
+  .carro h2 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333; 
+    font-size: 18px; 
+  }
+    .productos {
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+  }
+  
+  .productos div {
+    margin: 20px; 
+    width: 200px; 
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+  }
+  
+  .productos div img {
+    width: 100%; 
+    height: 150px;
+    object-fit: cover; 
+    border-radius: 10px 10px 0 0; 
+  }
+  
+  .productos div p {
+    margin-bottom: 10px; 
+    font-size: 16px; 
+  }
+  
+  .productos div button {
+    background-color: #4CAF50; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px;
+    cursor: pointer; 
+  }
+  
+  .productos div button:hover {
+    background-color: #3e8e41;
+  }
+    #factura {
+    width: 300px;
+    background-color: #fff; 
+    border: 1px solid #ddd; 
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin: 20px auto; 
+    margin-top: 40px;
+   }
+#imprimir-factura {
+    background-color: #4CAF50; 
+    color: #fff; 
+    padding: 10px 20px; 
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer; 
+  }
+  
+  #imprimir-factura:hover {
+    background-color: #3e8e41; 
+  }
+  
+  #factura {
+    width: 300px;
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
+    margin: 20px auto; 
+    margin-top: 40px; 
+    display: none; 
+  }
+  
+  #factura h2 {
+    margin-top: 0;
+    font-weight: bold;
+    color: #333; 
+    font-size: 18px; /
+  }
+  .remove {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  .remove:hover {
+    background-color: #e53935;
+  }

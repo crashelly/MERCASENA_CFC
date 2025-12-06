@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="module">
+
+        async function consulta1(){
+            const response = await fetch("http://192.168.1.34/mercasena/app/test/php/sesion1.php");
+            const data = await response.json();
+            console.log(data);
+            var SessionId = data.sessionID;
+            return SessionId;
+        }
+
+        async function consulta2(SessionId){
+           let  dataArr = {
+                sessionID: SessionId
+            }
+
+
+
+            const response = await fetch("http://192.168.1.34/mercasena/app/test/php/session2.php",{
+                method:"POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(dataArr)
+            });
+            const data = await response.json();
+            console.log(data);
+        }
+
+
+        consulta1().then((sessionID)=>{
+            consulta2(sessionID);
+        });
+    //    await  consulta2();
+    </script>
+</body>
+</html>

@@ -1,0 +1,2737 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mercasena</title>
+    <!-- Tailwind CSS CDN -->
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <!-- <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script> -->
+
+
+    <script src="js/jquery/jquery-3.7.1.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@5" rel="stylesheet" type="text/css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+    <!-- Alpine.js CDN -->
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <!-- estilos de la pantalla de carga  -->
+    <!-- cally para lo del calendario -->
+    <script type="module" src="https://unpkg.com/cally"></script>
+
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/inventario.css">+
+    <link rel="stylesheet" href="assets/css/progressBar.css">
+    <link rel="stylesheet" href="assets/css/spaceman.css">
+    <link rel="stylesheet" href="assets/css/loadingPortal.css">
+    <link rel="stylesheet" href="assets/css/toggleSwitch.css">
+
+
+</head>
+
+<body class="bg-gray-100 font-sans min-h-screen">
+
+    <!-- moodal de carga -->
+    <dialog id="LoadingModalInmutable" class="modal z-10  ">
+        <div class="modal-box">
+            <!-- parte del icono de carga  -->
+            <div class="text-center">
+                <div class="w-16 h-16 border-4 border-dashed rounded-full animate-spin color-sena-borde mx-auto"></div>
+                <h2 class="text-zinc-900 dark:text-white mt-4">Cargando...</h2>
+                <p class="text-zinc-600 dark:text-zinc-400">
+                    Cargando todo para que uses <span class="color-sena-texto  font-bold">MERCASENA</span>
+                </p>
+                <p class="text-xs opacity-50 text-zinc-600 dark:text-zinc-400 " id="modalLoadingAction">
+                    cargando...
+                </p>
+            </div>
+        </div>
+        <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn hidden">Close</button>
+        </form>
+
+    </dialog>
+
+
+    <!-- navbar para desktop -->
+    <div class="navbar mx-auto  hidden lg:flex display-none bg-white  bg-base-100 shadow-sm">
+        <div class="navbar-start">
+        </div>
+        <div class="navbar-center justify-between">
+            <h1 class="mr-40  text-2xl mx-auto font-bold color-sena-texto"> Bienvenido Administrador <span
+                    id="adminName"></span>
+            </h1>
+
+            <!--  boton de busqueda -->
+            <button onclick="inventary.searchProductosInfoForBuffer();  "
+                class="btn btn-ghost btn-circle  hover:bg-gray-200 duration-200   transition-discrete">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+            </button>
+
+        </div>
+        <!-- ======================= NAVBAR FINAL ================================= -->
+        <div class="navbar-end">
+
+            <!-- change popover-1 and --anchor-1 names. Use unique names for each dropdown -->
+            <button id="billBtnFromNavbar"
+                class="btn btn-ghost btn-circle hover:bg-gray-200 duration-200   transition-discrete">
+                <svg fill="#000000" width="30px" height="30px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M18,1H6A3,3,0,0,0,3,4V22a1,1,0,0,0,1.8.6L6.829,19.9l1.276,2.552a1,1,0,0,0,.8.549.981.981,0,0,0,.89-.4L12,19.667,14.2,22.6a.983.983,0,0,0,.89.4,1,1,0,0,0,.8-.549L17.171,19.9,19.2,22.6a1,1,0,0,0,.8.4,1,1,0,0,0,1-1V4A3,3,0,0,0,18,1Zm1,18-1.2-1.6a.983.983,0,0,0-.89-.4,1,1,0,0,0-.8.549l-1.276,2.552L12.8,17.4a1,1,0,0,0-1.6,0L9.171,20.105,7.9,17.553A1,1,0,0,0,7.09,17a.987.987,0,0,0-.89.4L5,19V4A1,1,0,0,1,6,3H18a1,1,0,0,1,1,1ZM17,9a1,1,0,0,1-1,1H8A1,1,0,0,1,8,8h8A1,1,0,0,1,17,9Zm-4,4a1,1,0,0,1-1,1H8a1,1,0,0,1,0-2h4A1,1,0,0,1,13,13Z">
+                        </path>
+                    </g>
+                </svg>
+            </button>
+            <!-- boton de advertencias  -->
+            <button id="notifcationsButton"
+                class="btn btn-ghost btn-circle hover:bg-gray-200 duration-200   transition-discrete"
+                popovertarget="advertencias-dropdown" style="anchor-name:--anchor-1">
+                <div class="indicator">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="" fill="none" viewBox="0 0 24 24" width="30px"
+                        height="30px" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" stroke="#19191cff"
+                            d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+
+                    <div id="indicator_container">
+
+
+                    </div>
+                </div>
+
+            </button>
+            <div class=" flex-col flex  grid grid-cols-1   mt-13 dropdown overflow-y-auto   max-h-80  menu  rounded-box bg-base-100 shadow-sm dropdown-end  dropdown-bottom "
+                popover id="advertencias-dropdown" style="position-anchor:--anchor-1">
+
+
+
+            </div>
+
+
+            <!-- fin del apartado de notificaciones -->
+
+            <!-- boton de notificaciones -->
+            <button id="logout_button"
+                class="btn btn-ghost btn-circle   hover:bg-gray-200 duration-200   transition-discrete  "
+                style="anchor-name:--anchor-1">
+                <div class="indicator">
+                    <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                        <g id="SVGRepo_iconCarrier">
+                            <path
+                                d="M15 16.5V19C15 20.1046 14.1046 21 13 21H6C4.89543 21 4 20.1046 4 19V5C4 3.89543 4.89543 3 6 3H13C14.1046 3 15 3.89543 15 5V8.0625M11 12H21M21 12L18.5 9.5M21 12L18.5 14.5"
+                                stroke="#19191cff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            </path>
+                        </g>
+                    </svg>
+
+
+                </div>
+            </button>
+
+            <!-- fin del apartado de notificaciones -->
+
+            <button id="btnPrueba" onclick="panelAdmin.classList.toggle('md:hidden')"
+                @click=" panel.classList.toggle('md:hidden')" class=" p-2 rounded-full hover:bg-gray-200">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+
+
+
+        </div>
+        </button>
+    </div>
+
+    <!-- fin NAVBAR DAISY UI -->
+
+    <div x-data="{ openSidebar: false, activeSection: 'dashboard' }"
+        class="flex   flex-col md:flex-row w-full  min-h-screen">
+        <!-- Sidebar -->
+        <aside id="panelAdmin"
+            class="bg-white hidden overflow-y-visible  shadow-lg transition-all duration-300 ease-in-out fixed   md:hidden inset-y-0 left-0 z-50 w-20 md:w-64"
+            :class="{ 'w-64': openSidebar, 'hidden md:block': !openSidebar }">
+            <div class="p-4 flex items-center justify-between border-b">
+                <h1 :class="{ 'opacity-100': openSidebar || window.innerWidth >= 768, 'opacity-0 hidden': !openSidebar && window.innerWidth < 768 }"
+                    class="text-xl font-bold text-green-600 transition-opacity duration-300">
+                    <h1 class="text-xl mx-auto  font-bold text-gray-800">Mercasena - <span class="color-sena-texto">
+                            ADMIN</span></h1>
+                </h1>
+            </div>
+
+
+            <!-- cinta de opciones -->
+            <nav class="py-4 overflow-y-auto h-96  max-h-90">
+                <!-- icono del dashboard -->
+                <svg class="mx-auto animate-bounce" fill="#20b041ff" width="40px" height="40px" viewBox="0 0 1920 1920"
+                    xmlns="http://www.w3.org/2000/svg" stroke="#20b041ff" transform="matrix(-1, 0, 0, 1, 0, 0)">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                        <path
+                            d="M833.935 1063.327c28.913 170.315 64.038 348.198 83.464 384.79 27.557 51.84 92.047 71.944 144 44.387 51.84-27.558 71.717-92.273 44.16-144.113-19.426-36.593-146.937-165.46-271.624-285.064Zm-43.821-196.405c61.553 56.923 370.899 344.81 415.285 428.612 56.696 106.842 15.811 239.887-91.144 296.697-32.64 17.28-67.765 25.411-102.325 25.411-78.72 0-154.955-42.353-194.371-116.555-44.386-83.802-109.102-501.346-121.638-584.245-3.501-23.717 8.245-47.21 29.365-58.277 21.346-11.294 47.096-8.02 64.828 8.357ZM960.045 281.99c529.355 0 960 430.757 960 960 0 77.139-8.922 153.148-26.654 225.882l-10.39 43.144h-524.386v-112.942h434.258c9.487-50.71 14.231-103.115 14.231-156.084 0-467.125-380.047-847.06-847.059-847.06-467.125 0-847.059 379.935-847.059 847.06 0 52.97 4.744 105.374 14.118 156.084h487.454v112.942H36.977l-10.39-43.144C8.966 1395.137.044 1319.128.044 1241.99c0-529.243 430.645-960 960-960Zm542.547 390.686 79.85 79.85-112.716 112.715-79.85-79.85 112.716-112.715Zm-1085.184 0L530.123 785.39l-79.85 79.85L337.56 752.524l79.849-79.85Zm599.063-201.363v159.473H903.529V471.312h112.942Z"
+                            fill-rule="evenodd"></path>
+                    </g>
+                </svg>
+                <!-- !================================================================================ -->
+
+                <div class="flex flex-col justify-start items-center   px-6  w-full  ">
+                    <button onclick="showMenu1(true)"
+                        class="focus:outline-none  focus:text-indigo-400 text-left  text-white flex justify-between items-center w-full py-5 space-x-14  ">
+                        <p class="text-md color-sena-texto hover:text-green-500  leading-5 font-bold  uppercase">Punto
+                            de
+                            venta</p>
+                        <svg id="icon1" class="transform" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15L12 9L6 15" stroke="#059668ff" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+                    </button>
+
+                    <div id="menu1"
+                        class="flex hidden justify-start text-green-500 hover:text-green-300  flex-col w-full md:w-auto items-start pb-1 ">
+                        <!-- boton del apartado de imagenes de marketing -->
+                        <button onclick="inventary.fetchBannerImages();"
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-grayt-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4 color-sena-texto hover:text-green-600 font-semibold ">Imagenes
+                                de marketing
+                            </p>
+                        </button>
+                        <!-- informacion del punto de venta -->
+                        <button onclick="inventary.showPuntoVentaEditionPanel();"
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 hover:text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto hover:text-green-600 font-semibold ">
+                                Información punto de
+                                venta</p>
+                        </button>
+
+
+                        <button onclick="inventary.travelToVENTS()"
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto  hover:text-green-600  font-semibold">
+                                Ir al portal VENTS</p>
+                        </button>
+
+
+                    </div>
+                </div>
+                <div class="flex flex-col justify-start items-center   px-6  w-full  ">
+                    <button onclick="showMenu2(true)"
+                        class="focus:outline-none focus:text-indigo-400 text-center  text-white flex justify-between items-center w-full py-5 space-x-14  ">
+                        <p
+                            class="text-md leading-5 uppercase  color-sena-texto hover:text-green-500  leading-5 font-bold   ">
+                            Inventario</p>
+                        <svg id="icon2" class="transform rotate-180" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15L12 9L6 15" stroke="#059668ff" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </button>
+                    <!--? MENU DEL INVENTARIO =============== -->
+                    <div id="menu2"
+                        class="flex hidden  justify-start text-green-500 hover:text-green-300  flex-col w-full md:w-auto items-start pb-1 ">
+                        <!-- boton que abre el apartado de recargar inventario -->
+                        <button id="openRechargeInventarySection"
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto hover:text-green-600 font-semibold ">
+                                Inventario Diario</p>
+                        </button>
+                        <!-- boton del producto base -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto hover:text-green-600 font-semibold ">
+                                Productos
+                                Base</p>
+                        </button>
+                        <!-- producto variacion-->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto hover:text-green-600 font-semibold  ">
+                                Producto
+                            </p>
+                        </button>
+                        <!-- medidas -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto hover:text-green-600 font-semibold  ">
+                                Medidas
+                            </p>
+                        </button>
+                        <!-- categorias -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto  hover:text-green-600 font-semibold ">
+                                Categorias</p>
+                        </button>
+
+                    </div>
+
+                    <!-- ? FIN MENU   -->
+
+
+                </div>
+                <!-- ? PARTE DE LOS PEDIDOS -->
+                <div class="flex flex-col justify-start items-center   px-6  w-full  ">
+                    <button onclick="showMenu3(true)"
+                        class="focus:outline-none focus:text-indigo-400  text-white flex justify-between items-center w-full py-5 space-x-14  ">
+                        <p
+                            class="text-md leading-5 uppercase color-sena-texto  hover:text-green-500  leading-5 font-bold   ">
+                            Pedidos</p>
+                        <svg id="icon3" class="transform rotate-180" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15L12 9L6 15" stroke="#059668ff" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </button>
+                    <!--? MENU DEL INVENTARIO =============== -->
+                    <div id="menu3"
+                        class="flex hidden  justify-start text-green-500 hover:text-green-300  flex-col w-full md:w-auto items-start pb-1 ">
+                        <!-- boton de ver pedidos -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <a id="sidebar_seeOrdersbtn"
+                                class="text-base leading-4  color-sena-texto  hover:text-green-600 font-semibold ">Ver
+                                Pedidos</a>
+                        </button>
+
+
+                    </div>
+
+                    <!-- ? FIN MENU   -->
+
+
+                </div>
+                <!-- ? FIN PARTE DE LOS PEDIDOS -->
+                <!-- ? COMPROBANTES DE VENTA  -->
+                <div class="flex flex-col justify-start items-center   px-6 w-full  ">
+                    <button onclick="showMenu4(true)"
+                        class="focus:outline-none focus:text-indigo-400  text-white flex justify-between items-center w-full py-5 space-x-14  ">
+                        <p
+                            class="text-md leading-5 uppercase  color-sena-texto  hover:text-green-500  leading-5 font-bold   ">
+                            Comprobantes de Venta</p>
+                        <svg id="icon4" class="transform rotate-180" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15L12 9L6 15" stroke="#059668ff" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </button>
+                    <!--? MENU DEL INVENTARIO =============== -->
+                    <div id="menu4"
+                        class="flex hidden  justify-start text-green-500 hover:text-green-300  flex-col w-full md:w-auto items-start pb-1 ">
+                        <!-- boton de ver pedidos -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <a id="billCreateBtn"
+                                class="text-base leading-4  color-sena-texto hover:text-green-600  font-semibold">Crear
+                                Comprobante de Venta</a>
+
+                        </button>
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="4.0" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <a id="billSearch_Btn"
+                                class="text-base leading-4  color-sena-texto hover:text-green-600  font-semibold">Buscar
+                                Comprobante de Venta</a>
+                        </button>
+                    </div>
+
+                    <!-- ? FIN MENU   -->
+
+
+                </div>
+                <div class="flex flex-col justify-start items-center   px-6  w-full  ">
+                    <button onclick="showMenu5(true)"
+                        class="focus:outline-none focus:text-indigo-400  text-white flex justify-between items-center w-full py-5 space-x-14  ">
+
+                        <p
+                            class="text-md leading-5 uppercase  color-sena-texto  hover:text-green-500  leading-5 font-bold   ">
+                            Otros</p>
+                        <svg id="icon5" class="transform rotate-180" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M18 15L12 9L6 15" stroke="#059668ff" stroke-width="3" stroke-linecap="round"
+                                stroke-linejoin="round" />
+                        </svg>
+
+                    </button>
+                    <!--? MENU DEL INVENTARIO =============== -->
+                    <div id="menu5"
+                        class="flex hidden justify-start text-green-500 hover:text-green-300  flex-col w-full md:w-auto items-start pb-1 ">
+                        <!-- boton de ver pedidos -->
+                        <!-- <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4 color-sena-texto hover:text-green-600  font-semibold">
+                                Ver auditorias</p>
+                        </button> -->
+                        <button
+                            class="flex justify-start items-center space-x-6 hover:text-white focus:bg-base-200 focus:text-white hover:bg-gray-300 text-gray-400 rounded px-3 py-2  w-full md:w-52">
+                            <svg class="fill-stroke" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path d="M15 10L11 14L17 20L21 4L3 11L7 13L9 19L12 15" stroke="currentColor"
+                                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                            <p class="text-base leading-4  color-sena-texto  hover:text-green-600  font-semibold">
+                                Descargar copia de seguridad</p>
+                        </button>
+                    </div>
+
+                    <!-- ? FIN MENU   -->
+
+
+                </div>
+                <!-- ? FIN  COMPROBANTES DE VENTA  -->
+                <!-- ?   VENTAS  -->
+
+                <!-- ? FIN VENTAS  -->
+                <!-- ? AUDITORIAS   -->
+
+                <!-- ? FIN  AUDITORIAS   -->
+
+
+
+
+                <!-- !================================================================================ -->
+            </nav>
+
+        </aside>
+
+        <!-- ========================= nav bar para parte movil   ===============  -->
+        <div class="navbar mx-auto lg:hidden  bg-white  bg-base-100 shadow-sm">
+            <div class="navbar-start">
+            </div>
+            <div class="navbar-center">
+            </div>
+            <div class="navbar-end">
+
+                <!--  boton de busqueda -->
+                <button class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                </button>
+                <!-- boton de salir  -->
+                <button id="logout_button_movil" class="btn btn-ghost btn-circle" onclick="">
+                    <div class="indicator">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                        </svg>
+                        <span class="badge badge-xs badge-primary indicator-item"></span>
+                    </div>
+                </button>
+                <!-- boton menu hamburguesa -->
+                <button @click="openSidebar = !openSidebar" class="md:hidden p-2 rounded-full hover:bg-gray-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Contenido principal -->
+        <main id="main" class="flex-1 p-4 w-full  md:p-6 overflow-y-auto">
+            <!-- alertas dentro de la pagina -->
+            <div>
+                <!-- mensaje de exito -->
+
+
+                <div role="alert" id="succesDivMenssage"
+                    class="bg-green-100 hidden   dark:bg-green-900 border-l-4 border-green-500 dark:border-green-700 text-green-900 dark:text-green-100 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:bg-green-200 dark:hover:bg-green-800 transform hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                        viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p class="text-xs font-semibold" id="infoText"></p>
+                </div>
+
+
+                <!-- mensaje de advertencia -->
+
+                <div role="alert" id="warningDivMenssage"
+                    class="bg-yellow-100 hidden  dark:bg-yellow-900 border-l-4 border-yellow-500 dark:border-yellow-700 text-yellow-900 dark:text-yellow-100 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:bg-yellow-200 dark:hover:bg-yellow-800 transform hover:scale-105">
+                    <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                        class="h-5 w-5 flex-shrink-0 mr-2 text-yellow-600" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"
+                            stroke-linejoin="round" stroke-linecap="round"></path>
+                    </svg>
+                    <p class="text-xs font-semibold" id="warningText"></p>
+                </div>
+
+
+                <!-- mensaje de error -->
+
+                <div role="alert" id="errorDivMenssage"
+                    class="bg-red-100 hidden  dark:bg-red-900 border-l-4 border-red-500 dark:border-red-700 text-red-900 dark:text-red-100 p-2 rounded-lg flex items-center transition duration-300 ease-in-out hover:bg-red-200 dark:hover:bg-red-800 transform hover:scale-105">
+                    <svg stroke="currentColor" viewBox="0 0 24 24" fill="none"
+                        class="h-5 w-5 flex-shrink-0 mr-2 text-red-600" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 16h-1v-4h1m0-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-width="2"
+                            stroke-linejoin="round" stroke-linecap="round"></path>
+                    </svg>
+                    <p class="ml-20  text-x2l text-center align-center justify-center font-semibold" id="errorText"></p>
+                </div>
+            </div>
+
+
+
+
+            <!-- =============================== CONTENIDO PRINCIPAL -->
+            <div id="mainContent" class="w-full border-green-400 bg-base-600   flex flex-col md:flex-row gap-4">
+                <!-- Dashboard Section -->
+                <div x-show="activeSection === 'dashboard'"
+                    class="overflow-x-auto bg-base-600  space-y-6 flex  flex-col  w-full">
+                    <header>
+
+                        <!-- <h1 class="text-2xl font-bold text-gray-800 border-gray-200>Welcome Back, John Doe!</h1>
+            <p class=" text-gray-600">Here's what's happening with your account today.</p>
+            
+         
+                        <!-- script que hace el efecto de escritura cehvre  snippet que saque xd -->
+
+                    </header>
+                    <!-- barra de progreso -->
+                    <!-- <div class="relative p-4 mt-24 max-w-sm mx-auto">
+                        <div class="flex mb-2 items-center justify-between">
+                            <div>
+                                <span
+                                    class="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-teal-600 bg-teal-200">
+                                    In Progress
+                                </span>
+                            </div>
+                            <div class="text-right">
+                                <span class="text-xs font-semibold inline-block text-teal-600">
+                                    70%
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex rounded-full h-2 bg-gray-200">
+                            <div style="width:70%" class="rounded-full bg-teal-500"></div>
+                        </div>
+                    </div> -->
+                    <div class="progress-container">
+                        <div class="progress-bar  text-center  text-lg text-white" style="width: 20%;"
+                            id="progressBar_percentage"></div>
+                        <div class="progress-text" id="percentageInGoal"></div>
+                        <div class="particles">
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                            <div class="particle"></div>
+                        </div>
+                    </div>
+
+
+                    <div id="styleProgressContainer"></div>
+                    <!-- <div id="progressBar_percentage" style="width: 80%;"
+                        class="flex  relative  flex-col justify-between mt-6   mb-4">
+                        <div class="divider"></div>
+
+                        <div>
+                            <div class=" absolute  h-2.5 w-full rounded-2xl bg-stroke dark:bg-dark-3">
+                                <div class=" left-0 top-0 h-full w-[70%] rounded-2xl bg-primary">
+                                    <span
+                                        class="absolute -right-4 bottom-full mb-2 rounded-xs bg-primary px-3.5 py-1 text-sm text-white">
+                                        <span
+                                            class="absolute bottom-[-2px] left-1/2 -z-10 h-2 w-2 -translate-x-1/2 rotate-45 rounded-xs bg-primary"></span>
+
+                                        <div id="testProgress">
+                                            <span id="percentageInGoal" class="px-1"> No definido</span>
+                                        </div>
+
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+
+
+
+
+
+                    <!-- <button type="button">
+                                <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                                    <g id="SVGRepo_iconCarrier">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12 8.25C9.92893 8.25 8.25 9.92893 8.25 12C8.25 14.0711 9.92893 15.75 12 15.75C14.0711 15.75 15.75 14.0711 15.75 12C15.75 9.92893 14.0711 8.25 12 8.25ZM9.75 12C9.75 10.7574 10.7574 9.75 12 9.75C13.2426 9.75 14.25 10.7574 14.25 12C14.25 13.2426 13.2426 14.25 12 14.25C10.7574 14.25 9.75 13.2426 9.75 12Z"
+                                            fill="#1C274C"></path>
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M12 3.25C7.48587 3.25 4.44529 5.9542 2.68057 8.24686L2.64874 8.2882C2.24964 8.80653 1.88206 9.28392 1.63269 9.8484C1.36564 10.4529 1.25 11.1117 1.25 12C1.25 12.8883 1.36564 13.5471 1.63269 14.1516C1.88206 14.7161 2.24964 15.1935 2.64875 15.7118L2.68057 15.7531C4.44529 18.0458 7.48587 20.75 12 20.75C16.5141 20.75 19.5547 18.0458 21.3194 15.7531L21.3512 15.7118C21.7504 15.1935 22.1179 14.7161 22.3673 14.1516C22.6344 13.5471 22.75 12.8883 22.75 12C22.75 11.1117 22.6344 10.4529 22.3673 9.8484C22.1179 9.28391 21.7504 8.80652 21.3512 8.28818L21.3194 8.24686C19.5547 5.9542 16.5141 3.25 12 3.25ZM3.86922 9.1618C5.49864 7.04492 8.15036 4.75 12 4.75C15.8496 4.75 18.5014 7.04492 20.1308 9.1618C20.5694 9.73159 20.8263 10.0721 20.9952 10.4545C21.1532 10.812 21.25 11.2489 21.25 12C21.25 12.7511 21.1532 13.188 20.9952 13.5455C20.8263 13.9279 20.5694 14.2684 20.1308 14.8382C18.5014 16.9551 15.8496 19.25 12 19.25C8.15036 19.25 5.49864 16.9551 3.86922 14.8382C3.43064 14.2684 3.17374 13.9279 3.00476 13.5455C2.84684 13.188 2.75 12.7511 2.75 12C2.75 11.2489 2.84684 10.812 3.00476 10.4545C3.17374 10.0721 3.43063 9.73159 3.86922 9.1618Z"
+                                            fill="#1C274C"></path>
+                                    </g>
+                                </svg>
+                            </button> -->
+                    <!-- <div class="container w-full  mx-auto px-0">
+                        <div class="mb-0 w-full">
+                            <div class="flex justify-between mb-1">
+                                <span class="text-base font-medium text-gray-700 dark:text-white">Meta anual - <span id="AnualGoal" class="font-bold text-xl">$10000000</span></span>
+                                <span id="percentageInGoal" class="text- font-medium text-gray-700 dark:text-white">75%</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 dark:bg-gray-700">
+                                <div class="bg-blue-600 h-2.5 rounded-full" style="width: 35%"></div>
+                            </div>
+                        </div>
+                    </div> -->
+                    <div class="divider"></div>
+                    <!-- cards de infrmacin -->
+                    <div class="flex w-full py-3 overflow-visible bg-base-300   flex-col justify-between mt-1   mb-4">
+                        <!-- cards de informacion  -->
+                        <div class="grid grid-cols-1 mt-1  rounded-lg  sm:grid-cols-2 lg:grid-cols-3 w-5/10  gap-3">
+                            <div id="salesContainer"
+                                class="bg-white  border-2 border-primary  hover:border-green-500 hover:border-t-4   hover:shadow-lg  p-1 rounded-lg shadow-md  hover:scale-105 transform ease-in-out duration-600   ">
+                                <h2 class="text-lg  mt-4 text-start ml-4 font-semibold text-gray-700">Ventas Realizados
+                                </h2>
+                                <!-- <input type="checkbox" value="synthwave" class="toggle theme-controller" /> -->
+                                <p id="totalSales" class="text-3xl text-start ml-4 font-bold text-green-600">0</p>
+                            </div>
+                            <div id="ordersContainer"
+                                class="bg-white p-3  border-2   hover:border-yellow-500 hover:border-t-4     hover:shadow-lg  hover:scale-105 transform ease-in-out text-start ml-4  rounded-lg shadow-md hover:scale-105 duration-600    ">
+                                <h2 class="text-lg mt-1 font-semibold text-start ml-4 text-gray-700">Pedidos </h2>
+                                <p id="totalOrders" class="text-3xl text-start ml-4 font-bold text-yellow-600">0</p>
+                            </div>
+                            <div id="totalTodayContainer"
+                                class="bg-white   border-2   hover:border-blue-500 hover:border-t-4   hover:scale-105 transform ease-in-out h-full hover:shadow-lg  p-4 lg:mr-6 text-start ml-4  duration-600  w-7/8 rounded-lg shadow-md mb-2 hover:scale-105 duration-600 ">
+                                <h2 class="text-lg font-semibold  text-start ml-4 text-gray-700">Total Vendido Hoy</h2>
+                                <div class="flex flex-inline">
+                                    <span class="mr-1 text-3xl text-start ml-4 font-bold text-blue-600 ">$<span
+                                            id="totalToday"
+                                            class="text-3xl ml-30 text-start ml-4 font-bold text-blue-600">0</span>
+                                    </span>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- contenedor de todo los modales -->
+                <div>
+                    <dialog id="ProductsModalForMobile" class="modal">
+                        <div class="modal-box w-11/12 max-w-5xl   ">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+                                    ✕</button>
+                            </form>
+                            <div>
+                                <!-- menu de filtros -->
+                                <div class="navbar rounded-lg  bg-base-100 shadow-sm">
+                                    <!-- primera parte -->
+                                    <div class="flex-none">
+
+                                    </div>
+                                    <!-- segunda parte -->
+                                    <div class="flex-1">
+                                        <!-- filtros -->
+
+                                        <a class="btn btn-ghost text-xl mr-3  justify-start color-sena-texto">Busqueda
+                                            de
+                                            productos</a>
+                                        <!-- <a class="btn btn-ghost text-xl ml-6 text-gray-700 ml-7">filtros </a> -->
+
+
+                                    </div>
+
+
+                                    <div class="flex-2">
+                                        <form class="flex flex-inline" id="searchBillByUser_formData">
+
+                                            <input id="productSearchBarForMobile" type="text" placeholder="quiero..."
+                                                class="input  input-bordered border-green-400 w-24 md:w-auto" />
+                                            <button type="submit" onclick=""
+                                                class="btn btn-sm bg-white-400   btn-circle btn-ghost hover:bg-green-400">
+                                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                        stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path
+                                                            d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                                            stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </g>
+                                                </svg>
+                                            </button>
+
+                                        </form>
+                                    </div>
+                                    <!-- tercera parte para ver  -->
+                                    <div class="flex-none">
+
+                                        <!-- boton de buscar pedidos -->
+
+
+                                        <!-- icono de la persona -->
+                                        <div class="dropdown dropdown-end ml-1  mr-1">
+                                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                                <div class="w-10 rounded-full">
+                                                    <img alt="Tailwind CSS Navbar component"
+                                                        src="../tienda/assets/logos/sena_logo_2.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+                                                </path>
+                                            </svg>
+                                        </button> -->
+                                    </div>
+                                </div>
+                                <!-- <div id="BillCardContainers" class="grid ml-8 grid-cols-1 p-2 lg:grid-cols-2"> -->
+                                <!-- CARD de informacion del comprobante de venta -->
+
+                                <!-- <div id="mobile_searchedProducts" class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 p-4"> -->
+                                <div id="mobile_searchedProducts"
+                                    class="grid mt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center">
+
+
+
+                                </div>
+
+                                <!-- </div> -->
+
+                                <!-- <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="1" checked="checked" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+          <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+        </div> -->
+
+                            </div>
+
+                        </div>
+                    </dialog>
+                    <!-- modal que muestra un mesnaje de que se dirije al portal vents -->
+
+                    <dialog id="goingToVentsModal" class="modal">
+                        <div class="modal-box w-11/12 max-w-5xl">
+                            <div>
+                                <section class="bg-gray-900  h-full   rounded-lg  w-full">
+                                    <div
+                                        class="relative lg:flex items-center space-y-16 max-w-7xl mx-auto px-8 py-24 lg:space-y-0 lg:space-x-16">
+                                        <div class="flex-grow space-y-8">
+                                            <div class="space-y-4">
+                                                <!-- <h2 class="text-yellow-300  font-bold    text-4xl text-gradient-to-r from-white to-yellow-500 shadow-lg rounded-lg p-2">
+                                                    Viajando hacia VENTS 🚀
+                                                </h2> -->
+                                                <div class="glitch mt-1" data-text="Viajando hacia VENTS 🚀 ...">
+                                                    Viajando hacia VENTS 🚀 ...</div>
+                                                <!-- el mu ñequito que viaja  -->
+                                                <div id="spaceManContianer" class=" pl-4 mt-4 pb-20  ml-10">
+                                                    <div class="loaderSpaceMan">
+                                                        <span><span></span><span></span><span></span><span></span></span>
+                                                        <div class="base">
+                                                            <span></span>
+                                                            <div class="face"></div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="longfazers">
+                                                        <span></span><span></span><span></span><span></span>
+                                                    </div>
+                                                </div>
+
+                                                <div class="">
+                                                    <span class="">
+                                                        Yeison Stiven Acevedo Loaiza
+                                                        Daniel Felipe Grajales
+                                                        Jesus David Buitrago Agudelo
+                                                        ADSO 2847431
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                            <div class="modal-action">
+                                <form method="dialog" class="modal-backdrop">
+                                    <button>close</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+                    <dialog id="perfilAdmnistrador" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div>
+                                <div
+                                    class="max-w-md w-full bg-white rounded-2xl overflow-hidden shadow-lg transition-all duration-300 hover:shadow-xl">
+                                    <!-- Cover Image -->
+                                    <div class="h-32 bg-gradient-to-r from-green-500 to-green-800 relative">
+                                        <div class="absolute -bottom-12 left-1/2 transform -translate-x-1/2">
+                                            <img id="imagenPuntoVenta_admin"
+                                                class="h-24 w-24 rounded-full bg-white  border-4 border-white object-cover"
+                                                src="assets/logos/logoSena_2.png" alt="Profile picture">
+
+                                            <!-- <img src=""   alt="" id="uploadAdministratorPhoto"> -->
+                                            <!--  -->
+                                        </div>
+
+                                    </div>
+                                    <!-- <script>
+                                       let upload_btn =  document.getElementById('uploadAdministratorPhoto_btn');
+                                       let upload_input =  document.getElementById('uploadAdministratorPhoto_input');
+
+                                       $("#uploadAdministratorPhoto_btn").on('click',()=>{
+                                        console.log("intentando abrir el malduito input de subir la imagen")
+                                        upload_input.click();
+                                       })
+                                    </script> -->
+                                    <!-- Profile Info -->
+                                    <form id="adminS_form" class="pt-16 pb-8 px-6 text-center">
+                                        <!-- upload image section -->
+                                        <div class="mx-auto justify-center text-center">
+                                            <input type="file" class="hidden" id="uploadAdministratorPhoto_input">
+
+                                            <a id="uploadAdministratorPhoto_btn" onclick=""
+                                                class="flex mx-auto hidden  jusitfy-center ml-20 pl-6 mb-5  flex-inline"
+                                                href="#">
+                                                <svg width="30px" height="30px" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                        stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path
+                                                            d="M17 17H17.01M15.6 14H18C18.9319 14 19.3978 14 19.7654 14.1522C20.2554 14.3552 20.6448 14.7446 20.8478 15.2346C21 15.6022 21 16.0681 21 17C21 17.9319 21 18.3978 20.8478 18.7654C20.6448 19.2554 20.2554 19.6448 19.7654 19.8478C19.3978 20 18.9319 20 18 20H6C5.06812 20 4.60218 20 4.23463 19.8478C3.74458 19.6448 3.35523 19.2554 3.15224 18.7654C3 18.3978 3 17.9319 3 17C3 16.0681 3 15.6022 3.15224 15.2346C3.35523 14.7446 3.74458 14.3552 4.23463 14.1522C4.60218 14 5.06812 14 6 14H8.4M12 15V4M12 4L15 7M12 4L9 7"
+                                                            stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </g>
+                                                </svg>
+
+                                                <span class="ml-2 align-center "> o sube una foto </span>
+                                            </a>
+                                        </div>
+
+                                        <h3 class="text-xl font-bold text-gray-800" id="adminS_encargadosName">No
+                                            identificado</h3>
+                                        <p class="text-indigo-600 font-medium">Encargado punto de venta </p>
+                                        <p class="text-indigo-300 font-medium" id="adminS_location">No ubicado </p>
+                                        <p class="text-gray-500 mt-2"></p>
+
+                                        <div class="container mx-auto p4-10">
+                                            <div
+                                                class="max-w-md mx-auto bg-white rounded-lg overflow-hidden md:max-w-xl">
+                                                <div class="md:flex">
+                                                    <div class="w-full px-6 py-8 md:p-8">
+                                                        <h2
+                                                            class="text-2xl font-bold color-sena-texto uppercase underline">
+                                                            Datos Punto de venta</h2>
+                                                        <!-- <p class="mt-4 text-gray-600">Please fill out the form below to
+                                                            complete your purchase.</p> -->
+                                                        <div class="mt-6">
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="name">
+                                                                    Nombre del encargado del punto de venta
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="managerName" type="text" placeholder="John Doe"
+                                                                    id="adminS_encargado">
+                                                            </div>
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="email">
+                                                                    Meta anual
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="anualGoal" type="number"
+                                                                    placeholder="100.000.000">
+                                                            </div>
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="card_number">
+                                                                    Whatsapp
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="whatsappNumber" type="text"
+                                                                    placeholder="1234 22 22">
+                                                            </div>
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="expiration_date">
+                                                                    Ubicacion
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="punt_location" type="text"
+                                                                    placeholder="Manizales,Caldas">
+                                                            </div>
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="cvv">
+                                                                    Centro de formacion
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="formerCenter" type="text"
+                                                                    placeholder="Centro de Procesos Industriales y Construccion">
+                                                            </div>
+                                                            <div class="mb-6">
+                                                                <label class="block color-sena-texto font-bold mb-2"
+                                                                    for="cvv">
+                                                                    Regional
+                                                                </label>
+                                                                <input
+                                                                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                                    id="regionalName" type="text"
+                                                                    placeholder="Regional Caldas">
+                                                            </div>
+                                                            <button
+                                                                class="bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                                type="submit">
+                                                                Guardar datos
+                                                            </button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </form>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+
+                    <!-- modal para subir la foto para la imagen comercial -->
+
+                    <dialog id="banner_uploadImageSection" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button
+                                    class="hover:bg-red-300    btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div class="  py-12 dark:bg-slate-900">
+
+                                <div class="max-w-screen-md mx-auto text-center">
+                                    <h1 class="mb-4 text-3xl font-bold dark:text-white">Sube tu <span
+                                            class="text-green-500 hover:scale-105 transform duration-300    hover:underline">MERCA-IMAGEN</span>
+                                    </h1>
+
+                                    <div
+                                        class="flex-1 items-center max-w-screen-sm mx-auto mb-3 space-y-4 sm:flex sm:space-y-0">
+                                        <div class="relative w-full">
+                                            <form class="items-center justify-center max-w-xl mx-auto">
+                                                <label
+                                                    class="flex justify-center w-full h-32 px-4 transition bg-white border-2 border-green-300 border-dashed rounded-md appearance-none cursor-pointer hover:border-blue-400 focus:outline-none"
+                                                    id="drop"><span class="flex items-center space-x-2"><svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            class="w-6 h-6 text-gray-600  animate-bounce" fill="none"
+                                                            viewBox="0 0 24 24" stroke="#11ba82ff" stroke-width="2">
+                                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                                d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12">
+                                                            </path>
+                                                        </svg><span class="font-medium text-gray-600">suelta la imagen o
+                                                            <span
+                                                                class="text-blue-600 underline ml-[4px]">buscala</span></span></span>
+                                                    <input type="file" name="" class="hidden"
+                                                        id="banner_imageUploadInput" accept="image/png,image/jpeg"
+                                                        id="input"></label>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- previsualizacion de la imagen -->
+                                <div
+                                    class="flex flex-col justify-start  space-y-5 md:flex-row md:space-y-0 md:space-x-6 lg:space-x-10 mt-7 mb-8">
+                                    <div class="relative md:w-7/12">
+                                        <h2 class="text-xl text-blue-500 font-bold mb-5 underline   ">Previsualizacion
+                                            de tu imagen</h2>
+                                        <img id="banner_imagePreview"
+                                            class="rounded-2xl hover:scale-110 tranform duration-300 ease-in-out "
+                                            src="">
+                                        <div
+                                            class="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2">
+                                            <h1 class="text-white mb-3 font-bold text-center uppercase lg:text-xl">
+                                            </h1>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="flex flex-col">
+                                    <butto id="banner_submitButton"
+                                        class="btn bg-green-200 text-2xl font-bold w-[20px] hover:bg-green-500 hover:text-white hover:shadow-lg  rounded-lg  bg-gradient-to-r  from-cyan-200 to-red-500 hover:scale-110 tranform duration-300 ease-in-out ">
+                                        Guardar Imagen</butto>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                    <!-- fin del moodal -->
+
+                    <!-- modal de edicion  -->
+                    <dialog id="MarketingImagesSection" class="modal">
+                        <div class="modal-box w-12/12 max-w-5xl  h-50">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm btn-circle hover:bg-red-400  btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+
+                            <div>
+                                <!-- carousele que mueve las imagenes -->
+                                <div id="bannerCarousele" class="owl-carousel mt-5 owl-theme">
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </dialog>
+
+                    <script>
+                        // MarketingImagesSection.showModal();
+                    </script>
+                    <!-- modal que muestra un carousele de imagenes de las imagenes de marketing -->
+
+
+                    <!-- search productos  productos modal -->
+
+                    <dialog id="searchProductsModal" class="modal">
+                        <div class="modal-box w-11/12 max-w-5xl ">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <!-- menu de filtros -->
+                            <div class="navbar  bg-base-100 shadow-sm">
+                                <!-- primera parte -->
+                                <div class="flex-none">
+                                    <button class="btn btn-square btn-ghost">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            class="inline-block h-5 w-5 stroke-current">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4 6h16M4 12h16M4 18h16"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <!-- segunda parte -->
+                                <div class="flex-1">
+                                    <!-- filtros -->
+
+                                    <a class="btn btn-ghost text-xl">Busqueda de productos</a>
+                                </div>
+                                <!-- tercera parte -->
+                                <div class="flex-none">
+                                    <!-- boton de buscar productos  -->
+                                    <input id="inputSearchProductsInBill" type="text" placeholder="Busqueda de pedidos"
+                                        class="input mr-3  input-bordered border-green-400 w-24 md:w-auto" />
+
+                                    <!-- icono de la persona -->
+                                    <div class="dropdown dropdown-end">
+                                        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                            <div class="w-10 rounded-full">
+                                                <img src="../tienda/assets/logos/sena_logo_2.png" class="senaLogo"
+                                                    alt="Tailwind CSS Navbar component" src="" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-square btn-ghost">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                            class="inline-block h-5 w-5 stroke-current">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+                                            </path>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div id="productsInBillSearch"
+                                class="grid bg-base-300  grid-cols-1 w-full overflow-y-auto  p-2">
+                                <!-- CARD de informacion del pedido -->
+
+
+                            </div>
+
+                            <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+                                <input class="join-item btn btn-square" type="radio" name="options" aria-label="1"
+                                    checked="checked" />
+                                <input class="join-item btn btn-square" type="radio" name="options" aria-label="2" />
+                                <input class="join-item btn btn-square" type="radio" name="options" aria-label="3" />
+                                <input class="join-item btn btn-square" type="radio" name="options" aria-label="4" />
+                            </div>
+
+                        </div>
+
+                    </dialog>
+                    <!-- You can open the modal using ID.showModal() method -->
+                    <!-- <button class="btn" onclick="my_modal_3.showModal()">open modal</button> -->
+                    <dialog id="billModal" class="modal">
+                        <div class="modal-box  w-11/12 max-w-5xl ">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div class="w-full   mx-auto p-0  bg-white">
+                                <div class="mb-6 min-w-full container   w-full">
+                                    <div class="border-b w-full  pb-2 mb-2 flex inline-flex  mx-auto">
+                                        <div class="flex w-8/10 p-2  text-left mr-10 px-6">
+                                            <img src="assets/logos/logoSena_2.png" alt="Company Logo"
+                                                class="h-auto  w-auto object-fit  mr-2">
+                                            <div class="w-full">
+
+                                            </div>
+                                        </div>
+                                        <div
+                                            class="flex-1 w-7/11 text-center  justify-self-end justify-center text-left ml-2">
+
+                                            <p
+                                                class="text-lg  text-slate-500  tracking-wide  mr-20 pr-10  font-bold mx-auto mb-1 ">
+                                                COMERCIALIZADORA DIDÁCTICA</p>
+                                            <div class="divider divider-neutral  "></div>
+                                            <p class="text-sm text-slate-500 font-bold mr-20 pr-10 ">SERVICIO NACIONAL
+                                                DE
+                                                APRENDIZAJE - SENA - </p>
+                                            <p class="text-sm text-slate-500 font-bold mr-20 pr-10 ">REGIONAL CALDAS</p>
+                                            <!-- <p class="text-sm text-slate-500  font-bold mr-20 pr-10 ">REGIONAL CALDAS
+                                            </p> -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- informacion de la factura -->
+                                <div class="container">
+                                    <div class=" grid grid-cols-2   mb-5 mt-4 ">
+                                        <!-- Customer Information parte de la izquierda -->
+                                        <div class="mr-1 w-1/2">
+                                            <div class="items-center w-2/2  mb-1  flex text-center">
+                                                <span
+                                                    class="font-semibold relative  mx-auto flex items-center  text-xs ml-11 lg:ml-16 lg:mr-3  lg:text-lg ">FECHA
+                                                </span>
+                                            </div>
+                                            <div class="flex w-2/3 relative ml-5   flex-col">
+                                                <!-- dia,mes año-->
+                                                <div class="flex lg:w-auto text-xs lg:text-sm text-center bg-slate-100">
+                                                    <div
+                                                        class="flex-1 w-max   py-1 px-1 font-bold border border-gray-500 rounded-tl-lg">
+                                                        DIA</div>
+                                                    <div
+                                                        class="flex-1 w-auto   py-1 px-1 font-bold border border-gray-500">
+                                                        MES
+                                                    </div>
+                                                    <div
+                                                        class="flex-1 w-auto py-1 px-1  font-bold border border-gray-500 rounded-tr-lg">
+                                                        AÑO</div>
+                                                </div>
+                                                <!-- fecha :V -->
+                                                <div class="flex relative   tex-center text-xs lg:text-sm ">
+                                                    <div id="billDay"
+                                                        class="flex-1 w-auto  py-2  px-2  border border-gray-500 rounded-bl-lg">
+                                                        error de coneccion</div>
+                                                    <div id="billMonth"
+                                                        class="flex-1  w-auto  py-2  px-2  border border-gray-500">error
+                                                        de coneccion
+                                                    </div>
+                                                    <div id="billYear"
+                                                        class="flex-1  w-auto  py-2  px-2  border border-gray-500 rounded-br-lg">
+                                                        error de coneccion</div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <!-- Invoice Information parte de la derecha -->
+                                        <div
+                                            class="mb-1 mt-10 justify-between  justify-self-center w-1/3 lg:ml-20  text-center flex-1">
+                                            <div
+                                                class="flex mt-4  align-center justify-center flex-inline mr-40 lg:mr-20">
+                                                <span class="font-semibold p-0 text-xs mr-1 ">COMPROBANTE DE
+                                                    VENTA</span>
+
+                                                <div class="flex  w-2/3   flex-col">
+                                                    <div
+                                                        class="flex  border absolute rounded-lg border-gray-500 border-collapse ">
+                                                        <div
+                                                            class="flex-1 ml-2 flex-inline font-bold py-1 lg:py-2  px-1 lg:px-4  text-red-500 flex-shrink-0 over-flow-hidden ">
+                                                            <span class="text-red-500">N°</span><input type="hidden"
+                                                                id="billCounterInput"> <span
+                                                                id="billCounterText">242545</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- informacion del cliente -->
+                                <div class="mb-6">
+
+
+                                    <div class="mr-1 w-2/2">
+
+                                        <div class="flex w-3/3 relative ml-5   flex-col">
+                                            <!-- dia,mes año-->
+                                            <div class="flex lg:w-auto text-xs lg:text-sm  bg-slate-100">
+
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1 px-1 font-bold border border-gray-500">
+                                                    <label for="customerNit" class="w-1/3">CLIENTE :</label>
+                                                    <input type="text"
+                                                        class="text-center text-lg  text-gray-600  w-2/3 "
+                                                        id="customerName">
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline  py-1 px-1 font-bold border border-gray-500">
+                                                    <label for="customerNit" class="w-1/3">C.C /Nit :</label>
+                                                    <input type="text"
+                                                        class="text-center  text-lg  text-gray-600  w-2/3  ml-20 pl-1 "
+                                                        id="customerNit" value="1054832432">
+                                                </div>
+
+                                            </div>
+
+                                            <div class="flex relative   text-xs lg:text-sm ">
+                                                <div
+                                                    class="flex-1 w-max flex-inline  py-1 px-1 font-bold border border-gray-500">
+                                                    <label for="customerAdress" class="self-center w-1/3">DIRECCION :
+                                                    </label>
+                                                    <textarea
+                                                        class="text-center align-end self-align-end text-wrap  text-lg  text-gray-600  w-2/3 "
+                                                        id="customerAdress"
+                                                        value="calle 31 #14 A 61 ,bloque b1 puerta 202 ">
+                                                    </textarea>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline pt-10  py-1 px-1 font-bold border border-gray-500">
+                                                    <label for="customerPhone"
+                                                        class="w-1/3 self-end   ">TELEFONO/CELULAR
+                                                        :</label>
+                                                    <div id="pruebaContainer" class="hidden">
+
+                                                    </div>
+                                                    <input type="text"
+                                                        class="text-center  text-lg  text-gray-600  w-2/3"
+                                                        id="customerPhone">
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!-- tabla con la informacion de la factura -->
+                                <!-- Invoice Table -->
+
+
+
+                                <div class="mb-6">
+
+                                    <div>
+
+                                        <!-- thead de la tabla -->
+
+                                        <div class="flex w-3/3 relative    flex-col">
+                                            <!-- dia,mes año-->
+                                            <div class="flex lg:w-auto text-xs lg:text-sm  bg-slate-100">
+
+                                                <div
+                                                    class="flex-1   w-max flex-inline   mx-auto  text-center  py-1  px-2 font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-gray-700 underline   w-full">CANTIDAD</span>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1  pl-0 text-center  font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-gray-700 self-center w-full ">DESCRIPCION</span>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1  text-center  font-bold border border-gray-500">
+                                                    <span class="font-bold text-gray-700 self-center w-full">Vr
+                                                        UNITARIO</span>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1  text-center   font-bold border border-gray-500">
+                                                    <span class="font-bold text-gray-700 self-center w-full">Vr
+                                                        TOTAL</span>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1  text-center   font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-gray-700 self-center w-full">ACCIONES</span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div id="tbodyBill">
+
+                                        </div>
+                                        <!-- parte del total -->
+                                        <div class="flex w-3/3 relative    flex-col">
+                                            <!-- dia,mes año-->
+                                            <div class="flex lg:w-auto text-xs lg:text-sm  bg-slate-100">
+
+                                                <div
+                                                    class="flex-1   w-max flex-inline   mx-auto  text-center  py-1  px-2 font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-gray-700 underline  text-2xl  w-full">Total</span>
+                                                </div>
+                                                <div
+                                                    class="flex-1 w-max flex-inline   py-1  pl-0 text-center  font-bold border border-gray-500">
+                                                    <span class="font-bold text-gray-700 self-center w-full ">$
+                                                    </span><input type="number" id="totalBill">
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                        <!-- fila  -->
+
+
+                                    </div>
+
+                                    <div class="flex w-full  mt-5 flex-inline gap-3">
+                                        <input type="hidden" id="pedidoID">
+                                        <butto id="addProductToBillButton" class="btn button-succes"><svg width="40px"
+                                                height="40px" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#11ff00">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <circle cx="12" cy="12" r="10" stroke="#23f207" stroke-width="1.5">
+                                                    </circle>
+                                                    <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                        stroke="#23f207" stroke-width="1.5" stroke-linecap="round">
+                                                    </path>
+                                                </g>
+                                            </svg></butto>
+                                        <butto id="confirmarVenta"
+                                            class="btn justify-self-end  button-succes hover:bg-green-200 hover:text-black  text-white   hover:scale-x-115 duration-300    hover:scale-y-105 tranform   bg-green-500 border border-green-700 rounded-lg  ">
+                                            CONFIRMAR</butto>
+                                    </div>
+                                </div>
+
+                                <!-- Footer -->
+                                <!-- <div class="text-sm text-slate-500 border-t pt-8 mt-8">
+                                    <p>Payment is due within 30 days of receipt.</p>
+                                    <p>Bank Account: 123456789, Routing Number: 000111222</p>
+                                    <p>Thank you for your business!</p>
+                                    <p>Template by <a href="https://themelize.me/">Themelize.me!</a></p>
+                                </div> -->
+                                <script>
+
+                                </script>
+
+
+                                <!-- script de renderizado  -->
+                                <!-- <script src="renderizarFactura.js"></script> -->
+                                <!-- <script src="renderizarFactura.js"></script> -->
+                            </div>
+                        </div>
+                    </dialog>
+                    <!-- <script src="renderizarFactura.js"></script> -->
+
+                    <dialog id="errorModal" class="modal">
+                        <div class="modal-box ">
+                            <div class="container inline-flex">
+                                <img src="../assets/icons/error-icon.gif"
+                                    class="object-cover overflow-visible  h-50 w-50 ml-7  mr-10 mt-9" alt="">
+                                <p class="align-center mt-9 text-gray-600 text-2xl " id="text-modalErrorR"></p>
+
+                            </div>
+
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <!-- if there is a button in form, it will close the modal -->
+                                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+                    <!-- modal para llenar el inventario diario  -->
+                    <!-- You can open the modal using ID.showModal() method -->
+
+                    <dialog id="diaryInventary" class="modal">
+                        <div class="modal-box w-11/12 max-w-5xl">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div>
+                                <div class="mb-6">
+                                    <h1 class="text-4xl font-bold color-sena-texto text-center">Inventario Diario</h1>
+                                    <!-- divisor  -->
+                                    <h2 class="text-lg font-semibold color-sena-texto text-center">Abastece mercasena
+                                    </h2>
+                                    <div class="divider"></div>
+
+                                    <div>
+                                        <span> Hoy es : </span>
+                                    </div>
+                                    <h3 class="text-lg font-semibold text-gray-600 text-start" id="inv_dateTime"></h3>
+                                </div>
+                                <!-- invnetario diario -->
+                                <div class="mb-6">
+
+                                    <div class=" flex flex-col rounded-lg">
+
+                                        <!-- thead de la tabla -->
+
+                                        <div class="">
+                                            <!-- dia,mes año-->
+                                            <!-- <div class="grid grid-cols-5 ">
+
+                                                <div
+                                                    class="   w-max   mx-auto  text-center font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-green-500 underline   w-full">PRODUCTO</span>
+                                                </div>
+                                                <div
+                                                    class=" w-max    text-center  font-bold border border-gray-500">
+                                                    <span class="font-bold text-green-500 self-center w-full ">CANTIDAD
+                                                        DENTRO DEL INVENTARIO</span>
+                                                </div>
+                                                <div
+                                                    class=" w-max    text-center  font-bold border border-gray-500">
+                                                    <span class="font-bold text-green-500 self-center w-full">NUEVAS
+                                                        CANTIDADES</span>
+                                                </div>
+                                                <div
+                                                    class=" w-max      text-center   font-bold border border-gray-500">
+                                                    <span class="font-bold text-green-500 self-center w-full">CANTIDAD
+                                                        TOTAL</span>
+                                                </div>
+                                                <div
+                                                    class=" w-max      text-center   font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-green-500 self-center w-full">OBSERVACIONES</span>
+                                                </div>
+                                                <div
+                                                    class=" w-max      text-center   font-bold border border-gray-500">
+                                                    <span
+                                                        class="font-bold text-green-500 self-center w-full">ACCIONES</span>
+                                                </div>
+                                            </div> -->
+                                            <div id="tbodyDiaryInventary" class="grid grid-cols-6   gap-0">
+                                                <div
+                                                    class=" pt-2 pb-3  rounded-l-lg     text-center color-sena-texto font-bold   border-2 color-sena-borde  hover:border-green-300  ">
+                                                    PRODUCTO </div>
+                                                <div
+                                                    class=" pt-2 pb-3      text-center color-sena-texto font-bold   border-2 color-sena-borde  hover:border-green-300  ">
+                                                    CANTIDAD</div>
+                                                <div
+                                                    class=" pt-2 pb-3     text-center color-sena-texto font-bold   border-2 color-sena-borde  hover:border-green-300  ">
+                                                    NUEVA CANTIDAD</div>
+                                                <div
+                                                    class=" pt-2 pb-3     text-center color-sena-texto font-bold   border-2 color-sena-borde  hover:border-green-300  ">
+                                                    CANTIDAD TOTAL</div>
+                                                <div
+                                                    class=" pt-2 pb-3     text-center color-sena-texto font-bold   border-2 color-sena-borde  hover:border-green-300  ">
+                                                    OBSERVACIONES</div>
+                                                <div
+                                                    class=" pt-2 pb-3   rounded-r-lg    text-center color-sena-texto font-bold   border-2  color-sena-borde  hover:border-green-300  ">
+                                                    ACCIONES</div>
+
+
+                                            </div>
+                                        </div>
+
+                                        <!-- <div id="tbodyDiaryInventary">
+
+
+
+
+                                        </div> -->
+
+
+                                        <!-- parte del total -->
+
+
+                                        <!-- fila  -->
+
+
+                                    </div>
+                                    <div class="divider"></div>
+                                    <div class="flex w-full  mt-5 flex-inline gap-3">
+                                        <input type="hidden" id="pedidoID">
+                                        <butto id="addProductToDailyInv" class="btn button-succes"><svg width="40px"
+                                                height="40px" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#11ff00">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <circle cx="12" cy="12" r="10" stroke="#23f207" stroke-width="1.5">
+                                                    </circle>
+                                                    <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                        stroke="#23f207" stroke-width="1.5" stroke-linecap="round">
+                                                    </path>
+                                                </g>
+                                            </svg></butto>
+                                        <butto id="confirmnDailyInv"
+                                            class="btn justify-self-end  button-succes hover:bg-green-200 hover:text-black  text-white   hover:scale-x-115 duration-300    hover:scale-y-105 tranform   bg-green-500 border border-green-700 rounded-lg  ">
+                                            CONFIRMAR</butto>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </dialog>
+                    <!-- modal de informacion  -->
+                    <dialog id="infoModal" class="modal">
+                        <div class="modal-box ">
+                            <div class="container inline-flex">
+                                <img src="../assets/icons/info-icon.gif"
+                                    class="object-cover overflow-visible  h-50 w-50 ml-7  mr-10 mt-9" alt="">
+                                <p class="align-center mt-9 text-gray-600 text-2xl " id="text-modalInfo">Press ESC key
+                                    or
+                                    click the button below to close</p>
+
+                            </div>
+
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <!-- if there is a button in form, it will close the modal -->
+                                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+
+                    <!-- modalNotificaciones -->
+                    <dialog id="modalNotificaciones" class="modal modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <h3 class="text-lg font-bold">Hello!</h3>
+                            <p class="py-4">Press ESC key or click on ✕ button to close</p>
+                        </div>
+                    </dialog>
+                    <!-- ======================================================== -->
+
+                    <!-- modal de la pantalla de carga -->
+                    <dialog id="loadingModal" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 duration-300 transition ease-in-out hover:bg-red-500  ">✕</button>
+                            </form>
+                            <div class="pt-6" id="loadingContainerModal">
+
+
+                                <div class="flex bg-white-800  p-8 justify-center items-center h-[450px]">
+                                    <div id="page">
+                                        <div id="container">
+                                            <div id="ring"></div>
+                                            <div id="ring"></div>
+                                            <div id="ring"></div>
+                                            <div id="ring"></div>
+                                            <img class="avatar w-20 animate-pulse h-20 object-cover"
+                                                src="../assets/logos/mercasena_logo.png" alt="">
+                                            <div id="h3"></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="bg-[#202020] p-4 text-center text-gray-400 text-xs font-mono">
+                                    <p>Administrador apreciamos tu paciencia MERCASENA trabajando</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </dialog>
+                    <!-- modal de exito -->
+                    <dialog id="modalExito" class="modal">
+                        <div class="modal-box ">
+                            <div class="container inline-flex">
+                                <img src="../assets/icons/check-icon.gif" class="object-cover mr-10 mt-9" alt="">
+                                <p class="align-center mt-9 text-gray-600 text-2xl " id="mensajeModalExito">Press ESC
+                                    key or
+                                    click the button below to close</p>
+
+                            </div>
+
+                            <div class="modal-action">
+                                <form method="dialog">
+                                    <!-- if there is a button in form, it will close the modal -->
+                                    <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                                </form>
+                            </div>
+                        </div>
+                    </dialog>
+                    <!-- modal que renderiza informacion sobre los pedidos -->
+                    <dialog id="ordersModal" class="modal">
+                        <div class="modal-box  bg-base-300  w-11/12 max-w-5xl  ">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+                                    ✕</button>
+                            </form>
+                            <div>
+                                <!-- menu de filtros -->
+                                <div class="navbar  bg-base-100 shadow-sm">
+                                    <!-- primera parte -->
+                                    <div class="flex-none">
+                                        <!-- <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                                            </svg>
+                                        </button> -->
+                                    </div>
+                                    <!-- segunda parte -->
+                                    <div class="flex-1">
+                                        <!-- filtros -->
+
+                                        <a class="btn btn-ghost text-xl ml-6 color-sena-texto">Pedidos</a>
+                                    </div>
+                                    <!-- tercera parte -->
+                                    <div class="flex-none">
+                                        <!-- boton de buscar pedidos -->
+                                        <input id="inputSearchOrders" type="text" placeholder="Busqueda de pedidos"
+                                            class="input mr-3  input-bordered border-green-400 w-24 md:w-auto" />
+
+                                        <!-- icono de la persona -->
+                                        <div class="dropdown dropdown-end">
+                                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                                <div class="w-10 rounded-full">
+                                                    <img alt="Tailwind CSS Navbar component"
+                                                        src="assets/logos/logoSena_2.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+                                                </path>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div id="ordersCardContainers" class="grid grid-cols-1 p-2 lg:grid-cols-3">
+                                    <!-- CARD de informacion del pedido -->
+
+
+                                </div>
+
+                                <div class="join mx-auto flex flex-inline" id="orderPaginationContainer">
+                                    <input class="join-item btn btn-square" type="radio" name="options" aria-label="1"
+                                        checked="checked" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="2" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="3" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="4" />
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </dialog>
+
+
+                    <!-- modal para buscar los comprobantes de venta -->
+                    <dialog id="billsModal" class="modal">
+                        <div class="modal-box  bg-base-300  w-11/12 max-w-5xl  ">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm bg-white-400 ml-2   btn-circle btn-ghost absolute right-3 top-8 lg:top-2  hover:bg-red-400">
+                                    ✕</button>
+                            </form>
+                            <div>
+                                <!-- menu de filtros -->
+                                <div class="navbar rounded-lg  bg-base-100 shadow-sm">
+                                    <!-- primera parte -->
+                                    <div class="flex-none">
+                                        <!-- <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                                            </svg>
+                                        </button> -->
+                                    </div>
+                                    <!-- segunda parte -->
+                                    <div class="flex-1">
+                                        <!-- filtros -->
+
+                                        <a class="btn btn-ghost text-xl ml-6 color-sena-texto">Comprobantes de venta</a>
+                                        <!-- <a class="btn btn-ghost text-xl ml-6 text-gray-700 ml-7">filtros </a> -->
+
+
+                                    </div>
+                                    <div class="flex-2 mr-0">
+                                        <div class="justify-end ">
+                                            <input type="checkbox" id="check_searchBills"
+                                                class="checkbox border-indigo-600 bg-indigo-500 checked:border-orange-500 checked:bg-orange-400 checked:text-orange-800" />
+                                        </div>
+                                        <!-- checkbox para buscar el canal -->
+
+                                    </div>
+                                    <div class="flex-3">
+                                        <!-- componenete de calendario para el filtraje  -->
+                                        <div
+                                            class="mr-20 ml-0 aling-start hover:scale-125 transform duration-300  ease-in-out">
+                                            <button popovertarget="cally-popover1"
+                                                class="input ml-1  hover:bg-gray-300 rounded-lg  " id="cally1"
+                                                style="anchor-name:--cally1">
+                                                <svg width="25px" class="mx-auto" height="25px" viewBox="0 0 24 24"
+                                                    fill="none" stroke="#39A900" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                        stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path
+                                                            d="M3 9H21M7 3V5M17 3V5M6 12H8M11 12H13M16 12H18M6 15H8M11 15H13M16 15H18M6 18H8M11 18H13M16 18H18M6.2 21H17.8C18.9201 21 19.4802 21 19.908 20.782C20.2843 20.5903 20.5903 20.2843 20.782 19.908C21 19.4802 21 18.9201 21 17.8V8.2C21 7.07989 21 6.51984 20.782 6.09202C20.5903 5.71569 20.2843 5.40973 19.908 5.21799C19.4802 5 18.9201 5 17.8 5H6.2C5.0799 5 4.51984 5 4.09202 5.21799C3.71569 5.40973 3.40973 5.71569 3.21799 6.09202C3 6.51984 3 7.07989 3 8.2V17.8C3 18.9201 3 19.4802 3.21799 19.908C3.40973 20.2843 3.71569 20.5903 4.09202 20.782C4.51984 21 5.07989 21 6.2 21Z"
+                                                            stroke="#23e126" stroke-width="2" stroke-linecap="round">
+                                                        </path>
+                                                    </g>
+                                                </svg>
+                                            </button>
+                                            <div popover id="cally-popover1"
+                                                class="dropdown bg-base-100 rounded-box shadow-lg"
+                                                style="position-anchor:--cally1">
+                                                <calendar-date class="cally"
+                                                    onchange={inventary.fetchBillsByDate(this.value)}>
+                                                    <!--  <svg aria-label="Previous" class="fill-current size-4"
+                                                        slot="previous" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24" fill="#4A4A4A">
+                                                        <path d="M15.75 19.5 8.25 12l7.5-7.5"></path>
+                                                    </svg>-->
+                                                    <svg fill="#000000" width="15px" height="15px" class="size-4"
+                                                        slot="previous" aria-label="Previous" viewBox="-8.5 0 32 32"
+                                                        version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <title>left</title>
+                                                            <path
+                                                                d="M7.094 15.938l7.688 7.688-3.719 3.563-11.063-11.063 11.313-11.344 3.531 3.5z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    <!-- el de la derecha -->
+                                                    <svg fill="#000000" class="size-4" width="15px" height="15px"
+                                                        aria-label="Next" slot="next" viewBox="-8.5 0 32 32"
+                                                        version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                        <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                            stroke-linejoin="round"></g>
+                                                        <g id="SVGRepo_iconCarrier">
+                                                            <title>right</title>
+                                                            <path
+                                                                d="M7.75 16.063l-7.688-7.688 3.719-3.594 11.063 11.094-11.344 11.313-3.5-3.469z">
+                                                            </path>
+                                                        </g>
+                                                    </svg>
+                                                    <!-- <svg stroke="" aria-label="Next" class="fill-current size-4"
+                                                        slot="next" xmlns="http://www.w3.org/2000/svg"
+                                                        viewBox="0 0 24 24">
+                                                        <path d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>
+                                                    </svg> -->
+                                                    <calendar-month></calendar-month>
+                                                </calendar-date>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+                                    <div class="flex-4">
+                                        <form class="flex flex-inline" id="searchBillByUser_form">
+
+                                            <input id="inputSearchBills_input_bill" type="text"
+                                                placeholder="Busqueda por  cliente"
+                                                class="input mr-2 input-bordered border-green-400 w-24 md:w-auto" />
+                                            <button
+                                                class="btn btn-sm bg-white-400 ml-2 mr-10  btn-circle btn-ghost hover:bg-green-400">
+                                                <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none"
+                                                    xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                        stroke-linejoin="round"></g>
+                                                    <g id="SVGRepo_iconCarrier">
+                                                        <path
+                                                            d="M16.6725 16.6412L21 21M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z"
+                                                            stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round"></path>
+                                                    </g>
+                                                </svg>
+                                            </button>
+
+                                        </form>
+                                    </div>
+                                    <!-- tercera parte para ver  -->
+                                    <div class="flex-none">
+
+                                        <!-- boton de buscar pedidos -->
+
+
+                                        <!-- icono de la persona -->
+                                        <div class="dropdown dropdown-end ml-5  mr-4">
+                                            <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                                                <div class="w-10 rounded-full">
+                                                    <img alt="Tailwind CSS Navbar component"
+                                                        src="assets/logos/logoSena_2.png" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- <button class="btn btn-square btn-ghost">
+                                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                                class="inline-block h-5 w-5 stroke-current">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z">
+                                                </path>
+                                            </svg>
+                                        </button> -->
+                                    </div>
+                                </div>
+                                <div id="billCardContainers_"
+                                    class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2 p-4">
+                                    <!-- CARD de informacion del pedido -->
+
+
+                                </div>
+
+                                <!-- <div class="join hidden  mx-auto flex flex-inline" id="orderPaginationContainer">
+                                    <input class="join-item btn btn-square" type="radio" name="options" aria-label="1"
+                                        checked="checked" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="2" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="3" />
+                                    <input class="join-item btn btn-square" type="radio" name="options"
+                                        aria-label="4" />
+                                </div> -->
+
+                            </div>
+
+                        </div>
+                    </dialog>
+                    <!-- mdald e frmularis  de ls cuales estran  prductos subcategorias etc-->
+                    <!-- =================== SECCION DE FORMULARIOS ========================== -->
+                    <!-- ================formulario de creacion de categorias ======== -->
+
+                    <!-- formulario de creacion  de  categoria , pesoVenta o producto  -->
+                    <dialog id="modalCreacion" class="modal modal-bottom sm:modal-middle">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <h3 class="text-lg font-bold" id="formMixedTitle">Creacion</h3>
+                            <form id="modalCreacionForm" metod="POST">
+                                <div id="containerModal" class="grid gap-6 w-full">
+
+
+
+                                </div>
+                            </form>
+
+                        </div>
+                    </dialog>
+
+
+                    <!-- formulario de creacion  productos -->
+                    <dialog id="formularioProducto" class="modal ">
+                        <div class="modal-box ">
+                            <h3 class="text-lg text-center font-bold">
+                                Crea tu producto</h3>
+                            <!-- formulario -->
+                            <form class="px-7 h-screen grid  w-full " id="modalFormCreateProduct"
+                                enctype="multipart/form-data">
+                                <div class="grid grid-cols-2 md:grid-cols-1 gap-6" id="form">
+                                    <div class="w-full  mx-auto items-center justify-between  gap-3">
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- categorias select -->
+                                            <!-- <label class="floating_label ">
+                                                <input type="file" id="image" name="image" accept="image/*">
+                                            </label> -->
+                                            <div class="bg-white p-8 rounded-xl  flex  w-full">
+
+                                                <!-- File upload box -->
+                                                <div
+                                                    class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-xl hover:border-green-500 transition-all duration-300">
+                                                    <!-- Icon for drag & drop -->
+                                                    <svg class="w-16 h-16 text-green-500 mb-4 transition-all duration-300"
+                                                        xmlns="http://www.w3.org/2000/svg" fill="none"
+                                                        viewBox="0 0 24 24" stroke="currentColor">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            stroke-width="2" d="M12 4v16m8-8H4" />
+                                                    </svg>
+
+                                                    <!-- Hidden file input file-upload -->
+                                                    <input id="file-upload" type="file" name="image" class="hidden" />
+
+                                                    <!-- Custom label for file upload -->
+                                                    <label for="file-upload"
+                                                        class="text-gray-600 cursor-pointer text-center hover:text-green-600 transition-all duration-300">
+                                                        <span class="block text-xl font-medium">Agarra y suelta tu
+                                                            imagen aqui</span>
+                                                        <span class="block text-sm text-gray-400">O dale click en el
+                                                            navegador</span>
+                                                    </label>
+
+                                                    <!-- File name display -->
+                                                    <div id="file-name"
+                                                        class="mt-3 text-gray-700 text-sm font-medium hidden">Ningun
+                                                        archivo cargado</div>
+                                                </div>
+
+                                                <!-- Upload Button -->
+
+                                            </div>
+
+
+                                        </div>
+                                        <!-- elemento del form -->
+
+
+                                        <div class="w-full flex gap-3">
+                                            <!-- categorias select -->
+                                            <label class="floating_label ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl text-green-400  ">Categorias</span>
+                                                        <br>
+                                                        <br>
+                                                        <select id="categoriasSelect"
+                                                            class=" p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="categoria">
+                                                            <option selected disabled> Categoria base</option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('categoria');">
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+
+
+                                                    </button>
+
+                                                </div>
+                                            </label>
+                                            <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Precio</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="$20000" id="precio" name="precio">
+                                                <span class="badge badge-neutral badge-xs">requerido</span>
+                                            </label>
+
+                                        </div>
+
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- demas informacion -->
+                                            <!-- productos select -->
+                                            <label class="floating_label mr-5 justify-start ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl text-green-400  ">Productos</span>
+                                                        <br>
+                                                        <br>
+                                                        <select id="productoSelect"
+                                                            class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="producto">
+                                                            <option selected disabled> productos </option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('producto');">
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+
+                                                    </button>
+
+                                                </div>
+                                            </label>
+                                            <label class="floating_label justify-end ">
+                                                <span class="text-2xl text-green-400  ">Existencias</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="100" id="existencias" name="existencias">
+                                                <span class="badge badge-neutral badge-xs">requerido</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- medidaVenta -->
+                                            <label class="floating_label ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl  text-green-400  ">Medida del
+                                                            Producto</span>
+                                                        <br>
+
+                                                        <select id="medSelect"
+                                                            class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="medidaVenta">
+                                                            <option selected disabled> toneladas
+                                                            </option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-9"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('medidaVenta');">
+                                                        <!-- esta funcion viene de js/ModalScripts.js -->
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </label>
+                                            <!-- <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Existencias</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="existencias" id="existencias"
+                                                    name="existencias">
+                                            </label> -->
+                                        </div>
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+
+                                            <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">¿Tiene el producto alguna
+                                                    variacion
+                                                    o subcategoria ?</span>
+                                                <br>
+                                                <br>
+                                                <label class="floating_label"> SI
+                                                    <input id="VariantCheckboxYes" type="checkbox"
+                                                        class="checkbox border-indigo-600 bg-indigo-500 checked:bg-orange-400 checked:text-orange-800 checked:border-orange-500 " />
+                                                </label>
+                                                <label class="floating_label"> NO
+                                                    <input id="VariantCheckboxNo" type="checkbox"
+                                                        class="checkbox border-indigo-600 bg-indigo-500 checked:bg-orange-400 checked:text-orange-800 checked:border-orange-500 " />
+                                                </label>
+
+                                            </label>
+
+
+
+
+                                        </div>
+
+                                        <div id="variantInputContainer" class="w-full flex gap-3">
+
+                                        </div>
+                                        <!-- elemento del form -->
+                                        <!-- <div class="w-full  flex gap-3">
+                                            <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Precio</span>
+                                                <br>
+                                                <br>
+    
+                                                <input
+                                                    class="p-3 shadow-2xl   glass w-full text-black outline-none focus:border-solid focus:border-[1px]border-[#035ec5]"
+                                                    type="number" placeholder="precio" required="">
+                                            </label>
+                                        </div> -->
+
+
+                                    </div>
+
+                                </div>
+                                <div
+                                    class="w-full text-center flex mt-20 mb-6 items-center rounded-full flex-row md:flex-row ">
+                                    <button
+                                        class="outline-none btn btn-circle md:inline-flex text-center glass shadow-2xl  w-full p-3  bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px]  hover:text-[#035ec5] font-bold"
+                                        type="submit"><span class="text-2xl text-center mx-auto">Guardar</span></button>
+                                </div>
+                            </form>
+                            <form method="dialog">
+                                <!-- if there is a button in form, it will close the modal -->
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                    </dialog>
+
+                    <!-- mensaje del dia  -->
+                    <dialog id="dayMensagge" class="modal">
+                        <div class="modal-box w-11/12 max-w-5xl">
+                            <div>
+                                <section>
+                                    <div
+                                        class="relative items-center w-full px-5 py-12 mx-auto md:px-12 lg:px-16 max-w-7xl lg:py-24">
+                                        <div class="flex w-full mx-auto text-left">
+                                            <div class="relative inline-flex items-center mx-auto align-middle">
+                                                <div class="text-center">
+                                                    <h1
+                                                        class="max-w-5xl    text-2xl font-bold leading-none tracking-tighter text-neutral-600 md:text-5xl lg:text-6xl lg:max-w-7xl">
+                                                        <!-- ADMINISTRADOR <br class="hidden lg:block"> -->
+                                                        <span class="color-sena-texto"
+                                                            id="typewriterr">Administrador</span>
+                                                        recuerda siempre recargar el inventario
+                                                    </h1>
+
+                                                    <div
+                                                        class="flex mt-3  justify-center w-full max-w-2xl gap-2 mx-auto mt-6">
+                                                        <div class="mt-3 rounded-lg sm:mt-0">
+                                                            <button id="feedDailyInv"
+                                                                class="px-5 py-4 text-base font-medium text-center text-white transition duration-500 ease-in-out transform color-sena lg:px-10 rounded-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">Alimentar
+                                                                Inventario</button>
+                                                        </div>
+                                                        <div class="mt-3 rounded-lg sm:mt-0 sm:ml-3">
+                                                            <button onclick="dayMensagge.close()"
+                                                                class="items-center block px-5 lg:px-10 py-3.5 text-base font-medium text-center text-blue-600 transition duration-500 ease-in-out transform border-2 border-white shadow-md rounded-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
+                                                                Omitir</button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                        <form method="dialog" class="modal-backdrop">
+                            <button>close</button>
+                        </form>
+                    </dialog>
+
+                    <script>
+                        const words = ["Administrador", "ADMINISTRADOR"];
+                        let i = 0;
+                        let j = 0;
+                        let currentWord = "";
+                        let isDeleting = false;
+
+                        function type() {
+                            currentWord = words[i];
+                            if (isDeleting) {
+                                document.getElementById("typewriterr").textContent = currentWord.substring(0, j - 1);
+                                j--;
+                                if (j == 0) {
+                                    isDeleting = false;
+                                    i++;
+                                    if (i == words.length) {
+                                        i = 0;
+                                    }
+                                }
+                            } else {
+                                document.getElementById("typewriterr").textContent = currentWord.substring(0, j + 1);
+                                j++;
+                                if (j == currentWord.length) {
+                                    isDeleting = true;
+                                }
+                            }
+                            setTimeout(type, 300);
+                        }
+
+                        type();
+                    </script>
+
+
+                    <!-- You can open the modal using ID.showModal() method -->
+
+                    <dialog id="testUpload" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <form id="uploadForm" enctype="multipart/form-data">
+                                <input type="file" id="imageFile" name="imageFile" accept="image/*">
+                                <button type="submit" id="cargarImagen" class="btn btn-warning ">Cargar Imagen</button>
+                            </form>
+                        </div>
+                    </dialog>
+
+
+
+                    <!-- formulario de notificacion de stock bajo  -->
+                    <dialog id="lowProductStockModalRequest" class="modal">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                            <div id="containerModalForLowStock" class="grid gap-6 w-full">
+
+                                <form class="lowStock" id="lowStockForm">
+                                    <label class="floating_label">
+
+                                        <div class="flex flex-col justify-center pt-5 pb-5 ">
+                                            <svg class="ml-50   mx-auto mt-2 mb-10 animate-bounce" width="50px"
+                                                height="50px" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg" stroke="#ffdd00">
+                                                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                    stroke-linejoin="round"></g>
+                                                <g id="SVGRepo_iconCarrier">
+                                                    <path
+                                                        d="M11.9997 12.5815V9.58148M11.9997 15.5815H12.0097M18.9997 20.5815L16.4094 18.0182M4.9997 20.5815L7.59001 18.0182M6.74234 3.99735C6.36727 3.62228 5.85856 3.41156 5.32812 3.41156C4.79769 3.41156 4.28898 3.62228 3.91391 3.99735C3.53884 4.37242 3.32813 4.88113 3.32812 5.41156C3.32812 5.942 3.53884 6.4507 3.91391 6.82578M20.0858 6.82413C20.4609 6.44905 20.6716 5.94035 20.6716 5.40991C20.6716 4.87948 20.4609 4.37077 20.0858 3.9957C19.7107 3.62063 19.202 3.40991 18.6716 3.40991C18.1411 3.40991 17.6324 3.62063 17.2574 3.9957M18.9997 12.5815C18.9997 16.4475 15.8657 19.5815 11.9997 19.5815C8.1337 19.5815 4.9997 16.4475 4.9997 12.5815C4.9997 8.71549 8.1337 5.58149 11.9997 5.58149C15.8657 5.58149 18.9997 8.71549 18.9997 12.5815Z"
+                                                        stroke="" stroke-width="2" stroke-linecap="round"
+                                                        stroke-linejoin="round"></path>
+                                                </g>
+                                            </svg>
+                                            <span
+                                                class="text-2xl font-semibold  text-gray-700  text-xl  text-center justify-center   ">
+
+                                                Alerta de bajo stock para <strong
+                                                    class="text-green-400 uppercase hover:underline  font-bold text-2xl"
+                                                    id="lowStockProduct_info"> papa
+                                                    criolla</strong></span>
+                                        </div>
+                                        <div class="flex text-center  flex-col" id="actualAlertContainer">
+
+                                        </div>
+
+                                        <br>
+                                        <br>
+                                        <input id="lowStock_productID" type="hidden">
+
+                                        <label class="text-center text-gray-700 text-md justify-center  "
+                                            for="lowStockForProduct">Alertar cuando haya menos de </label>
+                                        <div class="flex inline-flex mx-auto aling-start justify-center ">
+                                            <input id="lowStockForProduct"
+                                                class="p-3 shadow-2xl ml-12   glass w-40 input input-accent   text-black text-center ml-5 "
+                                                type="number" placeholder="" name="lowStockForProduct">
+                                            <span id="lowStockProduct_measurement"
+                                                class="text-xl font-bold ml-10 mb-2 self-end">Kilogramos</span>
+
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="flex mt-5 self-end justify-end">
+                                            <button type='submit'
+                                                class="bg-white text-green-600 font-bold px-3 py-1 text-xl rounded-full shadow-md border border-green-400 hover:bg-green-100 badge badge-success">
+                                                Guardar</button>
+                                        </div>
+
+
+
+
+                                    </label>
+                                </form>
+
+
+
+                            </div>
+                        </div>
+                    </dialog>
+                    <!-- formulario de edicion   productos -->
+                    <dialog id="formularioEditarProducto" class="modal ">
+                        <div class="modal-box ">
+                            <h3 class="text-lg text-center font-bold">
+                                Edicion del producto</h3>
+                            <!-- formulario -->
+                            <form class="px-7 h-screen grid  w-full " id="modalFormEditProduct"
+                                enctype="multipart/form-data">
+                                <div class="grid grid-cols-2 md:grid-cols-1 gap-6" id="form">
+                                    <div class="w-full  mx-auto items-center justify-between  gap-3">
+
+                                        <input type="hidden" id="productIdEdition">
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- categorias select -->
+                                            <!-- <label class="floating_label ">
+                                                <input type="file" id="image" name="image" accept="image/*">
+                                            </label> -->
+                                            <div class="bg-white p-8 rounded-xl  flex  w-full">
+
+                                                <!-- File upload box -->
+                                                <div
+                                                    class="flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 rounded-xl hover:border-green-500 transition-all duration-300">
+                                                    <!-- Icon for drag & drop -->
+
+                                                    <div class="h-20 w-20 flex flex-inline space-x-0 ">
+                                                        <span class="font-semibold text-inline mx-auto  mr-6">Antigua
+                                                            foto</span>
+                                                        <img src="" id="editionImageForm"
+                                                            class="h-16 w-16 object-cover  " alt="">
+                                                    </div>
+                                                    <!-- Hidden file input -->
+                                                    <input id="file-upload-edit" type="file" class="hidden" />
+
+                                                    <!-- Custom label for file upload -->
+                                                    <label for="file-upload-edit"
+                                                        class="text-gray-600 mt-6  cursor-pointer text-center hover:text-green-600 transition-all duration-300">
+                                                        <span class="block text-xl font-medium">dale click nueva
+                                                            imagen aqui</span>
+                                                        <span class="block text-sm text-gray-400">O dale click en el
+                                                            navegador</span>
+                                                    </label>
+
+                                                    <!-- File name display -->
+                                                    <div id="file-name-edit"
+                                                        class="mt-3 text-gray-700 text-sm font-medium hidden">Ningun
+                                                        archivo cargado</div>
+                                                </div>
+
+                                                <!-- Upload Button -->
+
+                                            </div>
+
+
+                                        </div>
+                                        <!-- elemento del form -->
+
+
+                                        <div class="w-full flex gap-3">
+                                            <!-- categorias select -->
+                                            <label class="floating_label ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl text-green-400  ">Categorias</span>
+                                                        <br>
+                                                        <br>
+                                                        <select id="categoriasSelectEdicion"
+                                                            class=" p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="categoria" required>
+                                                            <option selected disabled> Categoria base</option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('categoria');">
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+
+                                                    </button>
+
+                                                </div>
+                                            </label>
+                                            <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Precio</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="" id="EditionProductPrice" name="precio"
+                                                    required>
+                                                <span class="badge badge-neutral badge-xs">requerido</span>
+                                            </label>
+
+                                        </div>
+
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- demas informacion -->
+                                            <!-- productos select -->
+                                            <label class="floating_label mr-5 justify-start ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl text-green-400  ">Productos</span>
+                                                        <br>
+                                                        <br>
+                                                        <select id="productoSelectEdicion"
+                                                            class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="producto" required>
+                                                            <option selected disabled> productos </option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-14"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('producto');">
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+
+                                                    </button>
+
+                                                </div>
+                                            </label>
+                                            <label class="floating_label justify-end ">
+                                                <span class="text-2xl text-green-400  ">Existencias</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="100" id="EditionProductStock"
+                                                    name="existencias" required>
+                                                <span class="badge badge-neutral badge-xs">requerido</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+                                            <!-- medidaVenta -->
+                                            <label class="floating_label ">
+                                                <div class="container inline-flex container">
+                                                    <label class="floating_label w-full">
+                                                        <span class="text-2xl  text-green-400  ">Medida del
+                                                            Producto</span>
+                                                        <br>
+
+                                                        <select id="medSelectEdicion"
+                                                            class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px] select select-lg select-accent"
+                                                            name="medidaVenta" required>
+                                                            <option selected disabled> toneladas
+                                                            </option>
+                                                        </select>
+                                                    </label>
+                                                    <button
+                                                        class="group cursor-pointer outline-none hover:rotate-90 duration-100 mt-9"
+                                                        title="Add New" type="button"
+                                                        onclick="selectTypeOfCreationModal('medidaVenta');">
+                                                        <!-- esta funcion viene de js/ModalScripts.js -->
+                                                        <svg width="50px" height="50px" viewBox="0 0 24 24" fill="none"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                                                            <g id="SVGRepo_tracerCarrier" stroke-linecap="round"
+                                                                stroke-linejoin="round"></g>
+                                                            <g id="SVGRepo_iconCarrier">
+                                                                <path d="M15 12L12 12M12 12L9 12M12 12L12 9M12 12L12 15"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                                <path
+                                                                    d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7"
+                                                                    stroke="#27b348ff" stroke-width="1.5"
+                                                                    stroke-linecap="round"></path>
+                                                            </g>
+                                                        </svg>
+
+                                                    </button>
+
+                                                </div>
+                                            </label>
+                                            <!-- <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Existencias</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="number" placeholder="existencias" id="existencias"
+                                                    name="existencias">
+                                            </label> -->
+                                        </div>
+
+                                        <!-- elemento del form -->
+                                        <div class="w-full flex gap-3">
+
+                                            <label class="floating_label justify-end ">
+                                                <span class="text-2xl text-green-400  ">variacion</span>
+                                                <br>
+                                                <br>
+                                                <input
+                                                    class="p-3 shadow-2xl  glass w-full placeholder:text-black outline-none focus:border-solid border-[#035ec5] focus:border-[1px]"
+                                                    type="text" id="EditionProductVariant" name="existencias">
+                                                <!-- <span class="badge badge-neutral badge-xs">requerido</span> -->
+                                            </label>
+                                        </div>
+
+
+                                        <!-- elemento del form -->
+                                        <!-- <div class="w-full  flex gap-3">
+                                            <label class="floating_label">
+                                                <span class="text-2xl text-green-400  ">Precio</span>
+                                                <br>
+                                                <br>
+    
+                                                <input
+                                                    class="p-3 shadow-2xl   glass w-full text-black outline-none focus:border-solid focus:border-[1px]border-[#035ec5]"
+                                                    type="number" placeholder="precio" required="">
+                                            </label>
+                                        </div> -->
+
+
+                                    </div>
+
+                                </div>
+                                <div
+                                    class="w-full text-center flex mt-20 mb-6 items-center rounded-full flex-row md:flex-row ">
+                                    <button
+                                        class="outline-none btn btn-circle md:inline-flex text-center glass shadow-2xl  w-full p-3  bg-[#ffffff42] hover:border-[#035ec5] hover:border-solid hover:border-[1px]  hover:text-[#035ec5] font-bold"
+                                        type="submit"><span class="text-2xl text-center mx-auto">Guardar
+                                            Cambios</span></button>
+                                </div>
+                            </form>
+                            <form method="dialog">
+                                <!-- if there is a button in form, it will close the modal -->
+                                <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+                            </form>
+                    </dialog>
+                    <!-- ================ FORMUALARIOS DE EDICION ========================= -->
+                    <!-- modal que muestra la confirmacion de borrar algo -->
+
+
+                    <!-- =====MODAL DE ELIMINACION ====-->
+                    <dialog id="eliminateModal" class="modal shadow-lg rounded-2xl  item-center border-green-600">
+                        <div class="modal-box">
+                            <form method="dialog">
+                                <button
+                                    class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 hover:bg-red-500  ">✕</button>
+                            </form>
+                            <!-- contenido del modal en este caso el de eliminacion de algo -->
+                            <div
+                                class="group select-none w-[250px] mx-auto flex flex-col p-4 relative items-center justify-center bg-white-800 border border-gray-200 shadow-lg rounded-2xl">
+                                <div class="">
+                                    <div class="text-center p-3 flex-auto justify-between">
+                                        <svg fill="#fb0a06" viewBox="0 0 20 20"
+                                            class="animate-bounce animate-infinite animate-duration-[6000ms] animate-delay-[400ms] w-12 h-12 flex items-center text-gray-600 fill-red-500 mx-auto"
+                                            xmlns="http://www.w3.org/2000/svg" stroke="#9d2e2d">
+                                            <path clip-rule="evenodd"
+                                                d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z"
+                                                fill-rule="evenodd"></path>
+                                        </svg>
+                                        <h2 class="text-xl font-bold py-4 text-gray-800">¿Estas seguro de querer
+                                            eliminar <span id="prepositionID"></span> <strong class="text-green-500"
+                                                id="itemNameDeleteModal">M</strong> ?</h2>
+                                        <p class="font-bold text-sm text-gray-500 px-2">
+                                            ¿Realmente deseas continuar? Este proceso no se puede deshacer.
+                                        </p>
+                                    </div>
+                                    <div id="buttonsContainerModalDelete"
+                                        class="p-2 mt-2 text-center justify-between flex-inline  space-x-1 ">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </dialog>
+                    <script>
+
+                    </script>
+                    <!-- ====== FIN  SECCION FORMULARIOS ============================  -->
+                    <!-- =======================FIN CONTENIDO PRINCIPAL ========================== -->
+                </div>
+                <!-- =========== MODALES VERSION MOVIL ====================== -->
+                <!-- modal de error -->
+            </div>
+            <div class="divider"></div>
+            <div class=" block ml-0 aling-start   mt-7 inline-flex item-center align-center justify-center">
+
+                <!-- productos -->
+                <buton
+                    class="btn color-sena hover:shadow-4xl hover:bg-green-500  hover:border-green-800 rounded-lg   border-2  hover:scale-105 transform ease-in-out duration-600 text-white ml-4  lg:ml-8"
+                    onclick=" inventary.renderTable('product',inventary.renderProductsTable)">productos</buton>
+
+
+                <!-- producto base -->
+                <buton
+                    class="btn color-sena text-white ml-4  lg:ml-8  hover:shadow-4xl hover:bg-green-500  hover:border-green-800 rounded-lg   border-2  hover:scale-105 transform ease-in-out duration-600  hidden "
+                    id="btnbaseProduct"
+                    onclick=" inventary.renderTable('baseProduct',inventary.renderBaseProductsTable)">producto Base
+                </buton>
+                <!-- categorias -->
+                <buton
+                    class="btn color-sena text-white ml-4 lg:ml-8  hover:shadow-4xl hover:bg-green-500  hover:border-green-800 rounded-lg   border-2  hover:scale-105 transform ease-in-out duration-600"
+                    onclick="inventary.renderTable('category',inventary.renderCategoryTable)">categorias</buton>
+                <!-- medidas de venta -->
+                <buton
+                    class="btn color-sena text-white ml-4  lg:ml-8  hover:shadow-4xl hover:bg-green-500  hover:border-green-800 rounded-lg   border-2  hover:scale-105 transform ease-in-out duration-600"
+                    onclick="inventary.renderTable('measurement',inventary.renderMeasurementTable)  ">medidas</buton>
+
+                <!-- boton de aGREGAR -->
+                <buton id="addButton"
+                    onclick="Inventary.showInfoModal('elige alguna seccion que le quieras hacer cambios')"
+                    class="btn bg-gradient-to-r from-green-400 to-green-600 hover:shadow-4xl hover:from-blue-500 hover:to-blue-700 hover:border-blue-800 rounded-lg   border-2  hover:scale-110  transform ease-in-out duration-600  text-white text-2xl  self-center justify-end bg-green-200  ml-5 text-white hover:scale-200 hover:bg-green-500 hover:text-white  duration-700 ease-in-out">
+                    + </buton>
+            </div>
+            <!-- se activa cuqando se le da click a productos -->
+            <div id="btnOptionsContainer">
+
+
+            </div>
+            <!--tablas de informacion de los productos -->
+            <div class=" overflow-x-auto mt-14 ">
+
+                <table id="information-table"
+                    class=" mt-11  items-center border-gray-200  table-md lg:table-lg  w-full table-zebra border-gray-200 ">
+                    <!-- ára ver informacion de como se renderiza la tabla ir al archivo js/class/inventary.js funciones=> [ renderProductsTable(), renderCategoryTable(),renderMeasurementTable()] -->
+                    <!-- funciones de javascript que renderizan informacion aqui -->
+
+                </table>
+            </div>
+        </main>
+    </div>
+</body>
+<script src="js/ModalScripts.js"></script>
+<script defer src="js/class/inventary.js"></script>
+<script defer src="js/class/user.js"></script>
+
+<script defer src="js/start.js"></script>
+<script defer src="js/events.js"></script>
+<script src="js/scripts/inputFileScript.js"></script>
+<script src="js/scripts/sidebar.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</html>
+
+
+
+
+</html>

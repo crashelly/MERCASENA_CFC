@@ -1,0 +1,84 @@
+ <!-- Producto + botón eliminar -->
+ <div class="flex items-center  mt-4 justify-center gap-2">
+    <span class="bg-green-500 text-white px-3 py-1 rounded-lg">Mango: $14000</span>
+    <button class="bg-red-400 text-white px-2 py-1 rounded-md text-xs">Eliminar</button>
+  </div>
+
+  <!-- Cantidad que tambien contiene los botones de agregar o bajar -->
+  <div class="border-l-4 border-r-4 border-green-500 flex justify-center items-center">
+    <span class="bg-green-500 text-white px-3 py-1 rounded-lg">2</span>
+  </div>
+
+  <!-- Total -->
+  <div class="flex justify-center items-center">
+    <span class="bg-green-500 text-white px-3 py-1 rounded-lg">$28000</span>
+  </div>
+
+  <script>
+    for (let i = 0; i <5; i++) {
+      document.getElementById("shoppingCarContainer").innerHTML +=`
+        <!-- Producto + botón eliminar -->
+    <div class="flex items-center  mt-4 justify-center gap-2">
+      <span class="bg-green-500 text-white px-3 py-1 rounded-lg">: $14000</span>
+      <button class="bg-red-400 text-white px-2 py-1 rounded-md text-xs">Eliminar</button>
+    </div>
+
+    <!-- Cantidad que tambien contiene los botones de agregar o bajar -->
+    <div class="border-l-4 border-r-4 border-green-500 flex justify-center items-center">
+      <span class="bg-green-500 text-white px-3 py-1 rounded-lg">2</span>
+    </div>
+
+    <!-- Total -->
+    <div class="flex justify-center items-center">
+      <span class="bg-green-500 text-white px-3 py-1 rounded-lg">$28000</span>
+    </div>
+
+      `;
+    }
+
+  </script>
+
+
+
+
+  <dialog id="orderLimitNotification" class="modal">
+    <div class="modal-box w-11/12 max-w-5xl">
+      <form method="dialog">
+        <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      </form>
+
+      <div>
+        <div class="relative my-10 flex w-full flex-col items-center sm:mt-15">
+          <a rel="noreferrer" href="https://example.com"
+            class="mx-auto flex max-w-fit items-center justify-center space-x-2 overflow-hidden rounded-full bg-yellow-200 hover:bg-yellow-400 hover:text-white hover:scale-150 ease-in-out  transform hover:delay-150  px-7 py-2 transition-all duration-300">
+            <svg fill="#000000" class="w-5 h-5 animate-bounce" viewBox="0 0 32 32" version="1.1"
+              xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <title>warning</title>
+                <path
+                  d="M30.555 25.219l-12.519-21.436c-1.044-1.044-2.738-1.044-3.782 0l-12.52 21.436c-1.044 1.043-1.044 2.736 0 3.781h28.82c1.046-1.045 1.046-2.738 0.001-3.781zM14.992 11.478c0-0.829 0.672-1.5 1.5-1.5s1.5 0.671 1.5 1.5v7c0 0.828-0.672 1.5-1.5 1.5s-1.5-0.672-1.5-1.5v-7zM16.501 24.986c-0.828 0-1.5-0.67-1.5-1.5 0-0.828 0.672-1.5 1.5-1.5s1.5 0.672 1.5 1.5c0 0.83-0.672 1.5-1.5 1.5z">
+                </path>
+              </g>
+            </svg>
+            <p class="text-sm font-semibold text-[#1d9bf0]">ATENCION</p>
+          </a>
+          <h1
+            class="  mt-8 max-w-sm bg-gradient-to-r from-green-300 to-green-600 via-teal-500 to-gray-500 bg-clip-text text-center text-4xl font-extrabold text-transparent sm:max-w-4xl sm:text-6xl">
+            El pedido <span class="underline"> será cancelado</span> en <span class="underline">una hora</span> si no se
+            confirma el pago.
+          </h1>
+          <!-- <span class="mt-8 max-w-lg text-center text-xl leading-relaxed text-gray-800">
+            recuerda pagar en el punto de venta
+          </span> -->
+          <p
+            class="mt-3 hover:font-bold  hover:scale-125 ease-in-out  transform hover:delay-150  px-7 py-2 transition-all duration-300 rounded border px-3 py-1 shadow">
+            💳 <span class="text-accent font-semibold underline"></span> recuerda pagar en el punto de venta
+          </p>
+
+        </div>
+      </div>
+      <!-- <p class="py-4">El pedido será cancelado en una hora si no se confirma el pago.  recuerda pagar en el punto de venta</p> -->
+    </div>
+  </dialog>

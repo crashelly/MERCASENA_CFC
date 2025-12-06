@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"
+        integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
+        <form id="form-login" method="post">
+            <div class="mb-4">
+                <label for="email" class="block text-gray-700">Email</label>
+                <input type="email" id="email" name="email"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Enter your email" required>
+            </div>
+            <div class="mb-6">
+                <label for="password" class="block text-gray-700">Password</label>
+                <input type="password" id="password" name="password"
+                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                    placeholder="Enter your password" required>
+            </div>
+            <button type="submit"
+                class="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-opacity-50">Login</button>
+        </form>
+    </div>
+</body>
+
+</html>
+
+<script>
+    document.getElementById("form-login").addEventListener("submit", e => {
+        e.preventDefault();
+        let formA = document.getElementById("form-login");
+        // let form = new FormData(formA);
+
+        let url = "http://localhost/mercasena/app/controllers/auth.php";
+        
+        let email = document.getElementById("email").value;
+        let password = document.getElementById("password").value;
+
+
+        // $.ajax({
+        //         url:url,
+        //         method: "POST",
+        //         data: form,
+        //         processData:false,
+        //         contentType:false,
+        //         success: function (response) {
+        //             console.log("Success:", response);
+    
+        //         },
+        //         error: function (xhr, status, error) {
+        //             console.error("Error:", error);
+        
+        //         }
+        //     });
+        // metodfo con json
+        $.ajax({
+                url:url,
+                method: "POST",
+                data: JSON.stringify({
+                    action : "login",
+                    email: email,
+                    password: password
+                }),
+                contentType:"application/json",
+                success: function (response) {
+                    console.log("Success:", response);
+    
+                },
+                error: function (xhr, status, error) {
+                    console.error("Error:", error);
+        
+                }
+            });
+    })
+
+
+
+
+    // $(document).ready(function () {
+    //     $("form-login").submit(e => {
+    //         e.preventDefault();
+
+    //         let email = $("#email").val();
+    //         let password = $("#password").val();
+
+    //         // soliticyutd del ajax al servidor
+
+    //       let form =  new FormData;
+           
+    //     });
+    // });
+    // document.getElementById("form-login").addEventListener("submit", e => {
+    //     e.preventDefault();
+    //     let email = document.getElementById("email").value;
+    //     let password = document.getElementById("password").value;
+
+    //     let url = "http://localhost/mercasena/app/controllers/auth.php";
+    //     let form = new FormData();
+
+    //     let datos = {
+    //         "email": email,
+    //         "password": password,
+    //         "action": "login"
+    //     }
+    //     // form.append("email", email);
+    //     // form.append("password", password);
+    //     // form.append("action", "login");
+    //     fetch(url, {
+    //         method: "POST",
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify(datos)
+    //     }).then((response) => response.json())
+    //     .then((data) => {
+    //             console.log(data);
+    //     })
+    // })
+
+</script>

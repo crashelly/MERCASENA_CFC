@@ -1,0 +1,9 @@
+services:
+  server:
+    build: .
+    container_name: MERCASENA_server
+    ports:
+      - "80:80"
+    volumes:
+      - .:/var/www/html/
+    restart: always
