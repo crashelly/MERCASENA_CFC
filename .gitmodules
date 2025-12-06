@@ -1,9 +1,0 @@
-[submodule "MERCASENA_backend"]
-	path = MERCASENA_backend
-	url = https://github.com/crashelly/MERCASENA_backend.git
-[submodule "MERCASENA_db"]
-	path = MERCASENA_db
-	url = https://github.com/crashelly/MERCASENA_db.git
-[submodule "mercasena-react"]
-	path = mercasena-react
-	url = https://github.com/crashelly/mercasena-react.git
