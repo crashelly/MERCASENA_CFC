@@ -1,18 +1,15 @@
-FROM node:20
-
+FROM node:20 AS  build
 WORKDIR /app
-
-# Copiamos dependencias
 COPY package*.json ./
-
-# Instalamos dependencias
 RUN npm install
-
-# Copiamos el resto del código
 COPY . .
+RUN npm run build 
 
-# Exponemos el puerto del dev server de React
-EXPOSE 5173
+# esta es la parte del servidor
+FROM nginx:alpine
+ADD ./config/server.conf /etc/nginx/conf.d/default.conf
+COPY --from=build /app/dist /var/www/app
 
-# Ejecutamos React en modo dev
-CMD ["npm", "run","dev"]
+EXPOSE 4000
+
+CMD [ "nginx","-g","daemon off;" ]
