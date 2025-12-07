@@ -13,7 +13,7 @@ export default defineConfig({
       '@shop': path.resolve(__dirname, './src/Features/Shop'),
       '@inventary': path.resolve(__dirname, './src/Features/Inventary'),
       '@config': path.resolve(__dirname, './src/Config'),
-      '@assets': path.resolve(__dirname, './src/Assets'),
+      '@assets': path.resolve(__dirname, './src/assets'),
       '@slices': path.resolve(__dirname, './src/App/Slices'),
       '@public': path.resolve(__dirname, './public/'),
       '@Pages': path.resolve(__dirname, './src/pages'),

@@ -1,6 +1,6 @@
 import { Navbar } from "@components/shop/navbar"
 import { ComercialBanner, ProductCategories, Products } from "@features/shop/products/"
-import Footer from "@components/footer"
+import Footer from "@components/Footer"
 import "./shop.css"
 // import { LoginModal, RegisterModal } from '@components/modals'
 import  FloatingButtons from '@components/shop/FloatingButtons/whatsapp'
