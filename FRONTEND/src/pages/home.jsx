@@ -1,7 +1,7 @@
 import { Navbar } from "@components/shop/navbar"
 import FloatingButtons from '@components/shop/FloatingButtons/whatsapp'
 import { ComercialBanner, ProductCategories, Products } from "@features/shop/products/"
-import { setUserInfo, setLoggedUser } from "@slices/auth/userSlice"
+import { setUserInfo, setLoggedUser } from "@slices/Auth/UserSlice"
 import { useEffect, useState } from "react"
 import { Loader } from "@components/Loaders/shop/shopLoader"
 import { InfoModal, MyAccountModal, UserOrdersModal, BillModal, ShoppingCartModal, PreOrderModal, PostOrderModal } from "@components/modals"
