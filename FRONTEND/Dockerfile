@@ -3,13 +3,17 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY . .
-RUN npm run build 
 
-# esta es la parte del servidor
-FROM nginx:alpine
-ADD ./config/server.conf /etc/nginx/conf.d/default.conf
-COPY --from=build /app/dist /var/www/app
+# ✅ Paso temporal para ver estructura
+RUN echo "=== LISTANDO ARCHIVOS ===" && \
+    ls -R /app
+# RUN npm run build 
 
-EXPOSE 4000
+# # esta es la parte del servidor
+# FROM nginx:alpine
+# ADD ./config/server.conf /etc/nginx/conf.d/default.conf
+# COPY --from=build /app/dist /var/www/app
 
-CMD [ "nginx","-g","daemon off;" ]
+# EXPOSE 4000
+
+# CMD [ "nginx","-g","daemon off;" ]
