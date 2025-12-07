@@ -6,7 +6,7 @@ import "./shop.css"
 import  FloatingButtons from '@components/shop/FloatingButtons/whatsapp'
 import { InfoModal } from "@components/modals"
 
-import { Routes, Route, Link } from "react-router-dom"
+// import { Routes, Route, Link } from "react-router-dom"
 // import Spline from '@splinetool/react-spline';
 
 
