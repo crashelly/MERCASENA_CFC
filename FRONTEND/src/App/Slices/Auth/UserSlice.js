@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ErrorAlert } from "@components/Alerts"
-import BillCard from "../../../Components/modals/collection/MyBills/BillCard";
+// import BillCard from "../../../Components/modals/collection/MyBills/BillCard";
 
 const initialState = {
     globalData: {
