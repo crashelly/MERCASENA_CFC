@@ -12,7 +12,7 @@ export default defineConfig({
       '@features': path.resolve(__dirname, './src/Features'),
       '@shop': path.resolve(__dirname, './src/Features/Shop'),
       '@inventary': path.resolve(__dirname, './src/Features/Inventary'),
-      '@config': path.resolve(__dirname, './src/Config'),
+      '@config': path.resolve(__dirname, './src/config'),
       '@assets': path.resolve(__dirname, './src/assets'),
       '@slices': path.resolve(__dirname, './src/App/Slices'),
       '@public': path.resolve(__dirname, './public/'),
