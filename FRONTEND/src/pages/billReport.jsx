@@ -6,6 +6,7 @@ import QRCode from "react-qr-code";
 const BillReport = () => {
     const [bill, setData] = useState({});
     const [date, setDate] = useState({});
+    let qrRedirectLink = "https://zensoftwares.website/mercasena/V1/"
 
     useEffect(() => {
         const data = JSON.parse(localStorage.getItem("bill"));
@@ -19,9 +20,15 @@ const BillReport = () => {
     if (Object.keys(bill).length == 0) {
         return null
     }
+    const autoScrollDown = () => {
+        window.scrollTo({
+            top: 200,   // cantidad de píxeles hacia abajo
+            behavior: 'smooth' // animación suave
+        });
+    }
     return (
         <>
-            <div id="page_pdf">
+            <div id="page_pdf" onLoad={()=>autoScrollDown()}>
                 <table id="factura_head">
                     <tbody>
                         <tr className="tr_bill">
@@ -161,11 +168,9 @@ const BillReport = () => {
                         Email</p>
                     <h4 className="label_gracias">¡Gracias por su compra!</h4>
                     <h4 className="qrClass_label">Codigo QR de validacion</h4>
-                    <div className="qrClass">
-                        <QRCode value="https://zensoftwares.website/mercasena/V1/" size={150} />
-
-                    </div>
+                   
                 </div>
+                        <QRCode id="qrCode" value={qrRedirectLink} size={150} />
 
             </div>
         </>

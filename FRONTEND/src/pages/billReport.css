@@ -1,23 +1,29 @@
-/* 
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    } */
-
+/* *{
+    background-color: #FFF;
+} */
+     .agredecimientos_div{
+        align-items: start;
+     }
+    /*  */
+    #qrCode{
+        margin-left: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    } 
     .qr {
+        
         display: flex;
-        justify-content: center;
-        margin-top: 20px;
-        margin-left: 400px;
+        justify-content: start;
+        margin-top: 10px;
+        /* margin-left: 100px; */
     }
     .qrClass_label {
-        margin-left: 400px;
-        margin-top: 20px;
+        /* margin-left: 400px; */
+        /* margin-top: 5px; */
         margin-right: 50px;
-        justify-content: end;
+        justify-content: start;
         display: flex;
-        font-weight: 800;
+        font-weight: 600;
     }
     /* p,
     label,
@@ -56,8 +62,13 @@
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        width: 95%;
+        width: 100%;
         margin: 15px auto 10px auto;
+        background-color: #ffffff;
+        padding-left: 10px;
+        padding-right: 10px;
+        padding-bottom: 10px;
+        /* padding: 30px; */
     }
 
     #factura_head,
@@ -148,13 +159,14 @@
 
     .nota {
         font-size: 8pt;
+        margin-top: 20px;
     }
 
     .label_gracias {
         font-family: verdana;
         font-weight: bold;
-        font-style: italic;
-        text-align: center;
+        /* font-style: italic; */
+        text-align: start;
         margin-top: 20px;
     }
 
@@ -306,7 +318,7 @@
 .agredecimientos_div{
     color:black;
     margin-left: 10px;
-    padding-bottom: 30px;
+    padding-bottom: 10px;
 
     .qrClass{
         /* margin-left: 500px; */

@@ -6,8 +6,8 @@ class Config {
     constructor() {
         // this.mainUrl = ""
         // this.mainUrl = "https://zensoftwares.website/mercasena/app/Controllers/",
-        // this.mainUrl = "http://localhost/mercasena/app/Controllers/",
-        this.mainUrl = "http://192.168.1.35/mercasena/app/Controllers/",
+        this.mainUrl = "http://localhost/mercasena/app/Controllers/",
+        // this.mainUrl = "http://192.168.1.35/mercasena/app/Controllers/",
         // this.mainUrl = "http://localhost/app/Controllers/",
             this.API = {
                 URL: {
