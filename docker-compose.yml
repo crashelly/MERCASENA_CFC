@@ -18,16 +18,16 @@ services:
     volumes:
       - data:/var/lib/mysql
       # - ./DB/test/01-test.sql:/docker-entrypoint-initdb.d/01-test.sql
-      - ./MERCASENA_db/DB/script/01-mainMercasena.sql:/docker-entrypoint-initdb.d/01-mainMercasena.sql
+      - ./DATABASE/DB/script/01-mainMercasena.sql:/docker-entrypoint-initdb.d/01-mainMercasena.sql
     networks:
       - backend_net
   backend:
-      build: ./MERCASENA_backend
+      build: ./BACKEND
       container_name: MERCASENA_server_released
       ports:
       - "80:80"
       volumes:
-      - ./MERCASENA_backend/:/var/www/html/mercasena
+      - ./BACKEND/:/var/www/html/mercasena
       restart: always
       networks:
         - backend_net

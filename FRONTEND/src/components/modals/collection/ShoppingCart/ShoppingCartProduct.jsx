@@ -4,7 +4,7 @@ import {
     dropProductFromShoppingCart,
     increaseProductQuantity,
     decreaseProductQuantity
-} from "@slices/auth/UserSlice"
+} from "@slices/Auth/UserSlice"
 import { useEffect, useState } from "react";
 
 

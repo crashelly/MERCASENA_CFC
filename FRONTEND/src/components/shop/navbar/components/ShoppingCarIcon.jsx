@@ -1,5 +1,5 @@
 import { useInfoModal } from "@features/shop/products/hooks/useInfoModal";
-import {setShowShoppingCart} from "@slices/shop/appSlice"
+import {setShowShoppingCart} from "@slices/Shop/AppSlice"
 import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 export const ShoppingCartIcon = () => {

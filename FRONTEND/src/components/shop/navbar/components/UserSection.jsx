@@ -1,4 +1,4 @@
-import { setShowMyAccount, setShowMyOrders, setShowMyBills, setShowLogout } from "@slices/shop/appSlice"
+import { setShowMyAccount, setShowMyOrders, setShowMyBills, setShowLogout } from "@slices/Shop/AppSlice"
 import { MobileSearchModalButton } from "@components/shop/navbar/components/MobileProductSearch"
 import { MenuOption } from "@components/shop/navbar/components/userMenu/MenuOption"
 import { ShoppingCartIcon } from "./ShoppingCarIcon";

@@ -1,7 +1,7 @@
 import Logo from "@components/Logo"
-import githubIcon from "@assets/Logos/github-logo.png"
-import facebookIcon from "@assets/Logos/facebook-logo.png"
-import whatsappIcon from "@assets/Logos/whatsapp-logo.png"
+import githubIcon from "@assets/logos/github-logo.png"
+import facebookIcon from "@assets/logos/facebook-logo.png"
+import whatsappIcon from "@assets/logos/whatsapp-logo.png"
 
 import { CONFIG } from "@config/app"
 import { useState, useEffect } from "react"
