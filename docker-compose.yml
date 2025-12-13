@@ -15,6 +15,7 @@ services:
       retries: 10
     ports:
       - 3306:3306
+    # command: --bind-address=0.0.0.0
     volumes:
       - data:/var/lib/mysql
       # - ./DB/test/01-test.sql:/docker-entrypoint-initdb.d/01-test.sql

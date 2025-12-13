@@ -1,0 +1,16 @@
+DB_HOST="localhost"
+DB_USER="root"
+DB_PASS="yourpassword"
+
+MAIL_USER="postmaster.mercasena@gmail.com"
+MAIL_PASSWORD="ofki dmlb vcld scae"
+
+IP_ADRESS="http://localhost"
+
+DB_USER="u836772000_chucho"
+DB_PASS="mercasena_test"
+DB_ADMIN="root"
+DB_PASSADMIN="root"
+DATE="27/06/2025"
+PASS="root"
+ETC="root"

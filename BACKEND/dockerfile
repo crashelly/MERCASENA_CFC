@@ -19,7 +19,8 @@ RUN apt-get update && apt-get install  -y \
     && docker-php-ext-enable gd
 # E
 WORKDIR /var/www/html/mercasena/
-RUN composer install --no-dev --optimize-autoloader
+
+
 COPY ./composer.json /var/www/html/mercasena/
 COPY ./composer.lock /var/www/html/mercasena/
 

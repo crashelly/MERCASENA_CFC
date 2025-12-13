@@ -21,6 +21,11 @@ SET time_zone = "+00:00";
 -- Database: `u836772000_mercasena`
 --
 use mercasena;
+
+CREATE USER 'reportes'@'%' IDENTIFIED BY 'mercasenaReportes2025*+';
+GRANT ALL PRIVILEGES ON *.* TO 'reportes'@'%' WITH GRANT OPTION;
+FLUSH PRIVILEGES;
+
 DELIMITER $$
 --
 -- Procedures
